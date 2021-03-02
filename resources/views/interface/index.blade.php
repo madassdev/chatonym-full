@@ -67,7 +67,7 @@
                                                 }}"
                                                 class="rounded-full w-8"
                                                 alt=""
-                                                
+                                                    
                                             />
                                             <div
                                                 id="palette"
