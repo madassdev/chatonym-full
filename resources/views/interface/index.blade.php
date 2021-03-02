@@ -23,7 +23,7 @@
             <div class="w-1/2 p-0 m-0">
                 @include('partials.topbar')
                 <div class="content mt-16">
-                    <div class="m-3 bg-cha-secondarys p-3 rounded-2xl">
+                    <div class="m-3 bg-cha-secondary p-3 rounded-2xl">
                         <div class="row">
                             <div class="w-1/6 px-2">
                                 <img
@@ -123,12 +123,12 @@
 
                     <div class="feeds">
                         @foreach(['a', 'b', 'c'] as $c)
-                        <div class="feed rounded-xl bg-cha-secondarsy m-3 p-3">
+                        <div class="feed rounded-xl bg-cha-secondary m-3 p-3">
                             <div
                                 class="feed-body mb-1 p-3 h-48 overflow-hidden overflow-ellipsis relative"
                             >
                                 <div class="text">
-                                    <p class="text-xs font-light text-gray-600">
+                                    <p class="font-light text-gray-600">
                                         I don't care about that, just get your
                                         bag mama - American rapper, Young M.A
                                         reacts to the viral video of her ex, Mya
@@ -151,23 +151,23 @@
                                 ></div>
                             </div>
                             <div
-                                class="w-4/5 text-gray-600 mx-auto feed-footer flex items-center justify-between p-3"
+                                class="w-4/5 text-xs text-gray-600 mx-auto feed-footer flex items-center justify-between p-3"
                             >
                                 <div class="">
                                     <i
-                                        class="mdi mdi-heart-outline text-xl"
+                                        class="mdi mdi-heart-outline"
                                     ></i>
                                     320
                                 </div>
                                 <div class="">
                                     <i
-                                        class="mdi mdi-message-text-outline text-xl"
+                                        class="mdi mdi-message-text-outline"
                                     ></i>
                                     58
                                 </div>
                                 <div class="">
                                     <i
-                                        class="mdi mdi-export-variant text-xl"
+                                        class="mdi mdi-export-variant"
                                     ></i>
                                     16
                                 </div>
