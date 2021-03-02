@@ -58,7 +58,10 @@
                                     class="styling px-4 flex items-center relative"
                                 >
                                     <div class="w-3/4">
-                                        <div class="w-8 cursor-pointer" id="palette-selector">
+                                        <div
+                                            class="w-8 cursor-pointer"
+                                            id="palette-selector"
+                                        >
                                             <img
                                                 src="{{
                                                     asset(
@@ -67,27 +70,26 @@
                                                 }}"
                                                 class="rounded-full w-8"
                                                 alt=""
-                                                    
                                             />
                                             <div
                                                 id="palette"
-                                                class="absolute z-10 bg-cha-secondarys bg-gray-50 shadow-lg left-10 top-3 p-2 grid grid-cols-8 gap-2 rounded w-5/6"
+                                                class="hidden absolute z-10 bg-cha-secondarys bg-gray-50 shadow-lg left-10 top-3 p-2 grid grid-cols-8 gap-2 rounded w-5/6"
                                             >
                                                 @foreach(['a', 'b', 'c'] as $c)
                                                 <div
-                                                    class="bg-red-200 w-8 h-8 rounded"
+                                                    class="bg-red-200 w-8 h-8 rounded palette-color"
                                                 ></div>
                                                 <div
-                                                    class="bg-blue-200 w-8 h-8 rounded"
+                                                    class="bg-blue-200 w-8 h-8 rounded palette-color"
                                                 ></div>
                                                 <div
-                                                    class="bg-green-200 w-8 h-8 rounded"
+                                                    class="bg-green-200 w-8 h-8 rounded palette-color"
                                                 ></div>
                                                 <div
-                                                    class="bg-pink-200 w-8 h-8 rounded"
+                                                    class="bg-pink-200 w-8 h-8 rounded palette-color"
                                                 ></div>
                                                 <div
-                                                    class="bg-yellow-200 w-8 h-8 rounded"
+                                                    class="bg-yellow-200 w-8 h-8 rounded palette-color"
                                                 ></div>
                                                 @endforeach
                                             </div>
@@ -177,14 +179,64 @@
             </div>
             @include('partials.rightbar')
         </div>
+
+        <div
+            class="modal fade"
+            id="modal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            Modal title
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">...</div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            Save changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
             var palette = $("#palette");
+            var modal = $("#modal");
+            var palette_color = $(".palette-color");
             var palette_selector = $("#palette-selector");
+            var notif_icon = $("#notif-icon");
+            var notif_dropdown = $("#notif-dropdown");
             // console.log(palette)
-            palette.hide();
+            // palette.hide();
+            palette_color.click(function () {
+                console.log(modal)
+                modal.modal();
+            });
 
             palette_selector.mouseup(function (e) {
-                palette.show();
+                palette.removeClass("hidden");
+            });
+
+            notif_icon.mouseup(function (e) {
+                console.log(notif_dropdown);
+                notif_dropdown.removeClass("hidden");
             });
 
             $(document).mouseup(function (e) {
@@ -192,9 +244,18 @@
                 // if the target of the click isn't the container nor a descendant of the container
                 if (
                     !palette_selector.is(e.target) &&
-                    palette_selector.has(e.target).length === 0
+                    palette_selector.has(e.target).length === 0 &&
+                    !palette.hasClass("hidden")
                 ) {
-                    palette.hide();
+                    palette.addClass("hidden");
+                }
+
+                if (
+                    !notif_icon.is(e.target) &&
+                    notif_icon.has(e.target).length === 0 &&
+                    !notif_dropdown.hasClass("hidden")
+                ) {
+                    notif_dropdown.addClass("hidden");
                 }
             });
         </script>
