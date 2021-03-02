@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+Route::get('/u/{user}', function(App\Models\User $user){
+
+    return view('test.message',['user'=>$user]);
+});
+
+Route::get('/', function(App\Models\User $user){
+
+    return view('test.feeds');
+});
+
+Route::get('/interface', 'HomeController@interface');
