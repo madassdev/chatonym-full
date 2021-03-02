@@ -58,35 +58,39 @@
                                     class="styling px-4 flex items-center relative"
                                 >
                                     <div class="w-3/4">
-                                        <img
-                                            src="{{
-                                                asset('img/icons/rainbow.svg')
-                                            }}"
-                                            class="rounded-full cursor-pointer w-8"
-                                            alt=""
-                                            id="palette-selector"
-                                        />
-                                        <div
-                                            id="palette"
-                                            class="absolute z-10 bg-cha-secondarys bg-gray-50 shadow-lg left-10 top-3 p-2 grid grid-cols-8 gap-2 rounded w-5/6"
-                                        >
-                                            @foreach(['a', 'b', 'c'] as $c)
+                                        <div class="w-8 cursor-pointer" id="palette-selector">
+                                            <img
+                                                src="{{
+                                                    asset(
+                                                        'img/icons/rainbow.svg'
+                                                    )
+                                                }}"
+                                                class="rounded-full w-8"
+                                                alt=""
+                                                
+                                            />
                                             <div
-                                                class="bg-red-200 w-8 h-8 rounded"
-                                            ></div>
-                                            <div
-                                                class="bg-blue-200 w-8 h-8 rounded"
-                                            ></div>
-                                            <div
-                                                class="bg-green-200 w-8 h-8 rounded"
-                                            ></div>
-                                            <div
-                                                class="bg-pink-200 w-8 h-8 rounded"
-                                            ></div>
-                                            <div
-                                                class="bg-yellow-200 w-8 h-8 rounded"
-                                            ></div>
-                                            @endforeach
+                                                id="palette"
+                                                class="absolute z-10 bg-cha-secondarys bg-gray-50 shadow-lg left-10 top-3 p-2 grid grid-cols-8 gap-2 rounded w-5/6"
+                                            >
+                                                @foreach(['a', 'b', 'c'] as $c)
+                                                <div
+                                                    class="bg-red-200 w-8 h-8 rounded"
+                                                ></div>
+                                                <div
+                                                    class="bg-blue-200 w-8 h-8 rounded"
+                                                ></div>
+                                                <div
+                                                    class="bg-green-200 w-8 h-8 rounded"
+                                                ></div>
+                                                <div
+                                                    class="bg-pink-200 w-8 h-8 rounded"
+                                                ></div>
+                                                <div
+                                                    class="bg-yellow-200 w-8 h-8 rounded"
+                                                ></div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
 
