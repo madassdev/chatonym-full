@@ -68,28 +68,28 @@
                                             class="rounded-full w-8"
                                             alt=""
                                         />
-                                    </div>
-                                    <div
-                                        id="palette"
-                                        class="absolute z-10 bg-cha-secondarys bg-gray-50 shadow-lg left-10 top-3 p-2 grid grid-cols-8 gap-2 rounded w-5/6"
-                                    >
-                                        @foreach(['a', 'b', 'c'] as $c)
                                         <div
-                                            class="bg-red-200 w-8 h-8 rounded"
-                                        ></div>
-                                        <div
-                                            class="bg-blue-200 w-8 h-8 rounded"
-                                        ></div>
-                                        <div
-                                            class="bg-green-200 w-8 h-8 rounded"
-                                        ></div>
-                                        <div
-                                            class="bg-pink-200 w-8 h-8 rounded"
-                                        ></div>
-                                        <div
-                                            class="bg-yellow-200 w-8 h-8 rounded"
-                                        ></div>
-                                        @endforeach
+                                            id="palette"
+                                            class="absolute z-10 bg-cha-secondarys bg-gray-50 shadow-lg left-10 top-3 p-2 grid grid-cols-8 gap-2 rounded w-5/6"
+                                        >
+                                            @foreach(['a', 'b', 'c'] as $c)
+                                            <div
+                                                class="bg-red-200 w-8 h-8 rounded"
+                                            ></div>
+                                            <div
+                                                class="bg-blue-200 w-8 h-8 rounded"
+                                            ></div>
+                                            <div
+                                                class="bg-green-200 w-8 h-8 rounded"
+                                            ></div>
+                                            <div
+                                                class="bg-pink-200 w-8 h-8 rounded"
+                                            ></div>
+                                            <div
+                                                class="bg-yellow-200 w-8 h-8 rounded"
+                                            ></div>
+                                            @endforeach
+                                        </div>
                                     </div>
 
                                     <div
@@ -181,17 +181,22 @@
         </div>
         <script>
             var palette = $("#palette");
+            var palette_selector = $("#palette-selector");
             // console.log(palette)
-            palette.hide()
+            palette.hide();
 
-            $("#palette-selector").mouseup(function (e) {
+            palette_selector.mouseup(function (e) {
                 palette.show();
+            });
 
+            $(document).mouseup(function (e) {
+                // console.log(palette_selector.has(e.target));
+                // if the target of the click isn't the container nor a descendant of the container
                 if (
-                    palette.is(e.target) &&
-                    palette.has(e.target).length === 0
+                    !palette_selector.is(e.target) &&
+                    palette_selector.has(e.target).length === 0
                 ) {
-                    palette.toggleClass('hidden');
+                    palette.hide();
                 }
             });
         </script>
