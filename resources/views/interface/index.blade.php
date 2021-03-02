@@ -171,11 +171,7 @@
                     </div>
                 </div>
             </div>
-            <div class="rightbar w-1/4">
-                <div class="w-1/4 fixed m-0 p-0 bg-cha-primary h-screen">
-                    Right bar
-                </div>
-            </div>
+            @include('partials.rightbar')
         </div>
         <script>
             var palette = $("#palette");

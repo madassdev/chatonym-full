@@ -14,6 +14,7 @@ module.exports = {
                 // "cha-secondary": "#EEEEEE",
                 "cha-secondary": "#c6c2e0",
                 "cha-light": "#F9F8FF",
+                "cha-accent": "#A7D2F1"
             },
             fontFamily: {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
