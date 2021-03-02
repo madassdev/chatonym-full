@@ -57,16 +57,14 @@
                                 <div
                                     class="styling px-4 flex items-center relative"
                                 >
-                                    <div
-                                        class="w-3/4 cursor-pointer"
-                                        id="palette-selector"
-                                    >
+                                    <div class="w-3/4">
                                         <img
                                             src="{{
                                                 asset('img/icons/rainbow.svg')
                                             }}"
-                                            class="rounded-full w-8"
+                                            class="rounded-full cursor-pointer w-8"
                                             alt=""
+                                            id="palette-selector"
                                         />
                                         <div
                                             id="palette"
