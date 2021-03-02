@@ -5,3 +5,11 @@
 body{
     font-family: 'poppins';
 }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: red;
+    opacity: 1; 
+    font-weight: 300;
+    font-size:12px;
+    /* Firefox */
+  }
