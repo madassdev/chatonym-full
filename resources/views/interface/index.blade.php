@@ -151,19 +151,19 @@
                             >
                                 <div class="">
                                     <i
-                                        class="mdi mdi-heart-outline text-2xl"
+                                        class="mdi mdi-heart-outline text-xl"
                                     ></i>
                                     320
                                 </div>
                                 <div class="">
                                     <i
-                                        class="mdi mdi-message-text-outline text-2xl"
+                                        class="mdi mdi-message-text-outline text-xl"
                                     ></i>
                                     58
                                 </div>
                                 <div class="">
                                     <i
-                                        class="mdi mdi-export-variant text-2xl"
+                                        class="mdi mdi-export-variant text-xl"
                                     ></i>
                                     16
                                 </div>
