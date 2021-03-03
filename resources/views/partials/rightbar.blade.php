@@ -1,5 +1,4 @@
-<div class="rightbar w-1/4 text-white">
-    <div class="w-1/4 fixed m-0 p-0 bg-cha-primary h-screen overflow-scroll">
+
         <div class="flex items-center justify-center p-3 mt-5">
             <p class="text-xl font-bold text-center"># HOT TRENDS</p>
         </div>

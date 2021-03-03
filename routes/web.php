@@ -38,3 +38,7 @@ Route::get('/u/{user}', 'HomeController@writeMessage');
 Route::get('/u/{user}/send', 'HomeController@sendMessage');
 Route::post('/u/{user}', 'HomeController@sendMessage')->name('users.messages.send');
 Route::post('/users/token', 'HomeController@saveToken')->name('users.tokens.create');
+
+Route::prefix('account')->middleware('auth')->group(function(){
+    Route::get('/', 'UserController@showProfile');
+});

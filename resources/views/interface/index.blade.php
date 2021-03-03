@@ -2,8 +2,14 @@
 
 @section('content')
 
+<div id="palette-preview" class="hidden h-24 m-3 px-5 py-3 rounded-2xl gra-orange text-white" gradient-bg="gra-orange">
+    <p class="preview-text text-xs">
+        Type a message in the input box below to preview
+    </p>
+</div>
+
 <div class="m-3 bg-cha-secondary p-3 rounded-2xl">
-    <div class="row">
+    <div class="flex">
         <div class="w-1/6 px-2">
             <img src="{{
                                         asset('img/placeholders/profile.jpg')
@@ -11,7 +17,7 @@
         </div>
         <div class="w-5/6 texting flex flex-col pr-4">
             <div class="mb-3 textarea flex space-x-4 items-center pr-3 rounded-full bg-white">
-                <textarea name="" id="" cols="30" rows="1" class="border-0 resize-none rounded-full w-full py-1 placeholder-gray-300" placeholder="Write something.."></textarea>
+                <textarea name="" id="message" cols="30" rows="1" class="text-xs text-gray-600 border-0 resize-none rounded-full w-full py-1 placeholder-gray-400" placeholder="Write something.."></textarea>
                 <i class="mdi mdi-emoticon-happy-outline text-xl text-gray-400"></i>
                 <i class="mdi mdi-send text-xl text-cha-primary"></i>
             </div>
@@ -26,11 +32,11 @@
                                                 }}" class="rounded-full w-8" alt="" />
                         <div id="palette" class="hidden absolute z-10 bg-cha-secondarys bg-gray-50 shadow-lg left-10 top-3 p-2 grid grid-cols-8 gap-2 rounded w-5/6">
                             @foreach(['a', 'b', 'c'] as $c)
-                            <div class="gra-orange w-8 h-8 rounded palette-color"></div>
-                            <div class="gra-oxblood w-8 h-8 rounded palette-color"></div>
-                            <div class="gra-tealgreen w-8 h-8 rounded palette-color"></div>
-                            <div class="gra-cherry w-8 h-8 rounded palette-color"></div>
-                            <div class="bg-yellow-200 w-8 h-8 rounded palette-color"></div>
+                            <div class="gra-orange w-8 h-8 rounded palette-color" gradient-bg="gra-orange"></div>
+                            <div class="gra-oxblood w-8 h-8 rounded palette-color" gradient-bg="gra-oxblood"></div>
+                            <div class="gra-tealgreen w-8 h-8 rounded palette-color" gradient-bg="gra-tealgreen"></div>
+                            <div class="gra-cherry w-8 h-8 rounded palette-color" gradient-bg="gra-cherry"></div>
+                            <div class="gre-mello w-8 h-8 rounded palette-color" gradient-bg="gra-mello"></div>
                             @endforeach
                         </div>
                     </div>
@@ -94,7 +100,9 @@
 
 @section('scripts')
 <script>
+    var message = $("#message")
     var palette = $("#palette");
+    var palette_preview = $("#palette-preview");
     var modal = $("#modal");
     var palette_color = $(".palette-color");
     var palette_selector = $("#palette-selector");
@@ -102,9 +110,23 @@
     var notif_dropdown = $("#notif-dropdown");
     // console.log(palette)
     // palette.hide();
+
+    message.keyup(function(e) {
+        var text = $(this).val();
+        palette_preview.children(".preview-text").removeClass('text-xs').text(text)
+    })
+
+    function paintPalettePreview(color) {
+        previous_color = palette_preview.attr('gradient-bg')
+        palette_preview.removeClass(previous_color);
+        palette_preview.addClass(color)
+        palette_preview.attr('gradient-bg', color)
+    }
+
+
     palette_color.click(function() {
-        console.log(modal)
-        modal.modal();
+        palette_preview.removeClass('hidden')
+        paintPalettePreview($(this).attr('gradient-bg'))
     });
 
     palette_selector.mouseup(function(e) {

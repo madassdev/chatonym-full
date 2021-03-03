@@ -1,17 +1,8 @@
-<div class="fixed w-1/2 m-0 p-0 bg-white z-10">
     <div class="flex items-center justify-between shadow-md p-2 px-3">
-        <div class="search w-1/2 px-3">
-            <i class="mdi mdi-magnify font-bold text-cha-primary text-2xl"></i>
+        <div class="openNavBtn md:w-1/2 px-3 flex space-x-2">
+            <i class="mdi mdi-menu font-bold text-2xl text-cha-primary"></i>
         </div>
-        <div class="icons flex items-center space-x-4 w-1/2 justify-end">
-            <div class="dp">
-                <img src="{{
-                                        asset('img/placeholders/profile.jpg')
-                                    }}" alt="" class="rounded-full w-6 h-6 object-cover cursor-pointer" />
-            </div>
-            <div class="rounded-full cursor-pointer text-center w-6 flex items-center justify-center h-6 bg-purple-200">
-                <i class="mdi mdi-plus"></i>
-            </div>
+        <div class="icons flex items-center space-x-4 md:w-1/2 justify-end">
             <div id="notif-icon" class="relative cursor-pointer rounded-full text-center text-cha-primary w-6 flex items-center justify-center h-6 bg-purple-200 hover:bg-purple-300">
                 <i class="mdi mdi-bell"></i>
                 <span class="absolute -top-1 -right-1 notif-count bg-cha-primary text-white px-1 rounded-full" style="font-size: 8px">
@@ -43,6 +34,11 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="dp">
+                <img src="{{
+                                        asset('img/placeholders/profile.jpg')
+                                    }}" alt="" class="rounded-full w-6 h-6 object-cover cursor-pointer" />
+            </div>
         </div>
     </div>
-</div>
