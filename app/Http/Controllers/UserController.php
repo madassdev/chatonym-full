@@ -10,4 +10,12 @@ class UserController extends Controller
     {
         return view('user.profile');
     }
+
+    public function showMessages()
+    {
+        
+        $user = auth()->user()->load('messages');
+        // return $user;
+        return view('user.messages', compact('user'));
+    }
 }

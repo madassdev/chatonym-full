@@ -28,11 +28,12 @@ Route::get('/u/{user}', function(App\Models\User $user){
     return view('test.message',['user'=>$user]);
 });
 
-Route::get('/', function(App\Models\User $user){
+// Route::get('/', function(App\Models\User $user){
 
-    return view('test.feeds');
-});
+//     return view('test.feeds');
+// });
 
+Route::get('/', 'HomeController@interface')->name('home');
 Route::get('/interface', 'HomeController@interface');
 Route::get('/u/{user}', 'HomeController@writeMessage');
 Route::get('/u/{user}/send', 'HomeController@sendMessage');
@@ -40,5 +41,8 @@ Route::post('/u/{user}', 'HomeController@sendMessage')->name('users.messages.sen
 Route::post('/users/token', 'HomeController@saveToken')->name('users.tokens.create');
 
 Route::prefix('account')->middleware('auth')->group(function(){
-    Route::get('/', 'UserController@showProfile');
+    Route::get('/', 'UserController@showProfile')->name('user.profile.show');
+    Route::get('/messages', 'UserController@showMessages')->name('user.messages.show');
+    Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
+

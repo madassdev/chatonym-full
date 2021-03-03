@@ -14,52 +14,57 @@
     <title>Chatonym</title>
 </head>
 
-<body class="font-normal">
-    <div class="row">
+<body class="font-normal bg-gray-200">
+    <div class="flex">
         <!-- Sidebar -->
-        @include('partials.sidebar')
+            <div class="hidden md:block sidebar w-1/4 fixed z-20 bg-cha-primary h-screen text-white top-0">
+                @include('partials.sidebar')
+            </div>
         <!-- Main -->
-        <div class="w-3/4 p-0 m-0">
-            <div class="fixed w-3/4 m-0 p-0 bg-white z-10">
+        <div class="md:ml-1/4p w-full md:w-3/4 p-0 m-0 top-0">
+            <div class="fixed w-full md:w-3/4 m-0 p-0 bg-white z-10 top-0">
                 @include('partials.topbar')
             </div>
-            <div class="content mt-16">
+
+            <div class="fixed mobile-menu top-0 duration-300 -ml-64 md:hidden left-0 text-white z-30 w-64 bg-cha-primary h-screen">
+                <div class="relative">
+                    <div class="closeNavBtn absolute top-0 right-2 cursor-pointer">
+                        <i class="mdi mdi-close font-bold text-2xl text-white"></i>
+                    </div>
+                    @include('partials.sidebar')
+                </div>
+            </div>
+
+            <div class="fixed transition transition-opacity mobile-menu-overlay duration-300 top-0 hidden md:hidden left-0 z-20 w-full bg-gray-900 h-screen">
+                
+            </div>
+
+            <div class="content mt-12 px-">
                 @yield('content')
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Modal title
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">...</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        Save changes
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         function clog(log) {
             console.log(log)
         }
+
+        $('.openNavBtn').click(function() {
+            $('.mobile-menu').toggleClass('-ml-64')
+            $('.mobile-menu-overlay').toggleClass('hidden').css('opacity', '0.6')
+        })
+
+        $('.closeNavBtn').click(function() {
+            $('.mobile-menu').toggleClass('-ml-64')
+            $('.mobile-menu-overlay').toggleClass('hidden').css('opacity', '0')
+        })
     </script>
 
     <!-- <script src="{{asset('firebase-messaging-sw.js')}}"></script> -->
 
     @yield('scripts')
+
+
 
 </body>
 
