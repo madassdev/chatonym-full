@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'feeds_url' => env('FEEDS_URL', 'https://chatonym.com/api/feeds?page=1'),
 
     /*
     |--------------------------------------------------------------------------

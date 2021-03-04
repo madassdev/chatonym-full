@@ -11,7 +11,6 @@
                 <div class="stats flex items-center justify-between my-3">
                     <p class="text-xs text-cha-accent">4 Likes</p>
                     <p class="text-xs text-cha-accent">221 Comments</p>
-
                 </div>
                 <img src="{{asset('img/icons/divider.svg')}}" class="h-full" alt="">
             </div>

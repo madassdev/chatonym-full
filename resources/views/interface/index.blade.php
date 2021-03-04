@@ -92,7 +92,7 @@
     var notif_icon = $("#notif-icon");
     var notif_dropdown = $("#notif-dropdown");
     var feeds = []
-    var feeds_url = "https://anonymous.dv/api/feeds?page=1";
+    var feeds_url = "{{config('app.feeds_url')}}" + "&client_token=anonymous-api-token";
     var feeds_spinner = $('.feeds-spinner')
     var feed = $('#feed-placeholder');
     var feeds_container = $('.feeds');
@@ -136,7 +136,7 @@
                 await $.get(feeds_url).done(function(data, status) {
                     console.log(data)
                     feeds = data.data.feeds.data
-                    feeds_url = data.data.feeds.next_page_url
+                    feeds_url = data.data.feeds.next_page_url + "&client_token=anonymous-api-token"
                 }).fail(function(response) {
                     console.log(response.responseJSON)
                 })
