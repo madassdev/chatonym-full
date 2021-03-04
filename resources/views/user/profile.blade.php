@@ -10,7 +10,7 @@
             <span
                 class="bg-white absolute bottom-1 right-1 h-6 w-6 flex justify-center items-center rounded-full text-center"
             >
-                <i class="text-cha-primary text-lg mdi mdi-incognito"></i>
+                <i class="text-cha-primary text-lg mdi mdi-guy-fawkes-mask"></i>
             </span>
         </div>
         <div class="text my-2">
@@ -58,20 +58,6 @@
             class="form-group flex space-y-2 flex-col md:flex-row mb-6 items-start md:items-center"
         >
             <label for="" class="md:w-2/5 md:text-right md:pr-8"
-                >Current password</label
-            >
-            <div class="input md:w-2/3 w-full">
-                <input
-                    type="password"
-                    id="current-password"
-                    class="rounded-xl border-gray-400 border w-full"
-                />
-            </div>
-        </div>
-        <div
-            class="form-group flex space-y-2 flex-col md:flex-row mb-6 items-start md:items-center"
-        >
-            <label for="" class="md:w-2/5 md:text-right md:pr-8"
                 >New password</label
             >
             <div class="input md:w-2/3 w-full">
@@ -80,6 +66,9 @@
                     id="password"
                     class="rounded-xl border-gray-400 border w-full"
                 />
+                <p class="hidden password-error text-red-500 text-xs p-2">
+                    Error
+                </p>
             </div>
         </div>
         <div
@@ -91,14 +80,124 @@
             <div class="input md:w-2/3 w-full">
                 <input
                     type="password"
-                    id="confirm-password"
+                    id="c_password"
                     class="rounded-xl border-gray-400 border w-full"
                 />
+                <p class="hidden c_password-error text-red-500 text-xs px-2">
+                    Error
+                </p>
             </div>
         </div>
         <div class="flex justify-end">
-            <x-primary-button id="pwdSubmitBtn">Submit</x-primary-button>
+            <x-primary-button id="pwdBtn">Submit</x-primary-button>
         </div>
     </form>
 </div>
+@endsection @section('scripts')
+<script>
+    var pwd_btn = $("#pwdBtn");
+
+    function popAlert(type) {
+        switch (type) {
+            case "success":
+                theme = "bg-green-300 text-green-700";
+
+                break;
+            case "warning":
+                theme = "bg-yellow-400 text-yellow-900";
+
+                break;
+            case "danger":
+                theme = "bg-red-300 text-red-700";
+
+                break;
+
+            default:
+                theme = "bg-red-300 text-blue-700";
+                break;
+        }
+        var alert = $(".alert");
+        alert.toggleClass(theme + " opacity-0 opacity-90 translate-y-16");
+    }
+
+    var notyf = new Notyf({
+        duration: 3000,
+        position: {
+            x: "right",
+            y: "top",
+        },
+        types: [
+            {
+                type: "primary",
+                background: "#ff8000",
+                icon: {
+                    className: "material-icons",
+                    tagName: "i",
+                    text: "star",
+                },
+            },
+        ],
+        dismissible: true,
+    });
+
+    pwd_btn.click(function () {
+        notyf.open({
+            type: "primary",
+            message: "Send us <b>an email</b> to get support",
+        });
+        var err = 0;
+        var spinner = $(this).children("svg");
+
+        password = $("#password");
+        c_password = $("#c_password");
+
+        password.focus(function () {
+            $(".password-error").text("Password cannot be empty").hide();
+            password.removeClass("border-red-500");
+        });
+        c_password.focus(function () {
+            $(".c_password-error").text("Password cannot be empty").hide();
+            c_password.removeClass("border-red-500");
+        });
+
+        if (password.val() === "") {
+            err++;
+            $(".password-error").text("Password cannot be empty").show();
+            password.addClass("border-red-500");
+            password = $("#password");
+        }
+        if (password.val().length < 5) {
+            err++;
+            $(".password-error")
+                .text("Password must be at least 5 characters long")
+                .show();
+            password.addClass("border-red-500");
+            password = $("#password");
+        }
+
+        if (c_password.val() != password.val()) {
+            err++;
+            $(".c_password-error").text("Passwords do not match!").show();
+            c_password.addClass("border-red-500");
+            c_password = $("#c_password");
+        }
+
+        if (err === 0) {
+            spinner.toggleClass("hidden");
+
+            $.post("{{route('user.password.update')}}", {
+                password: password.val(),
+                _token: "{{csrf_token()}}",
+            })
+                .done(function (response) {
+                    spinner.toggleClass("hidden");
+                    popAlert("success");
+                    clog(response);
+                })
+                .fail();
+        }
+
+        console.log(password.val());
+    });
+</script>
 @endsection

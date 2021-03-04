@@ -1,6 +1,9 @@
-require('./bootstrap');
+require("./bootstrap");
 
-require('alpinejs');
+require("alpinejs");
 
-import $ from 'jquery';
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
+import $ from "jquery";
 window.$ = window.jQuery = $;
+window.Notyf = Notyf;

@@ -13,9 +13,18 @@ class UserController extends Controller
 
     public function showMessages()
     {
-        
+
         $user = auth()->user()->load('messages');
         // return $user;
         return view('user.messages', compact('user'));
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            "password" => "required|min:3",
+        ]);
+        $user = auth()->user();
+        return $user;
     }
 }

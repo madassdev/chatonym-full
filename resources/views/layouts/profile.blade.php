@@ -10,16 +10,17 @@
     <link rel="stylesheet" href="{{ asset('css/gradients.css') }}" />
     <script src="{{ asset('js/app.js') }}"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"> -->
     <title>Chatonym</title>
 </head>
 
 <body class="font-normal bg-gray-200">
+
     <div class="flex">
         <!-- Sidebar -->
-            <div class="hidden md:block sidebar w-1/4 fixed z-20 bg-cha-primary h-screen text-white top-0">
-                @include('partials.sidebar')
-            </div>
+        <div class="hidden md:block sidebar w-1/4 fixed z-20 bg-cha-primary h-screen text-white top-0">
+            @include('partials.sidebar')
+        </div>
         <!-- Main -->
         <div class="md:ml-1/4p w-full md:w-3/4 p-0 m-0 top-0">
             <div class="fixed w-full md:w-3/4 m-0 p-0 bg-white z-10 top-0">
@@ -36,7 +37,7 @@
             </div>
 
             <div class="fixed transition transition-opacity mobile-menu-overlay duration-300 top-0 hidden md:hidden left-0 z-20 w-full bg-gray-900 h-screen">
-                
+
             </div>
 
             <div class="content mt-12 px-">
@@ -59,6 +60,7 @@
             $('.mobile-menu-overlay').toggleClass('hidden').css('opacity', '0')
         })
     </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script> -->
 
     <!-- <script src="{{asset('firebase-messaging-sw.js')}}"></script> -->
 

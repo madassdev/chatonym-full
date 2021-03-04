@@ -10,7 +10,7 @@
             <span
                 class="bg-white absolute bottom-1 right-1 h-6 w-6 flex justify-center items-center rounded-full text-center"
             >
-                <i class="text-cha-primary text-lg mdi mdi-incognito"></i>
+                <i class="text-cha-primary text-lg mdi mdi-guy-fawkes-mask"></i>
             </span>
         </div>
         <div class="text my-2">

@@ -43,6 +43,7 @@ Route::post('/users/token', 'HomeController@saveToken')->name('users.tokens.crea
 Route::prefix('account')->middleware('auth')->group(function(){
     Route::get('/', 'UserController@showProfile')->name('user.profile.show');
     Route::get('/messages', 'UserController@showMessages')->name('user.messages.show');
+    Route::post('/password', 'UserController@updatePassword')->name('user.password.update');
     Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
 
