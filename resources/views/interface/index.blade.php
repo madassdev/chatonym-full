@@ -171,7 +171,7 @@
     $(window).on('scroll', onScroll); 
 
     function onScroll() {
-        if (($(window).scrollTop() == $(document).height() - $(window).height() && shouldFetchFeeds)) {
+        if (($(window).scrollTop() + window.innerHeight  >= document.body.scrollHeight  && shouldFetchFeeds)) {
             showFeeds()
         }
     }
