@@ -21,7 +21,7 @@
             <div class="w-5/6 texting flex flex-col pr-4">
                 <div class="mb-3 textarea flex space-x-4 items-center pr-3 rounded-full bg-white">
                     <textarea name="" id="message" cols="30" rows="1" class="text-xs text-gray-600 border-0 resize-none rounded-full w-full py-1 placeholder-gray-400" placeholder="Write something.."></textarea>
-                    <!-- <i class="mdi mdi-emoticon-happy-outline text-xl text-gray-400"></i> -->
+                    <i class="mdi mdi-emoticon-happy-outline text-xl hidden md:block text-gray-400"></i>
                     <i class="mdi mdi-send text-xl text-cha-primary"></i>
                 </div>
 
@@ -128,7 +128,7 @@
     // feeds_spinner.hide()
     async function showFeeds() {
         feeds_container.append(feeds_spinner)
-        feeds_spinner.addClass('mb-64')
+        feeds_spinner.addClass('my-16')
         feeds_spinner.show()
         if (feeds_url) {
             shouldFetchFeeds = false
