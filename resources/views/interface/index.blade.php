@@ -167,11 +167,14 @@
 
     showFeeds()
 
-    $(window).scroll(function() {
+    $(document.body).on('touchmove', onScroll);
+    $(window).on('scroll', onScroll); 
+
+    function onScroll() {
         if (($(window).scrollTop() == $(document).height() - $(window).height() && shouldFetchFeeds)) {
             showFeeds()
         }
-    });
+    }
     // console.log(palette)
     // palette.hide();
 
