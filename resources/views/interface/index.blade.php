@@ -89,8 +89,6 @@
     var modal = $("#modal");
     var palette_color = $(".palette-color");
     var palette_selector = $("#palette-selector");
-    var notif_icon = $("#notif-icon");
-    var notif_dropdown = $("#notif-dropdown");
     var feeds = []
     var feeds_url = "{{config('app.feeds_url')}}" + "&client_token=anonymous-api-token";
     var feeds_spinner = $('.feeds-spinner')

@@ -37,7 +37,7 @@ Route::get('/', 'HomeController@interface')->name('home');
 Route::get('/interface', 'HomeController@interface');
 Route::get('/u/{user}', 'HomeController@writeMessage');
 Route::get('/u/{user}/send', 'HomeController@sendMessage');
-Route::post('/u/{user}', 'HomeController@sendMessage')->name('users.messages.send');
+Route::post('/u/{user}', 'HomeController@sendPm')->name('users.messages.send');
 Route::post('/users/token', 'HomeController@saveToken')->name('users.tokens.create');
 
 Route::prefix('account')->middleware('auth')->group(function(){
