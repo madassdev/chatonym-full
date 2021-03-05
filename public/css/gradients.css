@@ -92,7 +92,7 @@
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.bg-veryblue {
+.gra-veryblue {
     background: #0575e6; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to right,

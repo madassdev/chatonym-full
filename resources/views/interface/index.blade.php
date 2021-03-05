@@ -60,6 +60,8 @@
 </section>
 @endauth
 <section class="feeds-container">
+<x-feed-card />
+
     <div class="feeds-spinner space-y-1 p-5 flex items-center justify-center flex-col">
         <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-cha-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -97,6 +99,8 @@
 
 
     function generateFeedUi(data) {
+        gradients = ["gra-orange", 'gra-oxblood', 'gra-quepal', 'gra-cherry', 'gra-amin', 'gra-veryblue']
+        gra_bg = Math.floor(Math.random() * 8);
         img = false
         message = data.message
         type = data.media_type
@@ -108,6 +112,8 @@
             }
         }
         var new_feed = feed.clone()
+        grad = gradients[gra_bg]
+        // new_feed.find('.text').addClass(grad ?? 'text-gray-600')
         new_feed.find('.feed-message').html(message)
         feeds_container.append(new_feed)
         if (img) {
@@ -118,9 +124,9 @@
         // clog('offsetHeight is ' + new_feed.find('.feed-body').prop('offsetHeight'))
         // clog('scrollHeight is ' + new_feed.find('.feed-body').prop('scrollHeight'))
 
-        if (new_feed.find('.feed-body').prop('clientHeight') > 100) {
-            new_feed.find('.overflow-blocker').show()
-        }
+        // if (new_feed.find('.feed-body').prop('clientHeight') > 100) {
+        //     new_feed.find('.overflow-blocker').show()
+        // }
 
     }
     // feeds_spinner.hide()
@@ -148,7 +154,7 @@
                 }
 
             } catch (e) {
-
+                clog(e)
                 feeds_spinner.html("<p class='bg-red-200 rounded p-3 text-xs text-red-500'> <i class='mdi mdi-alert-remove mr-3'></i>Something went wrong, please reload page</p>")
                 feeds_spinner.show()
             }
