@@ -47,3 +47,10 @@ Route::prefix('account')->middleware('auth')->group(function(){
     Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
 
+
+Route::prefix('threads')->middleware('auth')->group(function(){
+    Route::get('/', 'ThreadController@index')->name('thread.index');
+    Route::post('/', 'ThreadController@create')->name('thread.create');
+    // Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
+});
+

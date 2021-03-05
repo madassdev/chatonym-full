@@ -8,15 +8,18 @@ class UserController extends Controller
 {
     public function showProfile()
     {
-        return view('user.profile');
+        $user = auth()->user();
+        $messages_count = $user->messages->count();
+        $threads_count = $user->threads->count();
+        return view('user.profile-mini', compact('messages_count', 'threads_count'));
     }
 
     public function showMessages()
     {
-
         $user = auth()->user()->load('messages');
-        // return $user;
-        return view('user.messages', compact('user'));
+        $messages_count = $user->messages->count();
+        $threads_count = $user->threads->count();
+        return view('user.messages', compact('user', 'messages_count', 'threads_count'));
     }
 
     public function updatePassword(Request $request)

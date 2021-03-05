@@ -80,6 +80,11 @@ class User extends Authenticatable
         return @$this->deviceToken->token;
     }
 
+    public function getRefLinkAttribute()
+    {
+        return config('app.url')."/u/".$this->username;
+    }
+
     public function reactToModel($model, $reaction)
     {
 

@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use ErrorException;
+use IFrankSmith\Sluggable\Traits\Sluggable;
 
 class Thread extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Sluggable;
 
     public $reactionClass = ThreadReaction::class;
     
@@ -76,6 +77,14 @@ class Thread extends Model
 
 
         return null;
+    }
+
+    public function sluggable()
+    {
+        return [
+            "source" => "name",
+            "column" => "slug",
+        ];
     }
 
 }

@@ -12,10 +12,12 @@ class PrimaryButton extends Component
      * @return void
      */
     public $id;
+    public $type;
 
-    public function __construct($id)
+    public function __construct($type="submit", $id)
     {
         $this->id = $id;
+        $this->type = $type;
     }
 
     /**
