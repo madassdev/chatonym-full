@@ -30,4 +30,14 @@ class UserController extends Controller
         $user = auth()->user();
         return $user;
     }
+
+    public function showThreads()
+    {
+        $user = auth()->user()->load('messages');
+        $messages_count = $user->messages->count();
+        $threads_count = $user->threads->count();
+        $threads = $user->threads;
+        return view('user.threads', compact('threads', 'threads_count', 'messages_count'));
+        return $user->threads;
+    }
 }

@@ -11,9 +11,12 @@ class FeedCard extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $has_comments;
+
+    public function __construct($has_comments = false)
     {
-        //
+        $this->has_comments = $has_comments;
     }
 
     /**

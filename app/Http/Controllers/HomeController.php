@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ClientErrorException;
+use App\Models\Feed;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,12 @@ class HomeController extends Controller
     {
         return view('interface.index');
     }
+
+    // public function showFeed(Feed $feed)
+    // {
+    //     $feed->load('replies')
+    //     return $feed;
+    // }
 
     public function writeMessage(User $user)
     {
@@ -210,4 +217,6 @@ class HomeController extends Controller
 
         return $response;
     }
+
+    
 }

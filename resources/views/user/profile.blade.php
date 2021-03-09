@@ -109,12 +109,6 @@
             duration: 1500
         })
     })
-
-    MicroModal.init({
-        onOpen: (modal) => console.log(`${modal.id} is hidden`),
-        onClose: (modal) => console.log(`${modal.id} is hidden`),
-    });
-
     // MicroModal.show("create-thread-modal");
     $(".create-thread").click(function() {
         MicroModal.show("create-thread-modal");

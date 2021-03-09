@@ -13,7 +13,7 @@ module.exports = {
             colors: {
                 "cha-primary": "#6A50D3",
                 "cha-secondary": "#F9F8FF",
-                // "cha-secondary": "#c6c2e0",
+                // "cha-secondary": "#dddbeb",
                 "cha-light": "#F9F8FF",
                 "cha-accent": "#A7D2F1"
             },
@@ -24,7 +24,15 @@ module.exports = {
             margin:{
                 "1/4p" : "25%",
                 "1/2p" : "50%",
-                "3/4p" : "75%"
+                "3/4p" : "75%",
+                "4/4p" : "100%",
+            },
+            fontSize: {
+                "xs-12" : "12px",
+                "xs-10" : "10px",
+                "xs-8" : "8px",
+                "xs-7" : "7px",
+                "xs-6" : "6px",
             }
         },
     },

@@ -1,4 +1,7 @@
+/* color: #dddbeb */
 .gra-orange {
+
+    color:white;
     background: #ff4e00; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to bottom right,
@@ -13,11 +16,15 @@
 }
 
 .gra-oxblood {
+
+    color:white;
     background-color: #6b0f1a;
     background-image: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);
 }
 
 .gra-quepal {
+
+    color:white;
     background: #11998e; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to bottom right,
@@ -32,6 +39,8 @@
 }
 
 .gra-oxblood {
+
+    color:white;
     background: #11998e; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to bottom right,
@@ -46,11 +55,15 @@
 }
 
 .gra-cherry {
+
+    color:white;
     background-color: #ff416c;
     background-image: linear-gradient(315deg, #eb3349 0%, #f45c43 74%);
 }
 
 .gra-amin {
+
+    color:white;
     background: #4a00e0; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to bottom right,
@@ -65,6 +78,8 @@
 }
 
 .gra-grandeur {
+
+    color:white;
     background: #000046; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to right,
@@ -79,6 +94,8 @@
 }
 
 .gra-celestial {
+
+    color:white;
     background: #c33764; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to right,
@@ -93,6 +110,8 @@
 }
 
 .gra-veryblue {
+
+    color:white;
     background: #0575e6; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to right,

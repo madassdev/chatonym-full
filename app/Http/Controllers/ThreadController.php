@@ -19,9 +19,6 @@ class ThreadController extends Controller
     {
         $user = auth()->user();
         $secret = null;
-        // $token = null;
-        // return $thread;
-        // return $request;
         $request->validate([
             'name' => 'required|max:50',
             'description' => 'required|max:100',
@@ -62,5 +59,11 @@ class ThreadController extends Controller
                 'data' => $thread
             ],
         );
+    }
+
+    public function showThreads()
+    {
+        $threads = auth()->user()->threads();
+        return $threads;
     }
 }
