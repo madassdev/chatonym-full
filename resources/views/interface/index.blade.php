@@ -64,12 +64,17 @@
     <x-feed-card :has_comments="1" />
     <x-feed-card :has_comments="1" />
 
-    <div class="w-1/2 reply-chat fixed z-20 text-white bottom-0 hidden">
-        <div class="w-11/12 mx-auto shadow-xl rounded-full">
-            <div class="mb-3 textarea flex space-x-4 items-center pr-3 rounded-full bg-white">
+    <div class="w-full md:w-1/2 reply-chat fixed z-20 text-white bottom-0 hidden">
+        <div class="w-full mx-auto shadow-xl rounded-full flex items-center mb-3 px-4 md:space-x-1 space-x-2">
+            <div class="textarea flex space-x-4 items-center pr-3 w-11/12 rounded-full bg-white">
                 <textarea name="" id="reply-message" cols="30" class="px-4 py-1 text-xs text-gray-600 border-0 resize-none rounded-full w-full placeholder-gray-400" placeholder="Write something.."></textarea>
                 <i class="mdi mdi-emoticon-happy-outline text-xl hidden  text-gray-400"></i>
                 <i class="mdi mdi-send text-xl text-cha-primary cursor-pointer reply-send"></i>
+            </div>
+            <div class="w-1/12 items-center flex justify-start">
+                <span class="rounded-full p-1 flex items-center justify-center bg-cha-primary">
+                    <i class="mdi mdi-close text-sm cursor-pointer reply-close"></i>
+                </span>
             </div>
         </div>
     </div>
@@ -129,12 +134,12 @@
     var reply_send_btn = feed_reply_input.find('.reply-send')
 
 
-    reply_send_btn.click(function(){
+    reply_send_btn.click(function() {
         feed_id = ($(this).parents('.reply-chat').attr('feed-id'))
-
-        $.post("{{url()->to('/')}}/feeds/"+feed_id).done(function(response){
+        reply_message = feed_reply_input.find('#reply-message').val()
+        $.post("{{url()->to('/')}}/feeds/" + feed_id).done(function(response) {
             clog(response)
-        }).fail(function(response){
+        }).fail(function(response) {
             clog(response)
         })
 
@@ -145,6 +150,7 @@
         clog(replying_feed.parents("#feed-placeholder").attr('feed-id'))
         feed_reply_input.attr('feed-id', replying_feed.parents("#feed-placeholder").attr('feed-id'))
         feed_reply_input.show()
+        feed_reply_input.find('#reply-message').focus()
     }
 
 
