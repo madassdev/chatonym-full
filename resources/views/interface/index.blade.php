@@ -132,7 +132,12 @@
     var feeds_container = $('.feeds');
     var feed_reply_input = $('.reply-chat')
     var reply_send_btn = feed_reply_input.find('.reply-send')
-
+    var reply_close_btn = feed_reply_input.find('.reply-close')
+    
+    reply_close_btn.click(function(){
+        feed_reply_input.find('#reply-message').val('')
+        feed_reply_input.hide()
+    })
 
     reply_send_btn.click(function() {
         feed_id = ($(this).parents('.reply-chat').attr('feed-id'))
