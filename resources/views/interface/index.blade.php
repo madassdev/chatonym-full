@@ -1,7 +1,6 @@
 @extends('layouts.chatonym')
 
 @section('content')
-@auth
 <section class="create-feed duration-300">
     <div id="palette-preview-box" class="hidden rounded-xl bg-cha-secondary m-3 mb-0 p-3">
         <div id="palette-preview" class="relative w-3/4 mx-auto h-24 px-5 py-3 rounded-2xl gra-orange text-white" gradient-bg="gra-orange">
@@ -59,7 +58,6 @@
         </div>
     </div>
 </section>
-@endauth
 <section class="feeds-container duration-300">
     <x-feed-card :has_comments="1" />
     <x-feed-card :has_comments="1" />
@@ -106,7 +104,30 @@
                 <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
             </header>
             <main class="modal__content p-3" id="modal-1-content">
-                <img src="{{asset('img/placeholders/smileys.jpg')}}" class="feed-modal-image" alt="" srcset="">
+                <img src="{{asset('img/placeholders/smileys.jpg')}}" class="feed-modal-image rounded-xl" alt="" srcset="">
+            </main>
+        </div>
+    </div>
+</div>
+<div class="modal micromodal-slide" id="login-loader-modal" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <header class="modal__header text-cha-primary">
+                <!-- <h2 class="modal__title" id="modal-1-title">
+                    Login to Chatonym
+                </h2>
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button> -->
+            </header>
+            <main class="modal__content p-3" id="modal-1-content">
+                <div class="spinner space-y-1 text-4xl p-5 flex items-center justify-center flex-col">
+                    <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-cha-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <p class="text-xs text-cha-primary opacity-80">
+                        Validating account
+                    </p>
+                </div>
             </main>
         </div>
     </div>
@@ -116,6 +137,7 @@
 
 @section('scripts')
 <script>
+    var auth = "{{auth()->check()}}" ? true : false;
     var shouldFetchFeeds = true;
     var message = $("#message")
     var palette = $("#palette");
@@ -133,8 +155,9 @@
     var feed_reply_input = $('.reply-chat')
     var reply_send_btn = feed_reply_input.find('.reply-send')
     var reply_close_btn = feed_reply_input.find('.reply-close')
-    
-    reply_close_btn.click(function(){
+
+    clog(auth)
+    reply_close_btn.click(function() {
         feed_reply_input.find('#reply-message').val('')
         feed_reply_input.hide()
     })
@@ -150,8 +173,18 @@
 
     })
 
+    function doLogin() {
+        MicroModal.show("login-loader-modal");
+        window.location = "{{route('login')}}"
+    }
+
     function replyToFeed(replying_feed) {
         // application_card = $(this).parents("[type=application-card]")
+        if (!auth) {
+            doLogin();
+            return
+        }
+
         clog(replying_feed.parents("#feed-placeholder").attr('feed-id'))
         feed_reply_input.attr('feed-id', replying_feed.parents("#feed-placeholder").attr('feed-id'))
         feed_reply_input.show()
