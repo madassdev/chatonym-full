@@ -64,6 +64,15 @@
     <x-feed-card :has_comments="1" />
     <x-feed-card :has_comments="1" />
 
+    <div class="w-1/2 reply-chat fixed z-20 text-white bottom-0 hidden">
+        <div class="w-11/12 mx-auto shadow-xl rounded-full">
+            <div class="mb-3 textarea flex space-x-4 items-center pr-3 rounded-full bg-white">
+                <textarea name="" id="reply-message" cols="30" class="px-4 py-1 text-xs text-gray-600 border-0 resize-none rounded-full w-full placeholder-gray-400" placeholder="Write something.."></textarea>
+                <i class="mdi mdi-emoticon-happy-outline text-xl hidden  text-gray-400"></i>
+                <i class="mdi mdi-send text-xl text-cha-primary cursor-pointer reply-send"></i>
+            </div>
+        </div>
+    </div>
     <div class="feeds-spinner space-y-1 p-5 flex items-center justify-center flex-col">
         <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-cha-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -116,9 +125,27 @@
     var feeds_spinner = $('.feeds-spinner')
     var feed = $('#feed-placeholder');
     var feeds_container = $('.feeds');
+    var feed_reply_input = $('.reply-chat')
+    var reply_send_btn = feed_reply_input.find('.reply-send')
 
 
-    // MicroModal.show("feed-open-modal");
+    reply_send_btn.click(function(){
+        feed_id = ($(this).parents('.reply-chat').attr('feed-id'))
+
+        $.post("{{url()->to('/')}}/feeds/"+feed_id).done(function(response){
+            clog(response)
+        }).fail(function(response){
+            clog(response)
+        })
+
+    })
+
+    function replyToFeed(replying_feed) {
+        // application_card = $(this).parents("[type=application-card]")
+        clog(replying_feed.parents("#feed-placeholder").attr('feed-id'))
+        feed_reply_input.attr('feed-id', replying_feed.parents("#feed-placeholder").attr('feed-id'))
+        feed_reply_input.show()
+    }
 
 
     function generateFeedUi(data) {
@@ -159,9 +186,12 @@
         old_reply = replies.find('.reply')
         new_feed.find('.see-more').hide()
         new_feed.find('.replies-icon-count').text(data.replies.length > 0 ? data.replies.length : '')
+        new_feed.find('.feed-comments-link').bind('click', function() {
+            replyToFeed($(this))
+        })
         new_feed.find('.replies-count').hide()
         replies.addClass('hidden')
-        
+
 
 
         if (data.replies.length > 0) {

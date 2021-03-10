@@ -28,10 +28,10 @@
         </div>
         <div class="replies">
 
-            <a href="" class="feed-comments-link flex items-center space-x-1">
+            <span class="cursor-pointer feed-comments-link flex items-center space-x-1">
                 <i class="mdi mdi-message-text-outline text-lg text-cha-primary"></i>
                 <span class="replies-icon-count text-cha-primary">43</span>
-            </a>
+            </span>
         </div>
         <!-- <div class="">
                 <i class="mdi mdi-heart-outline text-cha-primary"></i>

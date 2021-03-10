@@ -54,6 +54,7 @@ Route::prefix('feeds')->group(function(){
     Route::get('/', 'FeedController@index')->name('feed.index');
     Route::get('/fetch', 'FeedController@fetchFeeds')->name('feed.fetch');
     Route::get('/{feed}', 'FeedController@showFeed')->name('feed.show');
+    Route::post('/{feed}', 'FeedController@replyFeed')->name('feed.show');
     // Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
 
