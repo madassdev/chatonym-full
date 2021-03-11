@@ -21,9 +21,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
-Route::get('/u/{user}', function(App\Models\User $user){
+Route::get('/login','Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login','Auth\LoginController@login')->name('login');
+Route::get('/logout','Auth\LoginController@logout')->name('logout');
+
+Route::get('/u/{user}/xxx', function(App\Models\User $user){
 
     return view('test.message',['user'=>$user]);
 });
@@ -52,9 +56,10 @@ Route::prefix('account')->middleware('auth')->group(function(){
 
 Route::prefix('feeds')->group(function(){
     Route::get('/', 'FeedController@index')->name('feed.index');
+    Route::post('/', 'FeedController@create')->name('feed.create');
     Route::get('/fetch', 'FeedController@fetchFeeds')->name('feed.fetch');
     Route::get('/{feed}', 'FeedController@showFeed')->name('feed.show');
-    Route::post('/{feed}', 'FeedController@replyFeed')->name('feed.show');
+    Route::post('/{feed}', 'FeedController@replyFeed')->name('feed.reply');
     // Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
 

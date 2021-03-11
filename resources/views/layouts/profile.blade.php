@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="{{ asset('css/modal.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <script src="{{ asset('js/app.js') }}"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <title>Chatonym</title>
 </head>
 

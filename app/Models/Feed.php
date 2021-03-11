@@ -48,7 +48,7 @@ class Feed extends Model
 
     public function replies()
     {
-        return $this->hasMany(Feed::class, 'parent_id', 'id');
+        return $this->hasMany(Feed::class, 'parent_id', 'id')->orderBy('created_at', 'DESC');
     }
 
     public function getRepliesAttribute()
