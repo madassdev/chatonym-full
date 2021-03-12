@@ -14,7 +14,7 @@ class FeedController extends Controller
     }
     public function fetchFeeds()
     {
-        $feeds = Feed::latest()->whereNull('parent_id')->with('user')->with('replies')
+        $feeds = Feed::latest()->whereNull('parent_id')->with('user')->with('replies')->with('reactions')->withCount('reactions')
             ->paginate(30);
 
         return response()->json(['success' => true, 'data' => ['feeds' => FeedResource::collection($feeds)]]);
@@ -27,6 +27,24 @@ class FeedController extends Controller
         $feed->load('replies');
 
         return $feed;
+    }
+
+    public function reactToFeed(Request $request, Feed $feed)
+    {
+        $user = auth()->user();
+        $request->validate([
+            "reaction" => "required|string",
+        ]);
+
+        $feed->reactions()->updateOrCreate(["feed_id"=> $feed->id, "user_id"=> $user->id],[
+            "reaction" => $request->reaction,
+            "user_id" => $user->id
+        ]);
+
+        return response()->json([
+            "success" => true,
+            "data" => $feed
+        ]);
     }
 
     public function create(Request $request)

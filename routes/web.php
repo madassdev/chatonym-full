@@ -56,10 +56,11 @@ Route::prefix('account')->middleware('auth')->group(function(){
 
 Route::prefix('feeds')->group(function(){
     Route::get('/', 'FeedController@index')->name('feed.index');
-    Route::post('/', 'FeedController@create')->name('feed.create');
+    Route::post('/', 'FeedController@create')->name('feed.create')->middleware('auth');
     Route::get('/fetch', 'FeedController@fetchFeeds')->name('feed.fetch');
     Route::get('/{feed}', 'FeedController@showFeed')->name('feed.show');
-    Route::post('/{feed}', 'FeedController@replyFeed')->name('feed.reply');
+    Route::post('/{feed}', 'FeedController@replyFeed')->name('feed.reply')->middleware('auth');
+    Route::post('/{feed}/react', 'FeedController@reactToFeed')->name('feed.reply')->middleware('auth');
     // Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
 

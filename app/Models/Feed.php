@@ -59,32 +59,38 @@ class Feed extends Model
 
     public function getReactedByUserAttribute()
     {
-
-        try{
-             if(isset(auth()->guard('api')->user()->id))
-            {
-                $userId = auth()->guard("api")->user()->id;
-
-
-                $reaction = $this->reactions->
-                first(function ($reac) use ($userId) {
-                    return $reac->user_id === $userId;
-                });
-
-                if ($reaction) {
-                    return $reaction;
-                }
-                else{
-                    return null;
-                }
-            }
-
-        } catch(ErrorException $e){
-            return null;
+        if(auth()->user())
+        {  
+           return $this->reactions->firstWhere('user_id', auth()->user()->id);
         }
 
-
         return null;
+
+    //     try{
+    //          if(isset(auth()->guard('api')->user()->id))
+    //         {
+    //             $userId = auth()->guard("api")->user()->id;
+
+
+    //             $reaction = $this->reactions->
+    //             first(function ($reac) use ($userId) {
+    //                 return $reac->user_id === $userId;
+    //             });
+
+    //             if ($reaction) {
+    //                 return $reaction;
+    //             }
+    //             else{
+    //                 return null;
+    //             }
+    //         }
+
+    //     } catch(ErrorException $e){
+    //         return null;
+    //     }
+
+
+    //     return null;
     }
 
 

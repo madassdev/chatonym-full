@@ -381,10 +381,34 @@
             })
         }
 
+        if (data.reacted_by_user !== null) {
+            user_reaction = data.reacted_by_user.reaction
+            reaction_image = feed.find("[reaction=" + user_reaction + "]").attr('src')
+            new_feed.find('.select-reaction').attr('src', reaction_image)
+        }
+
         // REACTIONS UI
         new_feed.find('.add-reaction').bind('mouseup', function() {
             $('.current').find('.reactions-container').addClass('hidden')
             reactionManager($(this))
+        })
+
+        new_feed.find('.reaction').attr('feed-id', data.id).bind('click', function() {
+            clog($(this).attr('reaction') + $(this).attr('feed-id'))
+            if (!auth) {
+                doLogin();
+                return
+            }
+            $.post("{{url()->to('/feeds')}}" + "/" + data.id + "/react",{
+                reaction: $(this).attr('reaction')
+            }).done(function(response) {
+                clog(response)
+            }).done(function(response) {
+                clog(response)
+            })
+
+            $(this).parents('.reactions').find('.select-reaction').attr('src', $(this).attr('src'))
+            $('.current').find('.reactions-container').addClass('hidden')
         })
 
         // REPLY UI
@@ -396,9 +420,10 @@
 
     }
 
+    // function 
+
     function reactionManager(frs) {
         frs.parent('.reactions').addClass('current').find('.reactions-container').removeClass('hidden')
-        clog(frs.parent('.reactions'))
     }
 
     function makeReply(r) {
@@ -454,13 +479,14 @@
         feeds_container.append(feeds_spinner)
         feeds_spinner.addClass('my-16')
         feeds_spinner.show()
-        if (feeds_url) {
+        if (feeds_url !== null) {
             shouldFetchFeeds = false
             try {
                 await $.get(feeds_url).done(function(data, status) {
                     console.log(data)
                     feeds = data.data.feeds.data
-                    feeds_url = data.data.feeds.next_page_url + "&client_token=anonymous-api-token"
+                    feeds_url = data.data.feeds.next_page_url
+
                 }).fail(function(response) {
                     console.log(response.responseJSON)
                 })
@@ -554,8 +580,7 @@
 
         if (
             !$('.reactions').is(e.target) &&
-            $('.reactions').has(e.target).length === 0 
-            &&
+            $('.reactions').has(e.target).length === 0 &&
             !$(e.target).hasClass("current")
         ) {
             $('.reactions-container').addClass("hidden");
