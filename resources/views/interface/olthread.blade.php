@@ -1,68 +1,18 @@
 @extends('layouts.chatonym')
 
 @section('content')
-<section class="create-feed duration-300">
-    <div id="palette-preview-box" class="hidden rounded-xl bg-cha-secondary m-3 mb-0 p-3">
-        <div id="palette-preview" class="relative w-3/4 mx-auto h-24 px-5 py-3 rounded-2xl gra-orange text-white" gradient-bg="gra-orange">
-            <p class="preview-text text-xs text-gray-100">
-                Type a message in the input box below to preview
-            </p>
-            <i class="palette-close mdi mdi-close absolute top-0 right-2 cursor-pointer"></i>
-        </div>
-    </div>
-
-    <div class="m-3 mb-0 bg-cha-secondary p-3 rounded-2xl">
-        <div class="flex">
-            <div class="w-1/6 px-2">
-                <img src="{{
-                                            asset('img/placeholders/profile.jpg')
-                                        }}" class="rounded-full float-right w-8 h-8 md:w-12 md:h-12 object-cover" alt="" />
-            </div>
-            <div class="w-5/6 texting flex flex-col pr-4">
-                <div class="mb-3 textarea flex space-x-4 items-center pr-3 rounded-full bg-white">
-                    <textarea name="" id="feed-message" cols="30" rows="3" class="text-xs text-gray-600 border-0 resize-none rounded-xl w-full py-1 placeholder-gray-400" placeholder="Write something.."></textarea>
-                    <i class="mdi mdi-emoticon-happy-outline text-xl hidden  text-gray-400"></i>
-                    <i class="mdi mdi-send text-xl text-cha-primary cursor-pointer"></i>
-                </div>
-
-                <div class="styling px-4 flex items-center relative">
-                    <div class="w-3/4">
-                        <div class="w-8 cursor-pointer" id="palette-selector">
-                            <img src="{{
-                                                        asset(
-                                                            'img/icons/rainbow.svg'
-                                                        )
-                                                    }}" class="rounded-full w-8" alt="" />
-                            <div id="palette" class="hidden absolute z-10 bg-cha-secondarys bg-gray-50 shadow-lg left-10 top-3 p-1 md:p-2 grid grid-cols-8 md:gap-2 gap-1 rounded w-full sm:w-2/3 md:w-5/6">
-                                @foreach(['a', 'b', 'c'] as $c)
-                                <div class="gra-orange w-6 h-6 md:w-8 md:h-8 rounded palette-color" gradient-bg="gra-orange"></div>
-                                <div class="gra-oxblood w-6 h-6 md:w-8 md:h-8 rounded palette-color" gradient-bg="gra-oxblood"></div>
-                                <div class="gra-quepal w-6 h-6 md:w-8 md:h-8 rounded palette-color" gradient-bg="gra-quepal"></div>
-                                <div class="gra-cherry w-6 h-6 md:w-8 md:h-8 rounded palette-color" gradient-bg="gra-cherry"></div>
-                                <div class="gra-amin w-6 h-6 md:w-8 md:h-8 rounded palette-color" gradient-bg="gra-amin"></div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="icons flex items-center w-1/2 justify-end space-x-4">
-                        <!-- <i class="mdi mdi-plus text-cha-primary text-xl"></i> -->
-
-                        <div id="imgBtn" class="flex items-center justify-center top-2 right-2 h-8 w-8 cursor-pointer rounded-full">
-                            <input id="imageInput" type="file" class="h-0 w-0" accept="image/*" />
-                            <i class="mdi mdi-camera-image text-cha-primary text-xl cursor-pointer media-upload image"></i>
-                        </div>
-                        <!-- <i class="mdi mdi-video-plus text-cha-primary text-xl cursor-pointer media-upload video"></i> -->
-                        <!-- <img src="{{
-                                                    asset('img/icons/GIF.svg')
-                                                }}" class="w-5 cursor-pointer" alt="" /> -->
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="thread-info p-4 px-8 duration-300">
+    <p class="text-xl font-black text-cha-primary">{{$thread->name}}</p>
+    <p class="text-xs  text-gray-500">{{$thread->description}}</p>
+    <div class="icons text-cha-primary my-3">
+        <i class="mdi mdi-message-text-outline"></i>
+        <span class="text-xs">
+            {{$thread->messages_count}}
+        </span>
     </div>
 </section>
 <section class="feeds-container duration-300">
+    <x-thread-message/>
     <x-feed-card :has_comments="1" />
 
     <div class="w-full md:w-1/2 reply-chat fixed z-20 text-white bottom-0 hidden">
@@ -85,8 +35,7 @@
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
         <p class="text-xs text-cha-primary opacity-80">
-
-            Loading feeds
+            Loading messages
         </p>
     </div>
     <div class="feeds">
@@ -197,7 +146,7 @@
     var palette_color = $(".palette-color");
     var palette_selector = $("#palette-selector");
     var feeds = []
-    var feeds_url = "{{route('feed.fetch')}}";
+    var messages_url = "{{route('thread.fetch',$thread)}}";
     var feeds_spinner = $('.feeds-spinner')
     var feed = $('#feed-placeholder');
     var feeds_container = $('.feeds');
@@ -482,7 +431,7 @@
         if (feeds_url !== null) {
             shouldFetchFeeds = false
             try {
-                await $.get(feeds_url).done(function(data, status) {
+                await $.get(thread_messages_url).done(function(data, status) {
                     console.log(data)
                     feeds = data.data.feeds.data
                     feeds_url = data.data.feeds.next_page_url

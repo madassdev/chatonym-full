@@ -10,7 +10,7 @@ class FeedController extends Controller
 {
     public function index()
     {
-        return view('interface.index');
+        return view('interface.feed');
     }
     public function fetchFeeds()
     {
@@ -36,7 +36,7 @@ class FeedController extends Controller
             "reaction" => "required|string",
         ]);
 
-        $feed->reactions()->updateOrCreate(["feed_id"=> $feed->id, "user_id"=> $user->id],[
+        $feed->reactions()->updateOrCreate(["feed_id" => $feed->id, "user_id" => $user->id], [
             "reaction" => $request->reaction,
             "user_id" => $user->id
         ]);
@@ -44,6 +44,24 @@ class FeedController extends Controller
         return response()->json([
             "success" => true,
             "data" => $feed
+        ]);
+    }
+
+    public function updateFeedImage(Request $request, Feed $feed)
+    {
+        $request->validate(
+            [
+                'image_url' => 'array',
+            ]
+        );
+
+        $feed->load('replies');
+        // $feed->message="updated";
+        $feed->image_url = $request->image_url;
+        $feed->save();
+        return response()->json([
+            'success' => true,
+            'data' => $feed->load('replies')
         ]);
     }
 
@@ -94,9 +112,11 @@ class FeedController extends Controller
             ]
         );
 
+        // $feed = Feed::find(3629);
+
         return response()->json([
             'success' => true,
-            'data' => $feed
+            'data' => $feed->load('replies')
         ]);
     }
 

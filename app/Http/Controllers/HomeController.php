@@ -13,7 +13,17 @@ class HomeController extends Controller
 {
     public function interface()
     {
-        return view('interface.index');
+        return view('interface.feed');
+    }
+    public function vuefeeds()
+    {
+        return view('vue.landing');
+    }
+
+    public function peepMessage(User $user)
+    {
+        $user->load('messages');
+        return view('interface.peep', compact('user'));
     }
 
     // public function showFeed(Feed $feed)

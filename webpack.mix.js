@@ -12,6 +12,8 @@ const mix = require("laravel-mix");
  */
 
 mix.js("resources/js/app.js", "public/js")
+.js('resources/js/Feed.js', 'public/js').vue()
+.js('resources/js/Thread.js', 'public/js').vue()
 .sass("resources/sass/app.scss", "public/css")
     .postCss("resources/css/app.css", "public/css", [
         require("postcss-import"),

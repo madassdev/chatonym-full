@@ -6,8 +6,8 @@
         <div class="image cursor-pointer my-2 w-5/6 m:w-2/3 mx-auto flex items-center justify-center hiddesn">
             <img src="{{asset('img/placeholders/image-loading.gif')}}" class="rounded-2xl feed-img object-cover h-44 w-full" alt="" srcset="" />
         </div>
-        <div class="text w-full mx-auto p-3 rounded-xl max-h-24 md:max-h-40 overflow-hidden overflow-scroll">
-            <p class="font-light  text-sm feed-message font-light">
+        <div class="text w-full mx-auto p-3 rounded-xl max-h-24 md:max-h-40 overflow-scroll">
+            <p class="font-light  text-sm feed-message">
                 I don't care about that, just get your
                 bag mama - American rapper, Young M.A
                 reacts to the viral video of her ex, Mya

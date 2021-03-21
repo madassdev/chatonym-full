@@ -52,6 +52,11 @@ class ThreadMessage extends Model
         return $this->hasMany(ThreadMessage::class, 'parent_id', 'id');
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(ThreadMessage::class, 'parent_id', 'id');
+    }
+
     public function getRepliesAttribute()
     {
         return $this->replies()->count();

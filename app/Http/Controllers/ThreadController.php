@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FeedResource;
 use App\Models\Thread;
+use App\Models\ThreadMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,6 +14,21 @@ class ThreadController extends Controller
     {
         $user = auth()->user();
         return $user->threads;
+    }
+
+    public function showThread(Thread $thread)
+    {
+        $thread->loadCount('messages');
+        return view('interface.thread', compact('thread'));
+    }
+
+    public function fetchMessages(Thread $thread)
+    {
+        // abort(403);
+        $messages = ThreadMessage::whereThreadId($thread->id)->latest()->with('reactions')->with('parent')->withCount('reactions')->with('parent')->latest()
+            ->paginate(30);
+
+        return response()->json(['success' => true, 'data' => ['messages' => FeedResource::collection($messages)]]);
     }
 
 
@@ -65,5 +82,79 @@ class ThreadController extends Controller
     {
         $threads = auth()->user()->threads();
         return $threads;
+    }
+
+    public function sendThreadMessage(Request $request, Thread $thread)
+    {
+        // if($thread->visibility == 'private'){
+
+        //     if(! $this->authorizePrivateThread($request, $thread)){
+
+        //         return response()->json([
+        //                                     'success'=>false,
+        //                                     'data'=>[
+        //                                         'message'=>'Thread requires a correct secret or token'
+        //                                         ]
+        //                                     ],
+        //                                     $this->validationFailed);
+        //     }
+        // }
+        $thread->load('messages');
+
+        $request->validate([
+            "message" => "required_without:image_url"
+        ]);
+
+
+        if ($request->message_id) {
+            $parentMessage = $thread->messages->where('id',$request->message_id)->first();
+            abort_unless($parentMessage,403,"Invalid message on thread");
+        }
+
+        $status = 'submitted';
+        $media_type = 'text';
+
+        if ($request->has('image_url')) {
+
+            $request->validate(
+                [
+                    'image_url' => 'array',
+                ]
+            );
+
+            $status = 'submitted-with-image';
+            $media_type = 'text-and-image';
+
+            json_encode($request->image_url);
+        }
+
+        $message = nl2br(strip_tags($request->message));
+        // return nl2br($request->message);
+
+
+        $tmessage = ThreadMessage::create(
+            [
+                'message' => $message,
+                'thread_id' => $thread->id,
+                'parent_id' => $request->message_id,
+
+                'user_ip' => $request->ip(),
+                'user_agent' => $request->header('User-Agent'),
+
+                'media_type' => $media_type,
+
+                'image_url' => $request->image_url,
+
+                'audio_url' => $request->audio_url,
+                'warped_audio_url' => $request->warped_audio_url,
+                'warp_effect' => $request->warp_effect,
+
+                'status' => $status
+            ]
+        );
+
+
+
+        return response()->json(['success' => true, 'data' => $tmessage->load('parent')]);
     }
 }

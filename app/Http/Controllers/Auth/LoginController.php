@@ -38,14 +38,17 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        if(request()->has('to_like') && request()->has('msg_id')){
+        if (request()->has('to_like') && request()->has('msg_id')) {
             // echo request()->get('msg_id');
             session()->put('msg_to_like', request()->get('msg_id'));
+
+            $this->redirectTo = url()->previous();
         }
     }
 
     public function login(Request $request)
     {
+        $this->redirectTo = (session()->get('url.intended'));
         $input = $request->all();
 
         $this->validate($request, [
@@ -55,14 +58,12 @@ class LoginController extends Controller
         ]);
 
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
-        {
+        if (auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
             return redirect($this->redirectTo);
-        }else{
+        } else {
             return back()
-                ->with(['error'=>'Login details incorrect']);
+                ->with(['error' => 'Login details incorrect']);
         }
-
     }
 
     public function destroy(Request $request)
@@ -74,5 +75,12 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function showLoginForm()
+    {
+        // dd(session()->get('url.intended'));
+        session(['url.intended' => url()->previous()]);
+        return view('auth.login');
     }
 }
