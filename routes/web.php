@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -27,6 +28,7 @@ Route::post('/mock', function () {
     return true;
 });
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/register', 'Auth\LoginController@showLoginForm')->name('register');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -87,3 +89,5 @@ Route::prefix('thread')->middleware('auth')->group(function () {
     Route::post('/', 'ThreadController@create')->name('thread.create');
     // Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
+
+Route::get('{vue_capture?}', 'HomeController@interface')->where('vue_capture', '[\/\w\.-]*');

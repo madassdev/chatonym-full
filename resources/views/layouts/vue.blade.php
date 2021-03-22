@@ -122,6 +122,20 @@
         });
 
         var app_user = @json(auth()->user())
+
+        $('.ref-link').click(function() {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(this).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+
+        notyf.success({
+            message: 'Link copied to clipboard',
+            duration: 1500
+        })
+    })
+    
     </script>
 
     <!-- <script src="{{asset('firebase-messaging-sw.js')}}"></script> -->

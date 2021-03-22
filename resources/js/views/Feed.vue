@@ -6,8 +6,8 @@
       :key="feed.id"
       :feed="feed"
       @imageClicked="openImageModal"
-      :ref="'feed-ref-'+feed.id"
-      :finder="'feed-ref-'+feed.id"
+      :ref="'feed-ref-' + feed.id"
+      :finder="'feed-ref-' + feed.id"
     />
     <!-- <FeedCard v-bind:feed="feed"/> -->
     <Spinner v-if="loadingFeeds" :text="'Loading feeds...'" />
@@ -75,10 +75,10 @@ export default {
       }
       if (intent.type === "feedReply") {
         //find the feed to reply
-        const intended_feed = this.$refs[intent.ref][0]
-        clog(intended_feed)
-        intended_feed.saveReplyMedia(caption, media)
-        return
+        const intended_feed = this.$refs[intent.ref][0];
+        clog(intended_feed);
+        intended_feed.saveReplyMedia(caption, media);
+        return;
       }
     },
     async saveFeed(message, image = null) {
@@ -127,14 +127,13 @@ export default {
               data: saved_feed,
             });
 
-            clog('uploaded_image')
+            clog("uploaded_image");
             await store
               .dispatch("updateFeedImage", {
                 feed_id: saved_feed.id,
                 image_url: uploaded_image,
               })
-              .then(function (data) {
-              });
+              .then(function (data) {});
           });
       }
     },
@@ -144,8 +143,12 @@ export default {
           document.body.scrollHeight &&
         this.shouldFetchFeeds
       ) {
-        await this.$store.dispatch("fetchMoreFeeds");
-        this.$store.commit("setFetching", true);
+        var store = this.$store;
+        this.$store.commit("setLoadingFeeds", true);
+        await this.$store.dispatch("fetchMoreFeeds").then(function () {
+          store.commit("setFetching", true);
+        });
+        store.commit("setFetching", true);
         if (this.next_url === null) {
           this.$store.commit("setFetching", false);
         }

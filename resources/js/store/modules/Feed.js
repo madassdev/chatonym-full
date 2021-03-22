@@ -75,6 +75,7 @@ const actions = {
 
     async fetchMoreFeeds({ commit, state }) {
         commit("setLoadingFeeds", true);
+        commit("setFetching", false);
         await axios
             .get(state.next_url)
             .then(res => {
