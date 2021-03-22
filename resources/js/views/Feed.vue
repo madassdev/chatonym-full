@@ -6,6 +6,8 @@
       :key="feed.id"
       :feed="feed"
       @imageClicked="openImageModal"
+      :ref="'feed-ref-'+feed.id"
+      :finder="'feed-ref-'+feed.id"
     />
     <!-- <FeedCard v-bind:feed="feed"/> -->
     <Spinner v-if="loadingFeeds" :text="'Loading feeds...'" />
@@ -13,7 +15,8 @@
     <MediaUploadModal
       :caption="modalMediaCaption"
       :media="modalMediaObject"
-      @mediaSent="saveFeed"
+      :intent="modalMediaIntent"
+      @mediaSent="dispatchMediaModal"
     />
   </div>
 </template>
@@ -38,6 +41,7 @@ export default {
       "next_url",
       "modalMediaObject",
       "modalMediaCaption",
+      "modalMediaIntent",
     ]),
   },
   data() {
@@ -64,10 +68,22 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
+    async dispatchMediaModal(caption, media, intent) {
+      if (intent.type === "saveFeed") {
+        await this.saveFeed(caption, media);
+        return;
+      }
+      if (intent.type === "feedReply") {
+        //find the feed to reply
+        const intended_feed = this.$refs[intent.ref][0]
+        clog(intended_feed)
+        intended_feed.saveReplyMedia(caption, media)
+        return
+      }
+    },
     async saveFeed(message, image = null) {
       this.$refs.newFeed.reset();
       var store = this.$store;
-
       let timestamp = Date.now();
       const mock_feed = {
         is_mock: true,
@@ -104,22 +120,23 @@ export default {
           .dispatch("uploadToCloudinary", {
             image: image,
           })
-          .then(async () => {
+          .then(async (uploaded_image) => {
             saved_feed.is_uploading = false;
             store.commit("updateMockFeed", {
               id: saved_feed.id,
               data: saved_feed,
             });
-            await store.dispatch('updateFeedImage', {
-              feed_id: saved_feed.id,
-              image_url: uploaded_feed_image
-            }).then(function(data){
-              clog('updated image data')
-              clog(data)
-            })
+
+            clog('uploaded_image')
+            await store
+              .dispatch("updateFeedImage", {
+                feed_id: saved_feed.id,
+                image_url: uploaded_image,
+              })
+              .then(function (data) {
+              });
           });
       }
-
     },
     async handleScroll(event) {
       if (

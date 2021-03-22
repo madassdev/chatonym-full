@@ -157,7 +157,14 @@ export default {
     openMediaModal(caption, media) {
       this.mediaCaption = caption;
       this.mediaObject = media;
-      this.$store.dispatch('openMediaModal', {media: media, caption: caption})
+      this.$store.dispatch("openMediaModal", {
+        media: media,
+        caption: caption,
+        intent: {
+            type:'saveFeed',
+            ref:null
+        }
+      });
     },
   },
 };

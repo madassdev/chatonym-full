@@ -74,7 +74,7 @@ Route::prefix('feeds')->group(function () {
     Route::get('/{feed}', 'FeedController@showFeed')->name('feed.show');
     Route::post('/{feed}', 'FeedController@replyFeed')->name('feed.reply')->middleware('auth');
     Route::post('/{feed}/update_image', 'FeedController@updateFeedImage')->name('feed.image.update')->middleware('auth');
-    Route::post('/{feed}/react', 'FeedController@reactToFeed')->name('feed.reply')->middleware('auth');
+    Route::post('/{feed}/react', 'FeedController@reactToFeed')->name('feed.react')->middleware('auth');
     // Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
 

@@ -11,7 +11,11 @@
           v-if="image"
           :image_url="image"
         />
-        <MockImage v-if="hasMockImage" :image="feed.mock_image" :spin="feed.is_uploading" />
+        <MockImage
+          v-if="hasMockImage"
+          :image="feed.mock_image"
+          :spin="feed.is_uploading"
+        />
         <div
           class="text w-full mx-auto p-3 rounded-xl max-h-24 md:max-h-40 overflow-scroll"
         >
@@ -37,7 +41,7 @@
           @reactionMade="reactToFeed"
           :count="feed.reactions_count"
         />
-        <div class="replies" v-if="!feed.is_mock">
+        <div class="replies" v-if="!feed.is_mock" @click="replyClicked">
           <span
             class="cursor-pointer feed-comments-link flex items-center space-x-1"
           >
@@ -52,11 +56,27 @@
           </span>
         </div>
       </div>
-
-      <FeedReply
-        v-if="!feed.is_mock && this.replies.length > 0"
-        :replies="this.replies"
+      <TextInput
+        v-if="is_replying"
+        @mediaSelected="mediaSelected"
+        @sendClicked="replySubmitted"
       />
+      <div class="feed-replies">
+        <div class="replies-container flex flex-col space-y-2">
+          <FeedReply
+            v-for="reply in replies"
+            v-bind:key="reply.id"
+            :reply="reply"
+            @imageClicked="imageClicked"
+          />
+        </div>
+        <div
+          class="see-more hiddden mx-auto w-3/4"
+          v-if="!feed.is_mock && this.replies.length > 0"
+        >
+          <a href="#" class="text-cha-primary text-xs">See more...</a>
+        </div>
+      </div>
       <button
         @click="
           addReply({
@@ -78,6 +98,7 @@ import FeedImage from "../components/FeedImage";
 import Reaction from "../components/Reaction";
 import MockImage from "../components/MockImage";
 import FeedReply from "../components/FeedReply";
+import TextInput from "../components/TextInput";
 import MicroModal from "micromodal";
 
 const default_layout = "default";
@@ -102,37 +123,122 @@ export default {
       }
     },
   },
-  props: ["feed"],
+  props: ["feed", "finder"],
   data() {
     return {
       replies: Array.isArray(this.feed.replies)
         ? this.feed.replies.slice(0, 2)
         : [],
+      is_replying: false,
+      reply_message: "",
     };
   },
+  created() {},
   mounted() {
-    //   clog(this.feed.is_mock)
   },
   components: {
     FeedImage,
     Reaction,
     FeedReply,
     MockImage,
+    TextInput,
   },
   methods: {
     reactToFeed(reaction) {
-      //   console.log(
-      //     "feed card making reaction: " +
-      //       reaction +
-      //       " on feed id of:" +
-      //       this.feed.id
-      //   );
-    },
-    addReply(reply) {
-      this.replies.unshift(reply);
+      var reaction_made = this.$store.dispatch("reactToFeed", {
+        feed: this.feed,
+        reaction: reaction,
+      });
     },
     imageClicked(image_url) {
       this.$emit("imageClicked", image_url);
+    },
+    replyClicked() {
+      if (!auth) {
+        doLogin();
+        return;
+      }
+      this.is_replying = true;
+    },
+    async saveReply(reply) {
+      this.is_replying = false;
+      var store = this.$store;
+      var feed = this.feed
+      var saved_reply = reply;
+      var replies = this.replies;
+      if (reply.is_uploading) {
+        replies.unshift(saved_reply);
+        var cloudinary_image_url = await this.$store
+          .dispatch("uploadToCloudinary", {
+            image: reply.mock_image,
+          })
+          .then(async (uploaded_image) => {
+            Object.assign(
+              replies.find((rep) => rep.id === saved_reply.id),
+              { is_uploading: false }
+            );
+            //send to backend
+            store.dispatch('replyToFeed',{
+                feed:feed,
+                message:saved_reply.message,
+                image_url:uploaded_image,
+            })
+          });
+      } else {
+        await this.$store.dispatch("replyToFeed", {
+          feed: this.feed,
+          message: reply.message,
+        });
+        this.replies.unshift(saved_reply);
+        this.feed.replies.push(saved_reply);
+      }
+    },
+    async replySubmitted(payload) {
+      if (payload.message !== "") {
+        const timestamp = Date.now();
+        const mock_reply = {
+          id: timestamp,
+          message: payload.message,
+          created_at: timestamp,
+          is_mock: true,
+          mock_image: null,
+          is_uploading: false,
+        };
+        // const image_url = [];
+        this.saveReply(mock_reply);
+      }
+
+    },
+    saveReplyMedia(caption, media) {
+      if (caption !== "") {
+        const timestamp = Date.now();
+        const mock_reply = {
+          id: timestamp,
+          message: caption,
+          created_at: timestamp,
+          is_mock: true,
+          mock_image: media,
+          is_uploading: true,
+          mock_image: media,
+          is_uploading: media !== null,
+        };
+        this.saveReply(mock_reply);
+      }
+    },
+    mediaSelected(payload) {
+      this.openMediaModal(payload.message, payload.media, {
+        type: "feedReply",
+        ref: this.finder,
+      });
+    },
+    openMediaModal(caption, media, intent) {
+      this.mediaCaption = caption;
+      this.mediaObject = media;
+      this.$store.dispatch("openMediaModal", {
+        media: media,
+        caption: caption,
+        intent: intent,
+      });
     },
   },
 };

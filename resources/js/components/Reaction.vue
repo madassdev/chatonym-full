@@ -8,7 +8,7 @@
       />
       <div class="w-1/3 flex items-center text-lg text-cha-primary">
         😅
-        <span class="reactions_count text-xs"> {{count}}</span>
+        <span class="reactions_count text-xs"> {{ c }}</span>
       </div>
     </div>
     <div class="reactions-container absolute z-1 left-0 -bottom-6">
@@ -62,13 +62,15 @@ export default {
   props: ["reaction", "count"],
   computed: {
     reactionIcon: function () {
-      if (this.reaction) {
-        this.iconImage = `/img/icons/${this.reaction.reaction}.svg`;
+      if (this.r) {
+        this.iconImage = `/img/icons/${this.r.reaction}.svg`;
       }
     },
   },
   data() {
     return {
+      r: this.reaction,
+      c:this.count,
       openReactions: false,
       iconImage: "/img/icons/add-smiley.svg",
     };
@@ -81,20 +83,28 @@ export default {
     });
   },
   mounted() {
-    if (this.reaction) {
-      this.iconImage = `/img/icons/${this.reaction.reaction}.svg`;
+    if (this.r) {
+      this.iconImage = `/img/icons/${this.r.reaction}.svg`;
     }
   },
   methods: {
     toggleReaction() {
-      console.log("toggle");
       this.openReactions = true;
     },
     reactionMade(reaction) {
-      this.iconImage = `/img/icons/${reaction}.svg`;
-      console.log('Reacted from child: '+reaction);
+      if (!auth) {
+        doLogin();
+        return;
+      }
+      if (!this.r) {
+        this.c++;
+      }
+        this.iconImage = `/img/icons/${reaction}.svg`;
+      this.r = {
+        reaction: reaction,
+      };
       this.openReactions = false;
-      this.$emit('reactionMade', reaction)
+      this.$emit("reactionMade", reaction);
     },
   },
 };

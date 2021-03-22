@@ -1,4 +1,4 @@
-@extends('layouts.chatonym')
+@extends('layouts.vue')
 
 @section('content')
 <section>

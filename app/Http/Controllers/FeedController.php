@@ -10,7 +10,7 @@ class FeedController extends Controller
 {
     public function index()
     {
-        return view('interface.feed');
+        return view('interface.olindex');
     }
     public function fetchFeeds()
     {

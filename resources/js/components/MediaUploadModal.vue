@@ -111,13 +111,13 @@ export default {
       }
     },
   },
-  props: ["caption", "media"],
+  props: ["caption", "media", "intent"],
   mounted() {},
 
   methods: {
     sendMedia() {
       this.$store.dispatch("closeMediaModal");
-      this.$emit("mediaSent", this.$refs.mediaCaption.value, this.media);
+      this.$emit("mediaSent", this.$refs.mediaCaption.value, this.media, this.intent);
     },
   },
 };

@@ -8,7 +8,11 @@ const state = {
     messageMediaText: "",
     mediaImageObject: null,
     modalMediaObject: null,
-    modalMediaCaption: "Default caption"
+    modalMediaCaption: "Default caption",
+    modalMediaIntent: {
+        type:'saveFeed',
+        ref:null
+    }
 };
 
 const getters = {
@@ -29,7 +33,10 @@ const getters = {
     },
     modalMediaCaption: state => {
         return state.modalMediaCaption;
-    }
+    },
+    modalMediaIntent: state => {
+        return state.modalMediaIntent;
+    },
 };
 
 async function updateFeedImage() {}
@@ -122,6 +129,44 @@ const actions = {
         return new_img_feed;
     },
 
+    async reactToFeed({ commit, state }, payload) {
+        var reaction_made = await axios
+            .post("/feeds/" + payload.feed.id + "/react", {
+                reaction: payload.reaction
+            })
+            .then(res => {
+                return res.data.data;
+            })
+            .catch(function(error) {
+                clog(error);
+                notyf.error({
+                    message:
+                        "Action failed, please check your internet connection and retry",
+                    duration: 5000
+                });
+            });
+        return reaction_made;
+    },
+    async replyToFeed({ commit, state }, payload) {
+        var saved_reply = await axios
+            .post("/feeds/" + payload.feed.id, {
+                message: payload.message,
+                image_url: payload.image_url
+            })
+            .then(res => {
+                return res.data.data;
+            })
+            .catch(function(error) {
+                clog(error);
+                notyf.error({
+                    message:
+                        "Action failed, please check your internet connection and retry",
+                    duration: 5000
+                });
+            });
+        return saved_reply;
+    },
+
     async uploadToCloudinary({ commit, state }, payload) {
         var fd = new FormData();
         fd.append("file", payload.image);
@@ -164,6 +209,7 @@ const mutations = {
     configureMediaModal(state, payload) {
         state.modalMediaObject = payload.media;
         state.modalMediaCaption = payload.caption;
+        state.modalMediaIntent = payload.intent;
     },
     setNextUrl(state, url) {
         state.next_url = url;
