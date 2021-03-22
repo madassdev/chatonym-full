@@ -20,7 +20,7 @@ try {
  */
 
 window.axios = require('axios');
-axios.defaults.baseURL = "https://chatonym.dv"
+axios.defaults.baseURL = "https://chatonym.herokuapp.com"
 axios.defaults.withCredentials = true;
 
 
