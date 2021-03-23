@@ -27,6 +27,7 @@ Route::get('/dashboard', function () {
 Route::post('/mock', function () {
     return true;
 });
+
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('/register', 'Auth\LoginController@showLoginForm')->name('register');
 Route::post('/login', 'Auth\LoginController@login')->name('login');

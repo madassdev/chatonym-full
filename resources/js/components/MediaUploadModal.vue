@@ -106,7 +106,7 @@ const default_layout = "default";
 export default {
   computed: {
     imageFromObject: function () {
-      if (this.media !== null) {
+      if (this.media !== null && typeof this.media !== 'undefined') {
         return URL.createObjectURL(this.media);
       }
     },

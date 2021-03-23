@@ -23,8 +23,9 @@ class FeedController extends Controller
 
     public function showFeed(Feed $feed)
     {
-        // return Feed::whereHas('replies')->get();
-        $feed->load('replies');
+        $thread = $feed->loadCount('replies');
+        return view('interface.thread', compact('thread'));// return Feed::whereHas('replies')->get();
+        // $feed->load('replies');
 
         return $feed;
     }

@@ -78,9 +78,7 @@
 <script>
 var app_url = $("head base").attr("href");
 var feeds_url = "https://chatonym.dv";
-
 const default_layout = "default";
-
 import Spinner from "../components/Spinner";
 import ThreadMessageCard from "../components/ThreadMessageCard";
 import ImageModal from "../components/ImageModal";
@@ -142,13 +140,11 @@ export default {
       var scrollPosition = new ScrollPosition(
         document.getElementById("messagesViewport")
       );
-
       if (
         $("#messagesViewport").scrollTop() == 0 &&
         this.shouldFetchThreadMessages
       ) {
         this.$store.commit("setLoadingThreadMessages", true);
-
         scrollPosition.prepareFor("up");
         var store = this.$store;
         setTimeout(async function () {

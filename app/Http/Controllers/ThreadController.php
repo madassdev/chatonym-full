@@ -16,6 +16,13 @@ class ThreadController extends Controller
         return $user->threads;
     }
 
+    public function trendingThreads()
+    {
+        $threads = Thread::whereVisibility('public')->withCount('messages')->orderBy('messages_count', 'desc')->paginate(10);
+
+        return response()->json(['success'=>true, 'data'=>$threads],$this->successStatus);
+    }
+
     public function showThread(Thread $thread)
     {
         $thread->loadCount('messages');
