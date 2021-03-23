@@ -13,6 +13,7 @@
         />
         <MockImage
           v-if="hasMockImage"
+          @imageClicked="imageClicked"
           :image="feed.mock_image"
           :spin="feed.is_uploading"
         />
@@ -74,7 +75,13 @@
           class="see-more hiddden mx-auto w-3/4"
           v-if="!feed.is_mock && this.replies.length > 0"
         >
-          <a href="#" class="text-cha-primary text-xs">See more...</a>
+          <span
+            @click="loadReplies"
+            v-if="more_replies"
+            href="#"
+            class="text-cha-primary text-xs cursor-pointer"
+            >See more replies...</span
+          >
         </div>
       </div>
       <button
@@ -127,15 +134,15 @@ export default {
   data() {
     return {
       replies: Array.isArray(this.feed.replies)
-        ? this.feed.replies.slice(0, 2)
+        ? this.feed.replies.splice(0, 2)
         : [],
+      more_replies: this.feed.replies.length > 0,
       is_replying: false,
       reply_message: "",
     };
   },
   created() {},
-  mounted() {
-  },
+  mounted() {},
   components: {
     FeedImage,
     Reaction,
@@ -144,6 +151,10 @@ export default {
     TextInput,
   },
   methods: {
+    loadReplies() {
+      this.more_replies = false;
+      this.replies = this.replies.concat(this.feed.replies);
+    },
     reactToFeed(reaction) {
       var reaction_made = this.$store.dispatch("reactToFeed", {
         feed: this.feed,
@@ -163,11 +174,11 @@ export default {
     async saveReply(reply) {
       this.is_replying = false;
       var store = this.$store;
-      var feed = this.feed
+      var feed = this.feed;
       var saved_reply = reply;
       var replies = this.replies;
       if (reply.is_uploading) {
-        replies.unshift(saved_reply);
+        replies = replies.unshift(saved_reply);
         var cloudinary_image_url = await this.$store
           .dispatch("uploadToCloudinary", {
             image: reply.mock_image,
@@ -178,11 +189,11 @@ export default {
               { is_uploading: false }
             );
             //send to backend
-            store.dispatch('replyToFeed',{
-                feed:feed,
-                message:saved_reply.message,
-                image_url:uploaded_image,
-            })
+            store.dispatch("replyToFeed", {
+              feed: feed,
+              message: saved_reply.message,
+              image_url: uploaded_image,
+            });
           });
       } else {
         await this.$store.dispatch("replyToFeed", {
@@ -190,7 +201,6 @@ export default {
           message: reply.message,
         });
         this.replies.unshift(saved_reply);
-        this.feed.replies.push(saved_reply);
       }
     },
     async replySubmitted(payload) {
@@ -207,7 +217,6 @@ export default {
         // const image_url = [];
         this.saveReply(mock_reply);
       }
-
     },
     saveReplyMedia(caption, media) {
       if (caption !== "") {

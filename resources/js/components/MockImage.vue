@@ -5,15 +5,16 @@
   >
     <img
       :src="imageFromObject"
+      @click="imageClicked"
       class="rounded-2xl feed-img object-cover h-44 w-full"
       alt=""
       srcset=""
     />
     <div
-    v-if="spin"
+      v-if="spin"
       class="absolute rounded-2xl flex items-center justify-center h-full w-full bg-black bg-opacity-40"
     >
-      <Spinner text="" color="h-8 w-8 text-white"/>
+      <Spinner text="" color="h-8 w-8 text-white" />
     </div>
   </div>
 </template>
@@ -28,16 +29,17 @@ export default {
       }
     },
   },
-  props: ["image", "spin"],
+  props: ["image", "spin", "done_image_url"],
   data() {
     return {};
   },
-  components:{
-      Spinner
+  components: {
+    Spinner,
   },
   methods: {
     imageClicked() {
-      this.$emit("imageClicked", this.image_url);
+      clog("ok");
+      this.$emit("imageClicked", this.imageFromObject);
     },
   },
 };
