@@ -61,7 +61,7 @@ class ThreadController extends Controller
                 403
             );
         }
-
+        $token = '';
         if ($request->visibility == 'private') {
             $secret = Str::random(6);
             $token = 'tk-' . Str::random(10) . '-' . Str::random(10) . '_' . Str::random(10);
@@ -76,7 +76,9 @@ class ThreadController extends Controller
         ]);
         $thread = $thread->load('user');
         $thread->threads_count = $user->threads->count();
-
+        $thread->messages()->firstOrCreate([
+            "message" => "<b>".$thread->name."</b><br>".$thread->description
+        ]);
         return response()->json(
             [
                 'success' => true,

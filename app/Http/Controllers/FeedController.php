@@ -25,8 +25,6 @@ class FeedController extends Controller
     {
         $thread = $feed->loadCount('replies');
         return view('interface.thread', compact('thread'));// return Feed::whereHas('replies')->get();
-        // $feed->load('replies');
-
         return $feed;
     }
 

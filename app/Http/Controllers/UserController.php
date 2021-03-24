@@ -36,7 +36,15 @@ class UserController extends Controller
         $user = auth()->user()->load('messages');
         $messages_count = $user->messages->count();
         $threads_count = $user->threads->count();
-        $threads = $user->threads;
+        $user->threads->map(function($t){
+            if(!$t->messages->count())
+            {
+                $t->messages()->firstOrCreate([
+                    "message" => "<b>".$t->name."</b><br>".$t->description
+                ]);
+            }
+        });
+        $threads = $user->threads->loadCount('messages');
         return view('user.threads', compact('threads', 'threads_count', 'messages_count'));
         return $user->threads;
     }
