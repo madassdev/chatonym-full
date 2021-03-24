@@ -115,6 +115,9 @@ export default {
     $("#messagesViewport").scroll(function () {
       scroll();
     });
+    $(messagesViewport).touchmove(function () {
+      scroll();
+    });
   },
   components: {
     Spinner,

@@ -62,9 +62,11 @@ export default {
     MediaUploadModal,
   },
   created() {
+    $(document.body).on('touchmove', this.handleScroll);
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {
+    $(document.body).on('touchmove', this.handleScroll);
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
