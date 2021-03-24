@@ -36,7 +36,7 @@ const getters = {
 const actions = {
     async fetchThreadMessages({ commit, state }) {
         await axios
-            .get(`thread/${state.appThread.slug}/fetch`)
+            .get(app_url+`thread/${state.appThread.slug}/fetch`)
             .then(res => {
                 commit(
                     "setThreadMessages",
@@ -92,7 +92,7 @@ const actions = {
         // };
         // // await ;
         await axios
-            .post(`thread/${state.appThread.slug}`, {
+            .post(app_url+`thread/${state.appThread.slug}`, {
                 message: payload.message,
                 message_id: payload.replying.id
             })
