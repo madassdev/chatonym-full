@@ -79,7 +79,8 @@
         function clog(log) {
             console.log(log)
         }
-
+        var app_url = "{{env('APP_URL')}}"
+        clog(app_url)
         var CLOUDINARY_FOLDER_ID = "{{cloudinary_folder_id()}}"
         var CLOUDINARY_API_KEY = "{{cloudinary_api_key()}}"
         var CLOUDINARY_UPLOAD_PRESET = "{{cloudinary_upload_preset()}}"

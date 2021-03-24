@@ -58,7 +58,7 @@ const actions = {
 
     fetchFeeds({ commit, state }) {
         axios
-            .get("feeds/fetch")
+            .get(app_url+"/feeds/fetch")
             .then(res => {
                 commit("setFeeds", res.data.data.feeds.data);
                 commit("setNextUrl", res.data.data.feeds.next_page_url);
@@ -95,7 +95,7 @@ const actions = {
 
     async saveMockFeed({ commit, state }, mock_feed) {
         const saved_feed = await axios
-            .post("/feeds", { message: mock_feed.message })
+            .post(app_url+"/feeds", { message: mock_feed.message })
             .then(res => {
                 res.data.data.mock_image = mock_feed.mock_image;
                 return res.data.data;
@@ -113,7 +113,7 @@ const actions = {
 
     async updateFeedImage({ commit, state }, payload) {
         var new_img_feed = await axios
-            .post("/feeds/" + payload.feed_id + "/update_image", {
+            .post(app_url+"/feeds/" + payload.feed_id + "/update_image", {
                 image_url: payload.image_url
             })
             .then(res => {
@@ -132,7 +132,7 @@ const actions = {
 
     async reactToFeed({ commit, state }, payload) {
         var reaction_made = await axios
-            .post("/feeds/" + payload.feed.id + "/react", {
+            .post(app_url+"/feeds/" + payload.feed.id + "/react", {
                 reaction: payload.reaction
             })
             .then(res => {
@@ -150,7 +150,7 @@ const actions = {
     },
     async replyToFeed({ commit, state }, payload) {
         var saved_reply = await axios
-            .post("/feeds/" + payload.feed.id, {
+            .post(app_url+"/feeds/" + payload.feed.id, {
                 message: payload.message,
                 image_url: payload.image_url
             })
