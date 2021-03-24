@@ -36,5 +36,5 @@ ScrollPosition.prototype.prepareFor = function(direction) {
 var app_thread = @json($thread) 
 // clog(app_thread)
 </script>
-<script src="{{ mix('js/Thread.js') }}"></script>
+<script src="{{ asset('js/Thread.js') }}"></script>
 @endsection

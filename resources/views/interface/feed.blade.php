@@ -9,5 +9,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ mix('js/Feed.js') }}"></script>
+<script src="{{ asset('js/Feed.js') }}"></script>
 @endsection
