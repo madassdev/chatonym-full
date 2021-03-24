@@ -57,6 +57,7 @@ const actions = {
     },
 
     fetchFeeds({ commit, state }) {
+        alert('fetch')
         axios
             .get(app_url+"/feeds/fetch")
             .then(res => {
@@ -65,6 +66,7 @@ const actions = {
                 commit("setLoadingFeeds", false);
             })
             .catch(function(error) {
+                alert('error on fetch')
                 notyf.error({
                     message:
                         "Action failed, please check your internet connection and retry",

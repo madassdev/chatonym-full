@@ -52,6 +52,7 @@ export default {
     };
   },
   async mounted() {
+    alert('mounted')
     await this.$store.dispatch("fetchFeeds");
   },
   components: {
