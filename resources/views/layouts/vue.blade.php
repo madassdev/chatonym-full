@@ -12,7 +12,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <base href="https://chatonym.dv">
     <title>Chatonym</title>
 </head>
 
