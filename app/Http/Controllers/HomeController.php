@@ -34,6 +34,7 @@ class HomeController extends Controller
 
     public function writeMessage(User $user)
     {
+        // return $user;
         return view('interface.landing', compact('user'));
         return $user;
     }
@@ -68,8 +69,7 @@ class HomeController extends Controller
 
         $replier = null;
         $user = User::whereUsername($request->username)->firstOrFail();
-        if(auth()->check())
-        {
+        if (auth()->check()) {
             $replier = auth()->user();
         }
 
@@ -112,8 +112,7 @@ class HomeController extends Controller
             ]
         );
 
-
-        if ($request->repliable) {
+        if ($request->repliable && $request->repliable == "true") {
             $request->validate(['replier_token' => 'required|string']);
 
             $pmessage->replier_id = @$replier->id;
@@ -128,11 +127,20 @@ class HomeController extends Controller
                 "replier_token" => $request->replier_token,
                 "action" => "message"
             ];
-
-            if ($user->deviceToken) {
-                return $this->sendFcm($payload, $user->token);
-            };
         }
+        if ($user->deviceToken) {
+
+            // return $this->sendFcm($payload, $user->token);
+            $payload = [
+                "title" => "You've got message from an anonymous user",
+                "message" => $request->message,
+                "url" => config('app.url')
+            ];
+
+            $notif = sendNotification($user->token, $payload);
+
+            return $notif;
+        };
     }
 
     // public function sendMessage(Request $request)
@@ -196,37 +204,50 @@ class HomeController extends Controller
 
     public function sendNotification()
     {
-        $user = User::find(1);
-        $token = $user->token;
-        $SERVER_API_KEY = 'AAAAq95Hf6E:APA91bH48qmAVjqKxvDXe9SPFKKP3JGn692Q_mHn6hIk6oh3Q1XPc7MkJ4X0K67k3EZYFu1z9nU3pv8Sv8Iy9jMkW9VvzrZnnS6zHLggSbBBko-8IoTNqrtTnofLww8y2tzDK-wXNFsd';
+        // $user = User::find(1);
+        // $token = $user->token;
+        // // $SERVER_API_KEY = 'AAAAq95Hf6E:APA91bH48qmAVjqKxvDXe9SPFKKP3JGn692Q_mHn6hIk6oh3Q1XPc7MkJ4X0K67k3EZYFu1z9nU3pv8Sv8Iy9jMkW9VvzrZnnS6zHLggSbBBko-8IoTNqrtTnofLww8y2tzDK-wXNFsd';
 
-        $data = [
-            "registration_ids" => [$token],
-            "notification" => [
-                "title" => "test title",
-                "body" => "test body",
-            ]
-        ];
-        $dataString = json_encode($data);
+        // $data = [
+        //     "registration_ids" => [$token],
+        //     "notification" => [
+        //         "title" => "test title",
+        //         "body" => "test body",
+        //     ]
+        // ];
+        // $dataString = json_encode($data);
 
-        $headers = [
-            'Authorization: key=' . $SERVER_API_KEY,
-            'Content-Type: application/json',
-        ];
+        // $headers = [
+        //     'Authorization: key=' . $SERVER_API_KEY,
+        //     'Content-Type: application/json',
+        // ];
 
-        $ch = curl_init();
+        // $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+        // curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        // curl_setopt($ch, CURLOPT_POST, true);
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
 
-        $response = curl_exec($ch);
+        // $response = curl_exec($ch);
 
-        return $response;
+        // return $response;
     }
 
-    
+    public function sendWebPushr()
+    {
+        // return  
+        $token = 40931995;
+        $payload = [
+            "title" => "New message from anonymous user",
+            "message" => "We are happy to inform you that bla bla bla",
+            "url" => config('app.url')
+        ];
+
+        $notif = sendNotification($token, $payload);
+
+        return $notif;
+    }
 }

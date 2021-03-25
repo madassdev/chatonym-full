@@ -21,8 +21,6 @@
   </div>
 </template>
 <script>
-var app_url = $("head base").attr("href");
-var feeds_url = "https://chatonym.dv";
 
 const default_layout = "default";
 
@@ -52,7 +50,6 @@ export default {
     };
   },
   async mounted() {
-    alert('mounted')
     await this.$store.dispatch("fetchFeeds");
   },
   components: {

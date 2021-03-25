@@ -23,6 +23,11 @@
     align-items: center;
 }
 
+.top-modal{
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .modal__container {
     background-color: #fff;
     max-width: 500px;

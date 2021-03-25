@@ -52,10 +52,7 @@
                     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
                         <div class="modal__container p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                             <header class="modal__header text-cha-primary">
-                                <!-- <h2 class="modal__title" id="modal-1-title">
-                    Login to Chatonym
-                </h2>
-                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button> -->
+
                             </header>
                             <main class="modal__content p-3" id="modal-1-content">
                                 <div class="spinner space-y-1 text-4xl p-5 flex items-center justify-center flex-col">
@@ -71,11 +68,109 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal micromodal-slide top-modal" id="message-register-modal" aria-hidden="true">
+                    <div class="modal__overlay top-modal pt-24" tabindex="-1" data-micromodal-close>
+                        <div class="modal__container bg-cha-primary text-white p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                            <header class="modal__header">
+                                Yay! Your message has been delivered.
+                                Now create your own account and start receiving anonymous messages
+                            </header>
+                            <main class="modal__content p-3" id="modal-1-content">
+                                <form action="{{route('login')}}" method="post" class="form">
+                                    @if(session()->has('error'))
+                                    <div class="bg-red-300 text-red-800 rounded text-xs p-3 border-l-4 border-red-800">
+                                        {{session('error')}}
+                                    </div>
+                                    @endif
+                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
+                                        <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
+                                        <input type="text" name="username" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('username') border border-red-500 @enderror" id="username" placeholder="Select Username" required @error('username') value="{{ old('username') }}" @enderror />
+
+                                        @error('username')
+                                        <span class="text-red-500 font-medium px-4 text-xs" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
+                                        <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
+                                        <input type="text" name="email" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('username') border border-red-500 @enderror" id="email" placeholder="Email" required @error('username') value="{{ old('email') }}" @enderror />
+
+                                        @error('email')
+                                        <span class="text-red-500 font-medium px-4 text-xs" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
+                                        <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
+                                        <input type="text" name="phone" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('username') border border-red-500 @enderror" id="phone" placeholder="Phone number" required @error('username') value="{{ old('phone') }}" @enderror />
+
+                                        @error('phone')
+                                        <span class="text-red-500 font-medium px-4 text-xs" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
+                                        <!-- <label for="" class="md:pr-8 md:w-1/3">Password</label> -->
+                                        <input type="password" name="password" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('password') border border-red-500 @enderror" id="password" placeholder="Password" required />
+                                        @error('password')
+                                        <span class="text-red-500 font-medium px-4 text-xs" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
+                                        <button class="input cta-btn tracking-widest rounded-full bg-white text-center text-cha-primary p-2 w-full">SIGNUP</button>
+                                    </div>
+                                    <div class="text-white">
+                                        Already have an account?
+                                        <a href="{{route('login')}}">Login</a>
+                                    </div>
+                                </form>
+                            </main>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
     <script>
+        var auth_status = "{{auth()->check() ? 1 : 0}}"
+        var device_token = null;
+        // var firebaseConfig = {
+        //     apiKey: "AIzaSyBYtoMYgqcD0xJA67rfD2ZI4jV-DGhBx84",
+        //     authDomain: "chatonym-full.firebaseapp.com",
+        //     projectId: "chatonym-full",
+        //     storageBucket: "chatonym-full.appspot.com",
+        //     messagingSenderId: "738168635297",
+        //     appId: "1:738168635297:web:3e033097bd626e9d4bd5e0",
+        //     measurementId: "G-82GPCTJ8SG"
+        // };
+        // // Initialize Firebase
+        // firebase.initializeApp(firebaseConfig);
+        // messaging = firebase.messaging();
+        // messaging.usePublicVapidKey('BJNTgYZ3Xx6ZiT1P7wMQo9G1ylWcDhJAHzt7eHy_XMK94TtNZ02SqVbqTq6wfZGB0_pkVrXrsO9uRCf6w1Zun9g');
+        // messaging.getToken().then(function(token) {
+        //     device_token = token
+        //     localStorage.setItem('user_token', device_token)
+        //     clog(device_token)
+        // })["catch"](function(err) {
+        //     device_token = null;
+        //     console.log("Unable to get permission to notify.", err);
+        // });
+
+
+        // messaging.onMessage(function(payload) {
+        //     console.log('onMessage from msssg is: ', payload);
+        //     alert('onMessage from msssg is: ', payload);
+        // });
+
         function clog(log) {
             console.log(log)
         }
@@ -125,25 +220,61 @@
         var app_user = @json(auth()->user())
 
         $('.ref-link').click(function() {
-        var $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val($(this).text()).select();
-        document.execCommand("copy");
-        $temp.remove();
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(this).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
 
-        notyf.success({
-            message: 'Link copied to clipboard',
-            duration: 1500
+            notyf.success({
+                message: 'Link copied to clipboard',
+                duration: 1500
+            })
         })
-    })
-    
     </script>
 
     <!-- <script src="{{asset('firebase-messaging-sw.js')}}"></script> -->
 
     @yield('scripts')
 
+    <!-- start webpushr code -->
+    <!-- start webpushr code -->
+    <script>
+        (function(w, d, s, id) {
+            if (typeof(w.webpushr) !== 'undefined') return;
+            w.webpushr = w.webpushr || function() {
+                (w.webpushr.q = w.webpushr.q || []).push(arguments)
+            };
+            var js, fjs = d.getElementsByTagName(s)[0];
+            js = d.createElement(s);
+            js.id = id;
+            js.async = 1;
+            js.src = "https://cdn.webpushr.com/app.min.js";
+            fjs.parentNode.appendChild(js);
+        }(window, document, 'script', 'webpushr-jssdk'));
+        webpushr('setup', {
+            'key': "{{config('webpushr.client_key')}}"
+        });
+    </script><!-- end webpushr code -->
+    <script>
+        //    Our JS snippet goes here
+        webpushr('fetch_id', function(sid) {
+            device_token = sid
+            localStorage.setItem('webpushr_token', sid)
+            if (auth_status == 1) {
+                setUserToken(sid)
+            }
+        });
 
+        function setUserToken(token) {
+            $.post(app_url + "/users/token", {
+                token: token
+            }).done((res) => {
+                clog(res)
+            })
+        }
+    </script>
+    <!-- end webpushr code -->
 
 </body>
 

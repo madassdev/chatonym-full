@@ -57,7 +57,6 @@ const actions = {
     },
 
     fetchFeeds({ commit, state }) {
-        alert('fetch')
         axios
             .get(app_url+"/feeds/fetch")
             .then(res => {

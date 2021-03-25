@@ -1,4 +1,4 @@
-@extends('layouts.chatonym')
+@extends('layouts.vue')
 
 @section('content')
 
@@ -81,22 +81,27 @@
                             <span class="slider round"></span>
                         </label>
                     </div>
-                    <div class="p-1 reply-tooltip hidden float-right w-5/6 md:w-2/3 shadow-sm rounded flex bg-white space-x-2 items-center justify-between mt-2 relative">
+                    <div class="p-1 reply-tooltip float-right w-5/6 md:w-2/3 shadow-sm rounded flex bg-white space-x-2 items-center justify-between mt-2 relative">
                         <div class="arrow-up absolute right-6 -top-2"></div>
                         <span class="flex items-center justify-center text-cha-primary">
                             <i class="text-xs mdi mdi-bell"></i>
                         </span>
                         <p class="text-gray-500 text-xs" style="line-height: 11px; font-size:10px">
-                            You need to enable notifications so that you can get replies from {{ucfirst($user->username)}}.
+                            You need to enable notifications so that you can get replies from "<strong class="text-cha-primary">
+                                {{ucfirst($user->username)}}</strong>".
                             Don't worry, we'll keep you anonymous, so they won't know it's you.
                         </p>
                     </div>
                 </div>
         </div>
         <div class="footer flex justify-end p-3 bg-cha-secondary rounded-b-2xl">
-            <button class="text-xs rounded-full text-white px-3 py-2 bg-cha-primary">
-                Send
-                <i class="mdi mdi-send"></i>
+            <button class="send-btn text-xs rounded-full text-white h-8 w-8 bg-cha-primary flex items-center justify-center">
+                <svg class="spinner animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <!-- Send -->
+                <i class="mdi mdi-send send-icon ml-1"></i>
             </button>
         </div>
         </form>
@@ -165,39 +170,7 @@
 
 @section('scripts')
 
-<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
 <script>
-    var auth_status = "{{auth()->check() ? 1 : 0}}"
-    var device_token = null;
-    var firebaseConfig = {
-        apiKey: "AIzaSyBYtoMYgqcD0xJA67rfD2ZI4jV-DGhBx84",
-        authDomain: "chatonym-full.firebaseapp.com",
-        projectId: "chatonym-full",
-        storageBucket: "chatonym-full.appspot.com",
-        messagingSenderId: "738168635297",
-        appId: "1:738168635297:web:3e033097bd626e9d4bd5e0",
-        measurementId: "G-82GPCTJ8SG"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    messaging = firebase.messaging();
-    messaging.usePublicVapidKey('BJNTgYZ3Xx6ZiT1P7wMQo9G1ylWcDhJAHzt7eHy_XMK94TtNZ02SqVbqTq6wfZGB0_pkVrXrsO9uRCf6w1Zun9g');
-    messaging.getToken().then(function(token) {
-        device_token = token
-        clog(device_token)
-    })["catch"](function(err) {
-        device_token = null;
-        console.log("Unable to get permission to notify.", err);
-    });
-
-
-    messaging.onMessage(function(payload) {
-        console.log('onMessage from msssg is: ', payload);
-        alert('onMessage from msssg is: ', payload);
-    });
-
-
     $("#private-check").change(function() {
         $('.reply-tooltip').toggleClass('hidden')
         if (device_token === null) {
@@ -217,10 +190,13 @@
     })
 
     $('#send-message-form').submit(function(e) {
+        $('.send-icon, .spinner').toggleClass('hidden')
         e.preventDefault()
         message = $(this).find('textarea').val()
         repliable = $(this).find("#repliable-check").is(":checked");
-
+        // if (auth_status == 0) {
+        //     MicroModal.show("message-register-modal");
+        // }
         $.post("{{route('users.messages.send', $user->username)}}", {
             message: message,
             repliable: repliable,
@@ -229,6 +205,9 @@
             _token: "{{csrf_token()}}"
         }).done(function(response) {
             clog(response)
+            if (auth_status == 0) {
+                MicroModal.show("message-register-modal");
+            }
         })
     })
 </script>

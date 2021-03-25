@@ -1,4 +1,4 @@
-import handler from '../../handler'
+import handler from "../../handler";
 const state = {
     threadMessages: [],
     appThread: app_thread,
@@ -32,11 +32,10 @@ const getters = {
     }
 };
 
-
 const actions = {
     async fetchThreadMessages({ commit, state }) {
         await axios
-            .get(app_url+`thread/${state.appThread.slug}/fetch`)
+            .get(app_url + `/thread/${state.appThread.slug}/fetch`)
             .then(res => {
                 commit(
                     "setThreadMessages",
@@ -49,12 +48,16 @@ const actions = {
                 commit("setLoadingThreadMessages", false);
             })
             .catch(function(error) {
-                handler.handle(error)
+                handler.handle(error);
             });
     },
 
     async fetchMoreThreadMessages({ commit, state }) {
         commit("setLoadingThreadMessages", true);
+        if (!state.nextThreadMessagesUrl) {
+            commit("setLoadingThreadMessages", false);
+            return;
+        }
         await axios
             .get(state.nextThreadMessagesUrl)
             .then(res => {
@@ -70,7 +73,7 @@ const actions = {
                 );
             })
             .catch(function(error) {
-                handler.handle(error)
+                handler.handle(error);
             });
     },
 
@@ -92,7 +95,7 @@ const actions = {
         // };
         // // await ;
         await axios
-            .post(app_url+`thread/${state.appThread.slug}`, {
+            .post(app_url + `/thread/${state.appThread.slug}`, {
                 message: payload.message,
                 message_id: payload.replying.id
             })
