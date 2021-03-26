@@ -1,15 +1,14 @@
 importScripts('https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/7.16.0/firebase-messaging.js');
-const firebaseConfig = {
-    apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
-    authDomain: "autifycloud-bba94.firebaseapp.com",
-    databaseURL: "https://autifycloud-bba94.firebaseio.com",
-    projectId: "autifycloud-bba94",
-    storageBucket: "autifycloud-bba94.appspot.com",
-    messagingSenderId: "338960353893",
-    appId: "1:338960353893:web:e082eb524607ac7839d48c",
-    measurementId: "G-ECGLNDB5YY"
-  };
+var firebaseConfig = {
+    apiKey: "AIzaSyBYtoMYgqcD0xJA67rfD2ZI4jV-DGhBx84",
+    authDomain: "chatonym-full.firebaseapp.com",
+    projectId: "chatonym-full",
+    storageBucket: "chatonym-full.appspot.com",
+    messagingSenderId: "738168635297",
+    appId: "1:738168635297:web:3e033097bd626e9d4bd5e0",
+    measurementId: "G-82GPCTJ8SG"
+};
 
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
@@ -26,3 +25,4 @@ messaging.setBackgroundMessageHandler(function (payload) {
     return self.registration.showNotification(notificationTitle,
         notificationOptions);
 });
+

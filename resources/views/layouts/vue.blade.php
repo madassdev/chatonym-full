@@ -91,42 +91,43 @@
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
-    <script>
-        var auth_status = "{{auth()->check() ? 1 : 0}}"
-        var device_token = null;
-        var firebaseConfig = {
-            apiKey: "AIzaSyBYtoMYgqcD0xJA67rfD2ZI4jV-DGhBx84",
-            authDomain: "chatonym-full.firebaseapp.com",
-            projectId: "chatonym-full",
-            storageBucket: "chatonym-full.appspot.com",
-            messagingSenderId: "738168635297",
-            appId: "1:738168635297:web:3e033097bd626e9d4bd5e0",
-            measurementId: "G-82GPCTJ8SG"
-        };
-        // Initialize Firebase
+    <h1>LISTENING</h1>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
+<script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
+    authDomain: "autifycloud-bba94.firebaseapp.com",
+    databaseURL: "https://autifycloud-bba94.firebaseio.com",
+    projectId: "autifycloud-bba94",
+    storageBucket: "autifycloud-bba94.appspot.com",
+    messagingSenderId: "338960353893",
+    appId: "1:338960353893:web:e082eb524607ac7839d48c",
+    measurementId: "G-ECGLNDB5YY"
+    };
+
         firebase.initializeApp(firebaseConfig);
-        messaging = firebase.messaging();
-        messaging.usePublicVapidKey('BJNTgYZ3Xx6ZiT1P7wMQo9G1ylWcDhJAHzt7eHy_XMK94TtNZ02SqVbqTq6wfZGB0_pkVrXrsO9uRCf6w1Zun9g');
-        messaging.getToken().then(function(token) {
-            device_token = token
-            localStorage.setItem('user_fcm_token', device_token)
-            clog(device_token)
-        })["catch"](function(err) {
-            device_token = null;
+        var messaging = firebase.messaging();
+        messaging.usePublicVapidKey('BPV4J_fRC_Evc8tCwwsiIXQgSgOMen3tDY94rtZL9IIobq9xWHvNk4DO22qDNSeF5WHhRRC8L7NqpHbmBXRVTiA');
+        messaging.requestPermission().then(function () {
+            console.log("Notification permission granted.");
+            return messaging.getToken();
+        }).then(function (token) {
+            console.log(token);
+            //alert(token);
+        })["catch"](function (err) {
             console.log("Unable to get permission to notify.", err);
         });
 
-
-        messaging.onMessage(function(payload) {
-            console.log('onMessage from msssg is: ', payload);
-            alert('onMessage from msssg is: ', payload);
+        messaging.onMessage(function (payload) {
+            console.log('onMessage: ', payload);
         });
-
         function clog(log) {
             console.log(log)
         }
+        var auth_status = "{{auth()->check() ? 1 : 0}}"
+        var device_token = null;
         var app_url = "{{env('APP_URL')}}"
         clog(app_url)
         var CLOUDINARY_FOLDER_ID = "{{cloudinary_folder_id()}}"
