@@ -171,6 +171,7 @@ class HomeController extends Controller
     public function sendFcm($token, $payload)
     {
         // Configure FCM and send message
+        // dd(99);
         $device_token = "fqky-XIA6fxztwVkJmxhMg:APA91bELqcZKI9TXZuqbcYS5wsIEO07kdNZ-pvEvVCJpI1ZZYdPsR5YuBBXE4HzJCsEXtGyGVShNiwrrB404IzCFJiL-0dBRE0gBzHFRBbPPCSn9wB_MMWQhHbQ_ig8hnZFNSVGmBdKm";
         $token = "eL44mzwaJ0jobPfV5bL2Dx:APA91bGi5tt6ard0zzFFEBatruB_fTmQ2HZhLUm7kAdYwR2EIlG9yp9iQ2W_pbwS_4m3MDLt48zvqXNy_QkJAODWiCkyoSy4PdvHt7tlJLXgCpNMq23nFyhMIBdigO-kvpfEZ5kADVvz        ";
         $SERVER_API_KEY = 'AAAAq95Hf6E:APA91bH48qmAVjqKxvDXe9SPFKKP3JGn692Q_mHn6hIk6oh3Q1XPc7MkJ4X0K67k3EZYFu1z9nU3pv8Sv8Iy9jMkW9VvzrZnnS6zHLggSbBBko-8IoTNqrtTnofLww8y2tzDK-wXNFsd';

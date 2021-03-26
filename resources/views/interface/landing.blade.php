@@ -208,7 +208,7 @@
             if (auth_status == 1) {
                 // window.location = "{{route('user.messages.show')}}"
             } else {
-                doReg()
+                // doReg()
             }
         })
     })
