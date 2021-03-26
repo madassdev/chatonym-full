@@ -40,7 +40,7 @@
             </div>
         </div>
         <div title="Click to copy" class="rounded-full border-gray-100 border p-1 text-xs cursor-pointer hover:border-0 hover:bg-gray-100 hover:text-cha-primary hover:font-bold hover:px-2">
-            <p class="ref-link">
+            <p class="ref-link" link="{{shareDmLink(auth()->user()->ref_link)}}">
                 {{auth()->user()->ref_link}}
                 <i class="mdi mdi-content-copy"></i>
             </p>
@@ -109,7 +109,7 @@
     $('.ref-link').click(function() {
         var $temp = $("<input>");
         $("body").append($temp);
-        $temp.val($(this).text()).select();
+        $temp.val($(this).attr('link')).select();
         document.execCommand("copy");
         $temp.remove();
 

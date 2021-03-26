@@ -7,13 +7,6 @@
         <img src="{{asset('img/placeholders/anonymous.jpeg')}}" class="object-cover rounded-full w-24 h-24 my-2" alt="" />
         <p class="text-xs">{{'@'.auth()->user()->username}}</p>
     </div>
-
-    <div title="Click to copy" class="rounded-full border-gray-100 border p-1 text-xs cursor-pointer hover:border-0 hover:bg-gray-100 hover:text-cha-primary hover:font-bold hover:px-2">
-        <p class="ref-link">
-            {{auth()->user()->ref_link}}
-            <i class="mdi mdi-content-copy"></i>
-        </p>
-    </div>
 </div>
 
 <ul class="flex-flex-col space-y-4 px-5">
