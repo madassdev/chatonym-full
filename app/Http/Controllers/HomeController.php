@@ -128,6 +128,7 @@ class HomeController extends Controller
                 "action" => "message"
             ];
         }
+        $notif = '';
         if ($user->deviceToken) {
 
             // return $this->sendFcm($payload, $user->token);
@@ -138,7 +139,7 @@ class HomeController extends Controller
             ];
 
             $notif = sendNotification($user->token, $payload);
-
+            
             // return $notif;
         };
 
