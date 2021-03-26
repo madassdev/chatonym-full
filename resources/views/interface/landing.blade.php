@@ -206,7 +206,7 @@
         }).done(function(response) {
             clog(response)
             if (auth_status == 1) {
-                window.location = "{{route('user.messages.show')}}"
+                // window.location = "{{route('user.messages.show')}}"
             } else {
                 doReg()
             }

@@ -1,7 +1,5 @@
 <div class="w-full p-3 gra-cherry rounded-xl">
-    <div
-        class="message-body mb-8 p-5 h-16 overflow-scroll"
-    >
+    <div class="message-body mb-8 p-5 h-16 overflow-scroll">
         <p class="font-light text-gray-100 text-sm">{!!$message->message!!}</p>
     </div>
     <div class="message-footer px-5 flex justify-between items-center">
@@ -10,13 +8,23 @@
                 {{$message->created_at->format('d M Y')}}
             </p>
         </div>
+        @if($message->replyable && $message->replier_token)
+        <div class="">
+            <a
+                href="{{route('user.chat.start', ['key' => $message->replier_token])}}"
+            >
+                <i class="mdi mdi-reply"></i>
+                <span class="text-xs">Reply</span>
+            </a>
+        </div>
+        @endif
         <div class="">
             <i class="mdi mdi-share"></i>
         </div>
     </div>
     <div class="details my-2">
         <p class="text-xs-6 text-right">
-            chatonym.com
+            Chatonym.com
         </p>
     </div>
 </div>

@@ -28,9 +28,9 @@
         <!-- Main -->
         <div class="md:ml-1/4p w-full md:w-1/2 p-0 m-0 top-0">
             <div class="fixed w-full md:w-1/2 m-0 p-0 bg-cha-primary md:bg-white z-10 top-0">
-            @php
-            $togglenav = "text-white"
-            @endphp
+                @php
+                $togglenav = "text-white"
+                @endphp
                 @include('partials.topbar')
             </div>
 
@@ -55,7 +55,9 @@
                     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
                         <div class="modal__container p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                             <header class="modal__header text-cha-primary">
-
+                                <p class="text-xs text-cha-primary opacity-80">
+                                    Validating account
+                                </p>
                             </header>
                             <main class="modal__content p-3" id="modal-1-content">
                                 <div class="spinner space-y-1 text-4xl p-5 flex items-center justify-center flex-col">
@@ -80,7 +82,7 @@
                                 Now create your own account and start receiving anonymous messages
                             </header>
                             <main class="modal__content p-3" id="modal-1-content">
-                                
+
                             </main>
                         </div>
                     </div>
@@ -94,33 +96,33 @@
     <script>
         var auth_status = "{{auth()->check() ? 1 : 0}}"
         var device_token = null;
-        // var firebaseConfig = {
-        //     apiKey: "AIzaSyBYtoMYgqcD0xJA67rfD2ZI4jV-DGhBx84",
-        //     authDomain: "chatonym-full.firebaseapp.com",
-        //     projectId: "chatonym-full",
-        //     storageBucket: "chatonym-full.appspot.com",
-        //     messagingSenderId: "738168635297",
-        //     appId: "1:738168635297:web:3e033097bd626e9d4bd5e0",
-        //     measurementId: "G-82GPCTJ8SG"
-        // };
-        // // Initialize Firebase
-        // firebase.initializeApp(firebaseConfig);
-        // messaging = firebase.messaging();
-        // messaging.usePublicVapidKey('BJNTgYZ3Xx6ZiT1P7wMQo9G1ylWcDhJAHzt7eHy_XMK94TtNZ02SqVbqTq6wfZGB0_pkVrXrsO9uRCf6w1Zun9g');
-        // messaging.getToken().then(function(token) {
-        //     device_token = token
-        //     localStorage.setItem('user_token', device_token)
-        //     clog(device_token)
-        // })["catch"](function(err) {
-        //     device_token = null;
-        //     console.log("Unable to get permission to notify.", err);
-        // });
+        var firebaseConfig = {
+            apiKey: "AIzaSyBYtoMYgqcD0xJA67rfD2ZI4jV-DGhBx84",
+            authDomain: "chatonym-full.firebaseapp.com",
+            projectId: "chatonym-full",
+            storageBucket: "chatonym-full.appspot.com",
+            messagingSenderId: "738168635297",
+            appId: "1:738168635297:web:3e033097bd626e9d4bd5e0",
+            measurementId: "G-82GPCTJ8SG"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        messaging = firebase.messaging();
+        messaging.usePublicVapidKey('BJNTgYZ3Xx6ZiT1P7wMQo9G1ylWcDhJAHzt7eHy_XMK94TtNZ02SqVbqTq6wfZGB0_pkVrXrsO9uRCf6w1Zun9g');
+        messaging.getToken().then(function(token) {
+            device_token = token
+            localStorage.setItem('user_fcm_token', device_token)
+            clog(device_token)
+        })["catch"](function(err) {
+            device_token = null;
+            console.log("Unable to get permission to notify.", err);
+        });
 
 
-        // messaging.onMessage(function(payload) {
-        //     console.log('onMessage from msssg is: ', payload);
-        //     alert('onMessage from msssg is: ', payload);
-        // });
+        messaging.onMessage(function(payload) {
+            console.log('onMessage from msssg is: ', payload);
+            alert('onMessage from msssg is: ', payload);
+        });
 
         function clog(log) {
             console.log(log)
