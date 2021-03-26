@@ -13,6 +13,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css" integrity="sha512-vIgFb4o1CL8iMGoIF7cYiEVFrel13k/BkTGvs0hGfVnlbV6XjAA0M0oEHdWqGdAVRTDID3vIZPOHmKdrMAUChA==" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+    if (location.protocol !== 'https:' && location.hostname != 'localhost') {
+        location.replace(`https:${location.href.substring(location.protocol.length)}`);
+    }
+    </script>
     <title>Chatonym</title>
 </head>
 
@@ -50,7 +55,37 @@
             </div>
         </div>
     </div>
-    <script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
+<script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
+    authDomain: "autifycloud-bba94.firebaseapp.com",
+    databaseURL: "https://autifycloud-bba94.firebaseio.com",
+    projectId: "autifycloud-bba94",
+    storageBucket: "autifycloud-bba94.appspot.com",
+    messagingSenderId: "338960353893",
+    appId: "1:338960353893:web:e082eb524607ac7839d48c",
+    measurementId: "G-ECGLNDB5YY"
+    };
+
+        firebase.initializeApp(firebaseConfig);
+        var messaging = firebase.messaging();
+        messaging.usePublicVapidKey('BPV4J_fRC_Evc8tCwwsiIXQgSgOMen3tDY94rtZL9IIobq9xWHvNk4DO22qDNSeF5WHhRRC8L7NqpHbmBXRVTiA');
+        messaging.requestPermission().then(function () {
+            console.log("Notification permission granted.");
+            return messaging.getToken();
+        }).then(function (token) {
+            $('.stoken').html(token)
+            console.log(token);
+            //alert(token);
+        })["catch"](function (err) {
+            console.log("Unable to get permission to notify.", err);
+        });
+
+        messaging.onMessage(function (payload) {
+            console.log('onMessage: ', payload);
+        });
         function clog(log) {
             console.log(log)
         }
