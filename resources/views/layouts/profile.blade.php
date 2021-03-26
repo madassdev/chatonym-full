@@ -25,6 +25,9 @@
         <!-- Main -->
         <div class="md:ml-1/4p w-full md:w-3/4 p-0 m-0 top-0">
             <div class="fixed w-full md:w-3/4 m-0 p-0 bg-white z-10 top-0">
+            @php
+            $togglenav = "text-cha-primary"
+            @endphp
                 @include('partials.topbar')
             </div>
 

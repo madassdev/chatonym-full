@@ -45,6 +45,15 @@
                 <i class="mdi mdi-content-copy"></i>
             </p>
         </div>
+        <div class="share my-2">
+
+            <span>
+                <a href="whatsapp://send?text={{shareDmLink(auth()->user()->ref_link)}}" data-action="share/whatsapp/share" target="_blank">
+
+                    <i class="mdi mdi-whatsapp"></i>
+                </a>
+            </span>
+        </div>
     </div>
 
     <div class="modal micromodal-slide" id="create-thread-modal" aria-hidden="true">

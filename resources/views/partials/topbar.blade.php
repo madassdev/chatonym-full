@@ -1,9 +1,9 @@
     <div class="flex items-center justify-between shadow-md p-2 px-3">
         <div class="openNavBtn md:w-1/2 px-3 flex space-x-2">
-            <i class="mdi mdi-menu font-bold text-2xl text-white md:text-cha-primary"></i>
+            <i class="mdi mdi-menu font-bold text-2xl {{$togglenav}} md:{{$togglenav}}"></i>
         </div>
         <div class="icons flex items-center space-x-4 md:w-1/2 justify-end">
-            <div id="notif-icon" class="relative cursor-pointer rounded-full text-center text-cha-primary w-6 flex items-center justify-center h-6 bg-purple-200 hover:bg-purple-300">
+            <!-- <div id="notif-icon" class="relative cursor-pointer rounded-full text-center text-cha-primary w-6 flex items-center justify-center h-6 bg-purple-200 hover:bg-purple-300">
                 <i class="mdi mdi-bell"></i>
                 <span class="absolute -top-1 -right-1 notif-count bg-cha-primary text-white px-1 rounded-full" style="font-size: 8px">
                     9
@@ -33,9 +33,9 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="dp">
+            <div class="dp openNavBtn">
                 <img src="{{
                                         asset('img/placeholders/anonymous.jpeg')
                                     }}" alt="" class="rounded-full w-6 h-6 object-cover cursor-pointer" />

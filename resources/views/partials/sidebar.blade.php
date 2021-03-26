@@ -26,7 +26,8 @@
     <li>
         <a href="{{route('user.messages.show')}}" class="hover:text-purple-200 hover:no-underline">
             <i class="mdi mdi-email text-xl mr-1"></i>
-            Messages <span class="bg-white text-cha-primary px-1 font-bold rounded-full text-xs">5</span>
+            Messages 
+            <!-- <span class="bg-white text-cha-primary px-1 font-bold rounded-full text-xs">5</span> -->
         </a>
     </li>
     <li>

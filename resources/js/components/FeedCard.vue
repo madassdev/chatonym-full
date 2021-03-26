@@ -49,11 +49,11 @@
             <i
               class="mdi mdi-message-text-outline text-lg text-cha-primary"
             ></i>
-            <span
+            <!-- <span
               v-if="feed.replies.length"
               class="replies-icon-count text-cha-primary"
               >{{ feed.replies.length }}</span
-            >
+            > -->
           </span>
         </div>
       </div>

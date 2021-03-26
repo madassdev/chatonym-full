@@ -54,3 +54,11 @@ function sendWebPushr($recipient, $data)
     $response = curl_exec($ch);
     return $response;
 }
+
+function shareDmLink($link)
+{
+    "Write a *secret anonymous message* for me.. � I *won't know* who wrote it..";
+    $template = "Hey, there! Write a *secret anonymous message* 😄♻🗣️ ... *I *won't know* who wrote it..* 😁🤭💃🚀".$link;
+    // $thread_template = "Hey, there! Speak your mind on my completely anonymous discussion group 😄♻🗣️ ... *Nobody knows nobody here* 😁🤭💃🚀".$link;
+    return urlencode($template);
+}
