@@ -37,7 +37,7 @@
 
             <div class="dp">
                 <img src="{{
-                                        asset('img/placeholders/profile.jpg')
+                                        asset('img/placeholders/anonymous.jpeg')
                                     }}" alt="" class="rounded-full w-6 h-6 object-cover cursor-pointer" />
             </div>
         </div>

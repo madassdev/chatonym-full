@@ -4,7 +4,7 @@
 @auth
 <div class="profile flex  flex-col items-center justify-center my-5 space-y-2">
     <div class="dp text-center">
-        <img src="{{asset('img/placeholders/profile.jpg')}}" class="object-cover rounded-full w-24 h-24 my-2" alt="" />
+        <img src="{{asset('img/placeholders/anonymous.jpeg')}}" class="object-cover rounded-full w-24 h-24 my-2" alt="" />
         <p class="text-xs">{{'@'.auth()->user()->username}}</p>
     </div>
 
@@ -18,9 +18,9 @@
 
 <ul class="flex-flex-col space-y-4 px-5">
     <li>
-        <a href="{{route('home')}}" class="hover:text-purple-200 hover:no-underline">
+        <a href="{{route('feed.index')}}" class="hover:text-purple-200 hover:no-underline">
             <i class="mdi mdi-trending-up text-xl mr-1"></i>
-            Trending
+            Feeds
         </a>
     </li>
     <li>
@@ -38,7 +38,7 @@
     <li>
         <a href="{{route('user.profile.show')}}" class="hover:text-purple-200 hover:no-underline">
             <i class="mdi mdi-cog text-xl mr-1"></i>
-            Settings
+            Account
         </a>
     </li>
     <li>
@@ -52,7 +52,7 @@
 @guest
 <div class="profile flex items-center justify-center my-5">
     <div class="dp text-center">
-        <img src="{{asset('img/placeholders/profile.jpg')}}" class="object-cover rounded-full w-24 h-24 my-2" alt="" />
+        <img src="{{asset('img/placeholders/anonymous.jpeg')}}" class="object-cover rounded-full w-24 h-24 my-2" alt="" />
         <p class="text-xs">Sign in</p>
     </div>
 </div>

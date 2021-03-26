@@ -2,7 +2,7 @@
 <div class="px-3 py-4 bg-cha-primary w-full text-gray-100">
     <div class="flex items-center justify-center flex-col pt-8">
         <div class="w-24 h-24 relative mb-2">
-            <img src=" {{ asset('img/placeholders/profile.jpg') }}" alt="" class="border-2 border-gray-200 shadow-lg rounded-full h-24 w-24 object-cover" />
+            <img src=" {{ asset('img/placeholders/anonymous.jpeg') }}" alt="" class="border-2 border-gray-200 shadow-lg rounded-full h-24 w-24 object-cover" />
             <span class="bg-white absolute bottom-1 right-1 h-6 w-6 flex justify-center items-center rounded-full text-center">
                 <i class="text-cha-primary text-lg mdi mdi-guy-fawkes-mask"></i>
             </span>
@@ -136,10 +136,7 @@
                 $(".user-threads-count").text(response.threads_count);
                 create_thread_form[0].reset();
                 MicroModal.close("create-thread-modal");
-
-                // setTimeout(function(){
-                //     window.location = "{{route('thread.index')}}"
-                // },3000)
+                window.location = "{{route('user.threads.show')}}"
                 btn_spinner.hide();
             })
             .fail(function(response, status, error) {

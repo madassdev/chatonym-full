@@ -134,13 +134,21 @@ class HomeController extends Controller
             $payload = [
                 "title" => "You've got message from an anonymous user",
                 "message" => $request->message,
-                "url" => config('app.url')
+                "url" => route('user.messages.show')
             ];
 
             $notif = sendNotification($user->token, $payload);
 
-            return $notif;
+            // return $notif;
         };
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                "token" => $request->replier_token,
+                "notification" => $notif,
+            ]
+        ]);
     }
 
     // public function sendMessage(Request $request)

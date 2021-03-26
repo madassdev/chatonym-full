@@ -76,7 +76,12 @@ class ThreadController extends Controller
         ]);
         $thread = $thread->load('user');
         $thread->threads_count = $user->threads->count();
-        $thread->messages()->firstOrCreate([
+        $thread->messages()->create([
+            "message" => "<div class='pt-12'><b>Welcome to anonymous thread</b> <br/>".
+                            "Feel free to discuss and have conversations on this thread while we keep you completely ".
+                            "<b>ANONYMOUS</b> <br/><br/><b>Important:</b>  AVOID SPAMMING!!! to avoid your account being blocked."
+        ]);
+        $thread->messages()->create([
             "message" => "<b>".$thread->name."</b><br>".$thread->description
         ]);
         return response()->json(

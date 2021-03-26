@@ -6,7 +6,7 @@
     <div class="row">
         <div class="w-1/6 px-2">
             <img src="{{
-                                        asset('img/placeholders/profile.jpg')
+                                        asset('img/placeholders/anonymous.jpeg')
                                     }}" class="rounded-full float-right w-12 h-12 object-cover" alt="" />
         </div>
         <div class="w-5/6 texting flex flex-col pr-4">

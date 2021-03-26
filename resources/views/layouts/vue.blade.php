@@ -76,59 +76,7 @@
                                 Now create your own account and start receiving anonymous messages
                             </header>
                             <main class="modal__content p-3" id="modal-1-content">
-                                <form action="{{route('login')}}" method="post" class="form">
-                                    @if(session()->has('error'))
-                                    <div class="bg-red-300 text-red-800 rounded text-xs p-3 border-l-4 border-red-800">
-                                        {{session('error')}}
-                                    </div>
-                                    @endif
-                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
-                                        <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
-                                        <input type="text" name="username" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('username') border border-red-500 @enderror" id="username" placeholder="Select Username" required @error('username') value="{{ old('username') }}" @enderror />
-
-                                        @error('username')
-                                        <span class="text-red-500 font-medium px-4 text-xs" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
-                                        <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
-                                        <input type="text" name="email" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('username') border border-red-500 @enderror" id="email" placeholder="Email" required @error('username') value="{{ old('email') }}" @enderror />
-
-                                        @error('email')
-                                        <span class="text-red-500 font-medium px-4 text-xs" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
-                                        <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
-                                        <input type="text" name="phone" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('username') border border-red-500 @enderror" id="phone" placeholder="Phone number" required @error('username') value="{{ old('phone') }}" @enderror />
-
-                                        @error('phone')
-                                        <span class="text-red-500 font-medium px-4 text-xs" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
-                                        <!-- <label for="" class="md:pr-8 md:w-1/3">Password</label> -->
-                                        <input type="password" name="password" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('password') border border-red-500 @enderror" id="password" placeholder="Password" required />
-                                        @error('password')
-                                        <span class="text-red-500 font-medium px-4 text-xs" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group flex space-y-1 flex-col my-5 items-start">
-                                        <button class="input cta-btn tracking-widest rounded-full bg-white text-center text-cha-primary p-2 w-full">SIGNUP</button>
-                                    </div>
-                                    <div class="text-white">
-                                        Already have an account?
-                                        <a href="{{route('login')}}">Login</a>
-                                    </div>
-                                </form>
+                                
                             </main>
                         </div>
                     </div>
@@ -181,9 +129,15 @@
         var CLOUDINARY_UPLOAD_URL = "{{cloudinary_upload_url()}}"
         var auth = "{{auth()->check()}}" ? true : false;
         var notyf = new Notyf()
+
         var doLogin = function() {
             MicroModal.show("login-loader-modal");
             window.location = "{{route('login')}}"
+        }
+
+        var doReg = function() {
+            MicroModal.show("login-loader-modal");
+            window.location = "{{route('register')}}/?newReg=true"
         }
 
         var notif_icon = $("#notif-icon");

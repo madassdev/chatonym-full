@@ -15,7 +15,7 @@
         <div class="flex">
             <div class="w-1/6 px-2">
                 <img src="{{
-                                            asset('img/placeholders/profile.jpg')
+                                            asset('img/placeholders/anonymous.jpeg')
                                         }}" class="rounded-full float-right w-8 h-8 md:w-12 md:h-12 object-cover" alt="" />
             </div>
             <div class="w-5/6 texting flex flex-col pr-4">
@@ -163,7 +163,7 @@
                     <div class="flex items-center">
                         <div class="w-1/6 px-2">
                             <img src="{{
-                                            asset('img/placeholders/profile.jpg')
+                                            asset('img/placeholders/anonymous.jpeg')
                                         }}" class="rounded-full float-right w-4 h-4 md:w-8 md:h-8 object-cover" alt="" />
                         </div>
                         <div class="mb-3 textarea flex space-x-4 items-center pr-3 rounded-full bg-white w-5/6">

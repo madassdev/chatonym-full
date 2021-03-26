@@ -23,7 +23,7 @@
       <div class="flex">
         <div class="w-1/6 px-2">
           <img
-            src="img/placeholders/profile.jpg"
+            src="img/placeholders/anonymous.jpeg"
             class="rounded-full float-right w-8 h-8 md:w-12 md:h-12 object-cover"
             alt=""
           />

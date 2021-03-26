@@ -6,7 +6,7 @@
     <div class="flex flex-col m-3">
         <div class="header bg-cha-primary p-3 rounded-t-2xl flex space-x-4 items-center">
             <div class="h-12 relative">
-                <img src=" {{ asset('img/placeholders/profile.jpg') }}" alt="" class="border-2 border-gray-200 shadow-lg rounded-full h-12 w-12 object-cover" />
+                <img src=" {{ asset('img/placeholders/anonymous.jpeg') }}" alt="" class="border-2 border-gray-200 shadow-lg rounded-full h-12 w-12 object-cover" />
                 <span class="bg-white absolute bottom-0 right-0 h-5 w-5 flex justify-center items-center rounded-full text-center">
                     <i class="text-cha-primary mdi mdi-guy-fawkes-mask"></i>
                 </span>
@@ -31,7 +31,7 @@
                     <div class="flex">
                         <div class="w-1/6 px-2">
                             <img src="{{
-                                            asset('img/placeholders/profile.jpg')
+                                            asset('img/placeholders/anonymous.jpeg')
                                         }}" class="rounded-full float-right w-8 h-8 md:w-12 md:h-12 object-cover" alt="" />
                         </div>
                         <div class="w-5/6 texting flex flex-col">
@@ -121,7 +121,7 @@
         <div class="flex">
             <div class="w-1/6 px-2">
                 <img src="{{
-                                            asset('img/placeholders/profile.jpg')
+                                            asset('img/placeholders/anonymous.jpeg')
                                         }}" class="rounded-full float-right w-8 h-8 md:w-12 md:h-12 object-cover" alt="" />
             </div>
             <div class="w-5/6 texting flex flex-col pr-4">
@@ -205,8 +205,10 @@
             _token: "{{csrf_token()}}"
         }).done(function(response) {
             clog(response)
-            if (auth_status == 0) {
-                MicroModal.show("message-register-modal");
+            if (auth_status == 1) {
+                window.location = "{{route('user.messages.show')}}"
+            } else {
+                doReg()
             }
         })
     })

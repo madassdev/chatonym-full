@@ -54,7 +54,7 @@
             <form action="{{route('login')}}" method="post" class="form">
                 @if(session()->has('error'))
                 <div class="bg-red-300 text-red-800 rounded text-xs p-3 border-l-4 border-red-800">
-                   {{session('error')}}
+                    {{session('error')}}
                 </div>
                 @endif
                 <div class="form-group flex space-y-1 flex-col my-5 items-start">
@@ -79,6 +79,10 @@
                 <div class="form-group flex space-y-1 flex-col my-5 items-start">
                     <button class="input cta-btn tracking-widest rounded-full bg-cha-primary text-center text-white p-2 w-full">LOGIN</button>
                 </div>
+
+                <div class="sub-cta text-cha-primary text-xs text-center">
+                    <a href="{{route('register')}}">Create an account</a>
+                </div>
             </form>
         </div>
     </div>
@@ -89,7 +93,7 @@
             if (shouldAnimate) {
                 $('.login-accent').addClass('widen')
                 // $('.login-accent').addClass('w-large-2500').addClass('h-large-2500')
-                $('.cta-btn').toggleClass('bg-cha-primary').toggleClass('bg-white').toggleClass('text-white').toggleClass('text-cha-primary')
+                $('.cta-btn, .sub-cta').toggleClass('bg-cha-primary').toggleClass('bg-white').toggleClass('text-white').toggleClass('text-cha-primary')
             }
             shouldAnimate = false
         })
@@ -104,7 +108,7 @@
             ) {
                 if (!shouldAnimate) {
                     $('.login-accent').removeClass('widen')
-                    $('.cta-btn').toggleClass('bg-cha-primary').toggleClass('bg-white').toggleClass('text-white').toggleClass('text-cha-primary')
+                    $('.cta-btn, .sub-cta').toggleClass('bg-cha-primary').toggleClass('bg-white').toggleClass('text-white').toggleClass('text-cha-primary')
                     shouldAnimate = true;
                 }
             }

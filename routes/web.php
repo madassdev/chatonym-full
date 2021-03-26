@@ -18,20 +18,21 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 // require __DIR__.'/auth.php';
 
-Route::post('/mock', function () {
-    return true;
-});
+// Route::post('/mock', function () {
+//     return true;
+// });
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::get('/register', 'Auth\LoginController@showLoginForm')->name('register');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
+Route::post('/register', 'Auth\RegisterController@register')->name('register');
+Route::get('/register', function(){
+    return view('auth.register');
+})->name('register');
+
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/u/{user}/xxx', function (App\Models\User $user) {
 
@@ -63,6 +64,7 @@ Route::post('/users/token', 'HomeController@saveToken')->name('users.tokens.crea
 
 Route::prefix('account')->middleware('auth')->group(function () {
     Route::get('/', 'UserController@showProfile')->name('user.profile.show');
+    Route::get('/settings', 'UserController@showSettings')->name('user.settings.show');
     Route::get('/messages', 'UserController@showMessages')->name('user.messages.show');
     Route::post('/password', 'UserController@updatePassword')->name('user.password.update');
     Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
