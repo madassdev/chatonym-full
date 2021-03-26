@@ -61,13 +61,18 @@
                 class="shadow-lg px-4 py-1 text-xs text-gray-600 border-0 resize-none rounded-full w-full placeholder-gray-400"
                 placeholder="Write something.."
               ></textarea>
-              <i
+              <!-- <i
                 class="mdi mdi-camera text-xl hiddens cursor-pointer text-gray-400"
-              ></i>
+              ></i> -->
               <i
                 @click="replySubmitted"
                 class="mdi mdi-send text-xl text-cha-primary cursor-pointer reply-send"
               ></i>
+              <!-- <TextInput
+                v-if="is_replying"
+                @mediaSelected="mediaSelected"
+                @sendClicked="replySubmitted"
+              /> -->
             </div>
           </div>
         </div>
@@ -84,6 +89,7 @@ import ThreadMessageCard from "../components/ThreadMessageCard";
 import ImageModal from "../components/ImageModal";
 import NewFeed from "../components/NewFeed";
 import MediaUploadModal from "../components/MediaUploadModal";
+import TextInput from "../components/TextInput";
 import { mapGetters } from "vuex";
 export default {
   computed: {
@@ -115,7 +121,7 @@ export default {
     $("#messagesViewport").scroll(function () {
       scroll();
     });
-    $(messagesViewport).on('touchmove' ,scroll())
+    $(messagesViewport).on("touchmove", scroll());
   },
   components: {
     Spinner,
@@ -123,6 +129,7 @@ export default {
     ImageModal,
     NewFeed,
     MediaUploadModal,
+    TextInput,
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);

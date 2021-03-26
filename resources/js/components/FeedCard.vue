@@ -178,12 +178,13 @@ export default {
       var saved_reply = reply;
       var replies = this.replies;
       if (reply.is_uploading) {
-        replies = replies.unshift(saved_reply);
+        replies.unshift(saved_reply);
         var cloudinary_image_url = await this.$store
           .dispatch("uploadToCloudinary", {
             image: reply.mock_image,
           })
           .then(async (uploaded_image) => {
+            clog(replies)
             Object.assign(
               replies.find((rep) => rep.id === saved_reply.id),
               { is_uploading: false }
