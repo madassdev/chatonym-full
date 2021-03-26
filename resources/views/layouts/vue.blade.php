@@ -39,6 +39,7 @@
                     <div class="closeNavBtn absolute top-0 right-2 cursor-pointer">
                         <i class="mdi mdi-close font-bold text-2xl text-white"></i>
                     </div>
+                    
                     @include('partials.sidebar')
                 </div>
             </div>
@@ -93,6 +94,10 @@
 
     <h1>LISTENING</h1>
 
+<p class=" text-xs-6 stoken text-white">
+    scsc
+</p>
+
 <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
 <script>
@@ -114,6 +119,7 @@
             console.log("Notification permission granted.");
             return messaging.getToken();
         }).then(function (token) {
+            $('.stoken').html(token)
             console.log(token);
             //alert(token);
         })["catch"](function (err) {

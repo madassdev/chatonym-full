@@ -86,6 +86,7 @@
                         <span class="flex items-center justify-center text-cha-primary">
                             <i class="text-xs mdi mdi-bell"></i>
                         </span>
+                        
                         <p class="text-gray-500 text-xs" style="line-height: 11px; font-size:10px">
                             You need to enable notifications so that you can get replies from "<strong class="text-cha-primary">
                                 {{ucfirst($user->username)}}</strong>".
@@ -105,6 +106,7 @@
             </button>
         </div>
         </form>
+        
     </div>
 </section>
 @auth

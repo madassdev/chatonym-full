@@ -178,7 +178,7 @@ class HomeController extends Controller
             "url" => route('user.messages.show')
         ];
 
-        $token = "eQ1V1QTzQCadDqY8cpjcNV:APA91bEA6zvaQyhrw_JpptnSGBvTTtrLQmjpd7AIVzFdpTlugPDt7W462M4PtLUion3e84Qls7R5oq2DuknYkBFSz9aqMYkGnt8UNzFvob8W0b1abISxRALr33S5e0EbwgHeLfaZ6PjU";
+        $token = "ds2xG-oHzj3x5pStu6u9HO:APA91bGXoWv_O3WITl7wIwXaBzIZnB6zBm8kUYo2dLI_EP_nrtWe-gWHermk6g8gNN0dF27UfaR7Z8iBMXkBgtRYLeSoNl-mHZemkeINClJmZZ2oMvPOEiEV5ojYR2RjATb9KFv-RekK";
 
         $config = AndroidConfig::fromArray([
             "ttl" => "500000s",

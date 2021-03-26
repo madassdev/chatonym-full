@@ -1,6 +1,9 @@
 <div class="logo p-3">
     Chatonym<strong class="text-green-600 font-bold">.</strong>
 </div>
+<p class=" text-xs-6 stoken text-white">
+    scsc
+</p>
 @auth
 <div class="profile flex  flex-col items-center justify-center my-5 space-y-2">
     <div class="dp text-center">
@@ -19,7 +22,7 @@
     <li>
         <a href="{{route('user.messages.show')}}" class="hover:text-purple-200 hover:no-underline">
             <i class="mdi mdi-email text-xl mr-1"></i>
-            Messages 
+            Messages
             <!-- <span class="bg-white text-cha-primary px-1 font-bold rounded-full text-xs">5</span> -->
         </a>
     </li>
@@ -67,13 +70,13 @@
     <li>
         <a href="{{route('login')}}" class="hover:text-purple-200 hover:no-underline">
             <i class="mdi mdi-login text-xl mr-1"></i>
-            Sign in 
+            Sign in
         </a>
     </li>
     <li>
         <a href="{{route('register')}}" class="hover:text-purple-200 hover:no-underline">
             <i class="mdi mdi-account-plus text-xl mr-1"></i>
-            Sign up 
+            Sign up
         </a>
     </li>
 </ul>
