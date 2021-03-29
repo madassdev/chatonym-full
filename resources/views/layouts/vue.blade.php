@@ -97,15 +97,13 @@
         </div>
     </div>
 
-    <h1>LISTENING</h1>
-
-<p class=" text-xs-6 stoken text-white">
-    scsc
-</p>
-
 <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
 <script>
+
+var auth_status = "{{auth()->check() ? 1 : 0}}"
+        var device_token = null;
+        var app_url = "{{env('APP_URL')}}"
     var firebaseConfig = {
     apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
     authDomain: "autifycloud-bba94.firebaseapp.com",
@@ -124,8 +122,11 @@
             console.log("Notification permission granted.");
             return messaging.getToken();
         }).then(function (token) {
+            device_token = token
             $('.stoken').html(token)
-            console.log(token);
+            if (auth_status == 1) {
+                setUserToken(token)
+            }
             //alert(token);
         })["catch"](function (err) {
             console.log("Unable to get permission to notify.", err);
@@ -137,10 +138,6 @@
         function clog(log) {
             console.log(log)
         }
-        var auth_status = "{{auth()->check() ? 1 : 0}}"
-        var device_token = null;
-        var app_url = "{{env('APP_URL')}}"
-        clog(app_url)
         var CLOUDINARY_FOLDER_ID = "{{cloudinary_folder_id()}}"
         var CLOUDINARY_API_KEY = "{{cloudinary_api_key()}}"
         var CLOUDINARY_UPLOAD_PRESET = "{{cloudinary_upload_preset()}}"
@@ -230,10 +227,10 @@
     <script>
         //    Our JS snippet goes here
         webpushr('fetch_id', function(sid) {
-            device_token = sid
+            // device_token = sid
             localStorage.setItem('webpushr_token', sid)
             if (auth_status == 1) {
-                setUserToken(sid)
+                // setUserToken(sid)
             }
         });
 

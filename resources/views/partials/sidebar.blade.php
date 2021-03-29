@@ -1,9 +1,9 @@
 <div class="logo p-3">
     Chatonym<strong class="text-green-600 font-bold">.</strong>
 </div>
-<p class=" text-xs-6 stoken text-white">
+<!-- <p class=" text-xs-6 stoken text-white">
     scsc
-</p>
+</p> -->
 @auth
 <div class="profile flex  flex-col items-center justify-center my-5 space-y-2">
     <div class="dp text-center">

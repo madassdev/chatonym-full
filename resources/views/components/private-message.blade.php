@@ -11,10 +11,10 @@
         @if($message->replyable && $message->replier_token)
         <div class="">
             <a
-                href="{{route('user.chat.start', ['key' => $message->replier_token])}}"
+                href="{{route('user.chat.show', ['message' => $message->id])}}"
             >
-                <i class="mdi mdi-reply"></i>
-                <span class="text-xs">Reply</span>
+                <i class="mdi mdi-chat"></i>
+                <span class="text-xs-8">Open chat</span>
             </a>
         </div>
         @endif

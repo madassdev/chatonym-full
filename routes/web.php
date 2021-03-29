@@ -66,7 +66,8 @@ Route::prefix('account')->middleware('auth')->group(function () {
     Route::get('/', 'UserController@showProfile')->name('user.profile.show');
     Route::get('/settings', 'UserController@showSettings')->name('user.settings.show');
     Route::get('/messages', 'UserController@showMessages')->name('user.messages.show');
-    Route::get('/messages/chat/{key}', 'UserController@startChat')->name('user.chat.start');
+    Route::get('/messages/chat/{message}', 'UserController@showChat')->name('user.chat.show');
+    Route::post('/messages/chat/{message}', 'UserController@sendChat')->name('user.chat.send');
     Route::post('/password', 'UserController@updatePassword')->name('user.password.update');
     Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 }); 

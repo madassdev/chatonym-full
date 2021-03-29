@@ -206,6 +206,7 @@
             username: "{{$user->username}}",
             _token: "{{csrf_token()}}"
         }).done(function(response) {
+            clog(device_token)
             clog(response)
             if (auth_status == 1) {
                 // window.location = "{{route('user.messages.show')}}"

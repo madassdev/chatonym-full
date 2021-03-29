@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -22,6 +23,51 @@ class UserController extends Controller
         return view('user.messages', compact('user', 'messages_count', 'threads_count'));
     }
 
+    public function showChat(Message $message)
+    {
+        $message->load('chats');
+        // return $message->chats;
+        return view('user.chat', compact('message'));
+    }
+
+    public function sendChat(Request $request, Message $message)
+    {
+        $user = auth()->user();
+        // return $request;
+        $chat_message = $message->chats()->create([
+            "message" => $request->message,
+            "image_url" => $message->image_url,
+            "user_token" => $user->token,
+            "replier_token" => $message->replier_token,
+            "sent_by_anon" => auth()->user()->id != $message->user_id
+        ]);
+
+        $payload = [
+            'notification' => [
+                "title" => $request->message,
+                "body" => $request->message,
+                'icon' => 'https://my-server/icon.png',
+                'click_action' => route('user.chat.show', ['message' => $message->id]),
+            ],
+            'fcm_options' => [
+                'link' => route('user.chat.show', ['message' => $message->id]),
+            ],
+        ];
+        $recipient = $message->user->id == auth()->id() ? $chat_message->replier_token : $message->user->token;
+
+        $notif = sendFcm($recipient, $payload);
+        return response()->json([
+            "success" => true,
+            "data" => [
+                "message" => $message,
+                "notification" => $notif,
+            ]
+        ]);
+        return view('user.chat', compact('message'));
+    }
+
+
+
     public function updatePassword(Request $request)
     {
         $request->validate([
@@ -36,11 +82,10 @@ class UserController extends Controller
         $user = auth()->user()->load('messages');
         $messages_count = $user->messages->count();
         $threads_count = $user->threads->count();
-        $user->threads->map(function($t){
-            if(!$t->messages->count())
-            {
+        $user->threads->map(function ($t) {
+            if (!$t->messages->count()) {
                 $t->messages()->firstOrCreate([
-                    "message" => "<b>".$t->name."</b><br>".$t->description
+                    "message" => "<b>" . $t->name . "</b><br>" . $t->description
                 ]);
             }
         });

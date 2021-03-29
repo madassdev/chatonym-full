@@ -32,6 +32,7 @@
     "dependencies": {
         "@mdi/font": "^5.9.55",
         "jquery": "^3.5.1",
+        "localforage": "^1.9.0",
         "micromodal": "^0.4.6",
         "moment": "^2.29.1",
         "notyf": "^3.9.0",

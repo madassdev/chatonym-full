@@ -2,6 +2,9 @@
 
 use App\Models\Main\App;
 use App\Models\Main\Tenant;
+use Kreait\Firebase\Messaging\AndroidConfig;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\WebPushConfig;
 
 function cloudinary_folder_id()
 {
@@ -26,8 +29,28 @@ function cloudinary_api_key()
 function sendNotification($to, $data)
 {
     return sendWebPushr($to, $data);
-    
 }
+
+function sendFcm($token, $payload)
+{
+
+    $config = AndroidConfig::fromArray([
+        "ttl" => "500000s",
+        "priority" => "high"
+    ]);
+
+    $push_config = WebPushConfig::fromArray(
+        $payload
+    );
+    $message = CloudMessage::withTarget('token', $token)->withAndroidConfig($config)->withData(["a" => "s"])->withWebPushConfig($push_config);
+
+    $messaging = app('firebase.messaging');
+    $config = config()->get('client_config');
+
+    $fcm = $messaging->send($message);
+    return $fcm;
+}
+
 
 function sendWebPushr($recipient, $data)
 {
@@ -40,7 +63,7 @@ function sendWebPushr($recipient, $data)
         "webpushrAuthToken: $token"
     );
     $req_data = array(
-    'title'             => $data['title'], //required
+        'title'             => $data['title'], //required
         'message'         => $data['message'], //required
         'target_url'    => $data['url'], //required
         'sid'        => $recipient
@@ -58,7 +81,7 @@ function sendWebPushr($recipient, $data)
 function shareDmLink($link)
 {
     "Write a *secret anonymous message* for me.. � I *won't know* who wrote it..";
-    $template = "Hey, there! Write a *secret anonymous message* 😄♻🗣️ ... *I *won't know* who wrote it..* 😁🤭💃🚀".$link;
+    $template = "Hey, there! Write a *secret anonymous message* 😄♻🗣️ ... *I *won't know* who wrote it..* 😁🤭💃🚀" . $link;
     // $thread_template = "Hey, there! Speak your mind on my completely anonymous discussion group 😄♻🗣️ ... *Nobody knows nobody here* 😁🤭💃🚀".$link;
     return urlencode($template);
 }

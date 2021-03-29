@@ -32,4 +32,9 @@ class Message extends Model
         return $this->belongsTo(User::class, 'replier_id');
     }
 
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
+    }
+
 }
