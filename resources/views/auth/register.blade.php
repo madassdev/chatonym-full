@@ -59,7 +59,7 @@
                 @endif
                 <div class="form-group flex space-y-1 flex-col my-5 items-start">
                     <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
-                    <input type="text" name="username" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('username') border border-red-500 @enderror" id="username" placeholder="Select Username" required @error('username') value="{{ old('username') }}" @enderror />
+                    <input type="text" name="username" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('username') border border-red-500 @enderror" id="username" placeholder="Select Username" required value="{{ old('username') }}" />
 
                     @error('username')
                     <span class="text-red-500 font-medium px-4 text-xs" role="alert">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group flex space-y-1 flex-col my-5 items-start">
                     <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
-                    <input type="text" name="email" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('email') border border-red-500 @enderror" id="email" placeholder="Email" required @error('email') value="{{ old('email') }}" @enderror />
+                    <input type="text" name="email" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('email') border border-red-500 @enderror" id="email" placeholder="Email" required value="{{ old('email') }}" />
 
                     @error('email')
                     <span class="text-red-500 font-medium px-4 text-xs" role="alert">
@@ -79,7 +79,7 @@
                 </div>
                 <div class="form-group flex space-y-1 flex-col my-5 items-start">
                     <!-- <label for="" class="md:pr-8 md:w-1/3">Username</label> -->
-                    <input type="text" name="mobile" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('mobile') border border-red-500 @enderror" id="phone" placeholder="Phone number" required @error('mobile') value="{{ old('mobile') }}" @enderror />
+                    <input type="text" name="mobile" class="input border-0 rounded-full px-5 bg-cha-secondary w-full @error('mobile') border border-red-500 @enderror" id="phone" placeholder="Phone number" required  value="{{ old('mobile') }}"/>
 
                     @error('mobile')
                     <span class="text-red-500 font-medium px-4 text-xs" role="alert">
@@ -99,7 +99,7 @@
                 <div class="form-group flex space-y-1 flex-col my-5 items-start">
                     <button class="input cta-btn tracking-widest rounded-full bg-cha-primary text-center text-white p-2 w-full">SIGNUP</button>
                 </div>
-                <div class="text-white">
+                <div class="text-center text-xs text-cha-primary sub-cta">
                     Already have an account?
                     <a href="{{route('login')}}">Login</a>
                 </div>
@@ -113,7 +113,7 @@
             if (shouldAnimate) {
                 $('.login-accent').addClass('widen')
                 // $('.login-accent').addClass('w-large-2500').addClass('h-large-2500')
-                $('.cta-btn').toggleClass('bg-cha-primary').toggleClass('bg-white').toggleClass('text-white').toggleClass('text-cha-primary')
+                $('.cta-btn, .sub-cta').toggleClass('bg-cha-primary').toggleClass('bg-white').toggleClass('text-white').toggleClass('text-cha-primary')
             }
             shouldAnimate = false
         })
@@ -128,7 +128,7 @@
             ) {
                 if (!shouldAnimate) {
                     $('.login-accent').removeClass('widen')
-                    $('.cta-btn').toggleClass('bg-cha-primary').toggleClass('bg-white').toggleClass('text-white').toggleClass('text-cha-primary')
+                    $('.cta-btn, .sub-cta').toggleClass('bg-cha-primary').toggleClass('bg-white').toggleClass('text-white').toggleClass('text-cha-primary')
                     shouldAnimate = true;
                 }
             }

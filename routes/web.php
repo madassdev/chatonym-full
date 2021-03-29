@@ -56,10 +56,10 @@ Route::get('/', 'HomeController@interface')->name('home');
 Route::get('/vuefeeds', 'HomeController@vuefeeds')->name('vuefeeds');
 Route::get('/interface', 'HomeController@interface');
 Route::get('/u/{user}', 'HomeController@writeMessage');
+Route::post('/u/{user}', 'HomeController@sendPm')->name('users.messages.send');
 Route::get('/webpushr', 'HomeController@sendWebPushr');
 Route::get('/peep/{user}', 'HomeController@peepMessage');
 Route::get('/u/{user}/send', 'HomeController@sendMessage');
-Route::post('/u/{user}', 'HomeController@sendPm')->name('users.messages.send');
 Route::post('/users/token', 'HomeController@saveToken')->name('users.tokens.create')->middleware('auth');
 
 Route::prefix('account')->middleware('auth')->group(function () {

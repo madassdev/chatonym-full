@@ -86,7 +86,7 @@
                         <span class="flex items-center justify-center text-cha-primary">
                             <i class="text-xs mdi mdi-bell"></i>
                         </span>
-                        
+
                         <p class="text-gray-500 text-xs" style="line-height: 11px; font-size:10px">
                             You need to enable notifications so that you can get replies from "<strong class="text-cha-primary">
                                 {{ucfirst($user->username)}}</strong>".
@@ -106,7 +106,7 @@
             </button>
         </div>
         </form>
-        
+
     </div>
 </section>
 @auth
@@ -208,11 +208,12 @@
         }).done(function(response) {
             clog(device_token)
             clog(response)
-            if (auth_status == 1) {
-                // window.location = "{{route('user.messages.show')}}"
-            } else {
-                // doReg()
-            }
+            $('.send-icon, .spinner').toggleClass('hidden')
+            MicroModal.show("message-sent-modal", {
+                onClose: function() {
+                    window.location = auth_status == 0 ? "{{route('register')}}" : "{{route('user.messages.show')}}"
+                }
+            });
         })
     })
 </script>

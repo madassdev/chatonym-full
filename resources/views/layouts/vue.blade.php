@@ -14,9 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css" integrity="sha512-vIgFb4o1CL8iMGoIF7cYiEVFrel13k/BkTGvs0hGfVnlbV6XjAA0M0oEHdWqGdAVRTDID3vIZPOHmKdrMAUChA==" crossorigin="anonymous" />
     <script>
-    if (location.protocol !== 'https:' && location.hostname != 'localhost') {
-        location.replace(`https:${location.href.substring(location.protocol.length)}`);
-    }
+        if (location.protocol !== 'https:' && location.hostname != 'localhost') {
+            location.replace(`https:${location.href.substring(location.protocol.length)}`);
+        }
     </script>
     <title>Chatonym</title>
 </head>
@@ -44,7 +44,7 @@
                     <div class="closeNavBtn absolute top-0 right-2 cursor-pointer">
                         <i class="mdi mdi-close font-bold text-2xl text-white"></i>
                     </div>
-                    
+
                     @include('partials.sidebar')
                 </div>
             </div>
@@ -80,15 +80,23 @@
                     </div>
                 </div>
 
-                <div class="modal micromodal-slide top-modal" id="message-register-modal" aria-hidden="true">
+                <div class="modal micromodal-slide" id="message-sent-modal" aria-hidden="true">
                     <div class="modal__overlay top-modal pt-24" tabindex="-1" data-micromodal-close>
-                        <div class="modal__container bg-cha-primary text-white p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                        <div class="modal__container text-cha-primary bg-white p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                             <header class="modal__header">
-                                Yay! Your message has been delivered.
-                                Now create your own account and start receiving anonymous messages
                             </header>
                             <main class="modal__content p-3" id="modal-1-content">
-
+                                <p class="text-center text-gray-600 font-bold text-3xl">
+                                    Yay! Your message has been delivered.
+                                </p>
+                                @guest
+                                <p class="text-sm text-center text-cha-primary my-8">
+                                    Now create your own account and start receiving anonymous messages.
+                                </p>
+                                @endguest
+                                <div class="flex justify-center items-center p-3">
+                                    <a href="{{auth()->check() ? route('user.messages.show'): route('register')}}" class="bg-cha-primary text-white uppercase rounded-full px-6 py-2">CONTINUE</a>
+                                </div>
                             </main>
                         </div>
                     </div>
@@ -96,45 +104,48 @@
             </div>
         </div>
     </div>
+    @php
+    $auth_user = auth()->user()
+    @endphp
 
-<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
-<script>
-
-var auth_status = "{{auth()->check() ? 1 : 0}}"
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-messaging.js"></script>
+    <script>
+        var auth_status = "{{auth()->check() ? 1 : 0}}"
         var device_token = null;
         var app_url = "{{env('APP_URL')}}"
-    var firebaseConfig = {
-    apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
-    authDomain: "autifycloud-bba94.firebaseapp.com",
-    databaseURL: "https://autifycloud-bba94.firebaseio.com",
-    projectId: "autifycloud-bba94",
-    storageBucket: "autifycloud-bba94.appspot.com",
-    messagingSenderId: "338960353893",
-    appId: "1:338960353893:web:e082eb524607ac7839d48c",
-    measurementId: "G-ECGLNDB5YY"
-    };
+        var firebaseConfig = {
+            apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
+            authDomain: "autifycloud-bba94.firebaseapp.com",
+            databaseURL: "https://autifycloud-bba94.firebaseio.com",
+            projectId: "autifycloud-bba94",
+            storageBucket: "autifycloud-bba94.appspot.com",
+            messagingSenderId: "338960353893",
+            appId: "1:338960353893:web:e082eb524607ac7839d48c",
+            measurementId: "G-ECGLNDB5YY"
+        };
 
         firebase.initializeApp(firebaseConfig);
         var messaging = firebase.messaging();
         messaging.usePublicVapidKey('BPV4J_fRC_Evc8tCwwsiIXQgSgOMen3tDY94rtZL9IIobq9xWHvNk4DO22qDNSeF5WHhRRC8L7NqpHbmBXRVTiA');
-        messaging.requestPermission().then(function () {
+        messaging.requestPermission().then(function() {
             console.log("Notification permission granted.");
             return messaging.getToken();
-        }).then(function (token) {
+        }).then(function(token) {
             device_token = token
             $('.stoken').html(token)
             if (auth_status == 1) {
                 setUserToken(token)
             }
             //alert(token);
-        })["catch"](function (err) {
+        })["catch"](function(err) {
             console.log("Unable to get permission to notify.", err);
         });
 
-        messaging.onMessage(function (payload) {
+        messaging.onMessage(function(payload) {
             console.log('onMessage: ', payload);
         });
+
         function clog(log) {
             console.log(log)
         }
@@ -185,7 +196,7 @@ var auth_status = "{{auth()->check() ? 1 : 0}}"
             }
         });
 
-        var app_user = @json(auth()->user())
+        var app_user = @json($auth_user)
 
         $('.ref-link').click(function() {
             var $temp = $("<input>");
