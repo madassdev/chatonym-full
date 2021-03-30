@@ -120,6 +120,7 @@ class HomeController extends Controller
                 "title" => "You've got message from an anonymous user",
                 "body" => $request->message,
                 'icon' => 'https://my-server/icon.png',
+                'click_action' => route('user.messages.show'),
             ],
             'fcm_options' => [
                 'link' => route('user.messages.show'),
