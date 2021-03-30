@@ -130,6 +130,13 @@ class HomeController extends Controller
             $pmessage->replier_token = $request->replier_token;
             $pmessage->save();
             $pmessage->chats()->create([
+                "message" => "Hi, Leave a message for me. It's completely anonymous.",
+                "image_url" => $pmessage->image_url,
+                "user_token" => $user->token,
+                "replier_token" => $request->replier_token,
+                "sent_by_anon" => false
+            ]);
+            $pmessage->chats()->create([
                 "message" => $request->message,
                 "image_url" => $pmessage->image_url,
                 "user_token" => $user->token,
