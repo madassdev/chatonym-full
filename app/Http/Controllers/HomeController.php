@@ -125,7 +125,7 @@ class HomeController extends Controller
                 'link' => route('user.messages.show'),
             ],
         ];
-        if ($request->repliable && $request->repliable == "true" && $request->replier_token) {
+        if ($request->repliable && $request->repliable == "true" && $request->replier_token && $user->token) {
             $pmessage->replier_id = @$replier->id;
             $pmessage->replyable = 1;
             $pmessage->replier_token = $request->replier_token;
