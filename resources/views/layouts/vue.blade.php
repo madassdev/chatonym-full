@@ -115,6 +115,13 @@
         var auth_status = "{{auth()->check() ? 1 : 0}}"
         var device_token = null;
         var app_url = "{{env('APP_URL')}}"
+        function setUserToken(token) {
+            $.post(app_url + "/users/token", {
+                token: token
+            }).done((res) => {
+                clog(res)
+            })
+        }
         // var firebaseConfig = {
         //     apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
         //     authDomain: "autifycloud-bba94.firebaseapp.com",
@@ -261,13 +268,7 @@
             }
         });
 
-        function setUserToken(token) {
-            $.post(app_url + "/users/token", {
-                token: token
-            }).done((res) => {
-                clog(res)
-            })
-        }
+        
     </script>
     <!-- end webpushr code -->
 
