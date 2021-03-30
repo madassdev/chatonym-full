@@ -96,4 +96,3 @@ Route::prefix('thread')->middleware('auth')->group(function () {
     // Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
 
-Route::get('{vue_capture?}', 'HomeController@interface')->where('vue_capture', '[\/\w\.-]*');

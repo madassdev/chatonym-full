@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "autifycloud-bba94",
+    "private_key_id": "f2eae4abb445c59a5b7b89a7308e9bed6b0efcd9",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQC6P6ggtaJr2Gv4\nGh8v5FeJVoRb3dqD7We+jdiwd7AioIGJXUyugmapXfrlnSaRX+hT6ixgqE8IGIyi\nxq9pwvNz85I1CmUJGvxZBbVkRFlmTagJbUEsCBEQo27D/9pj7BJn4a6zLS8m089F\nmipH+E7wGpT7VLU7s1jgFtRYZYjDg9D4c/g/ZufgBhAEhAWMbA/rIkrd7bbQXnzi\ndQCCuhCsDHdMU7c0wpnaq6vWGONsdNz3bdManNE+Epn7M7L9XgvUTv6P2/uGUYJP\n63cNCZ7QnF+xb/A6o4t3d7K7gJT2XXgeLh5VeTWk+WhoB424wwxo7rKdi0QhhB2q\n5DK3zCR7AgMBAAECgf9gZZIfW+M07k7zmpGJuCWWb7ER20G+BqIrfj8pFsmTIn/p\nGOEXcWaxQnMZZL0RgRI+XHWbkYFWL16a4TrpAn3/BZIm4bppfA4gBVRdEQM0b/0I\n5ANXRtWORwiNaV8fWJAuNCC3nCtLbVVaMPCxT1OL8jYp3y3uOGVHlolRNzwR9MMS\nVvLqUPRc2tNja41cTT3xjtk/mmABfrNk5RBkfibkC3DxOHytL0KWgvHJlB/rxG8s\nQE7TMhE/JgQX3MqkXOgciKX69RVtCryVioPenI1nduVLh0+67eXtBd+AAKLoxfZA\niKAgHAZDtmUVSzve5A6t0jR8fq4I+KAXyt8xbiECgYEA/hCAIZR9JK8IcIaxFMx7\n8eoX690FiWR1yNmNOIn4e2/6awxoFjk4JYmLSfYnn/BoI1tTnce7KTm0n3k9+m7E\ngsaFv8TRuga21IyFQsoWgIXeD6rdE1Jd1tipgDvoixNTOIjM5d5bM6jqCnuOsJSE\nQFI6MGb1ieUVqrPRLEyOkJsCgYEAu6rlTu4GB28vfi0q9vhAGap7zIotflu81Rgt\naq1Lo/M84M2dhDM9Szd8F+DdJYnIaoKghlLf7qY+js96SmuGHtbWRI/oUiWFHJ0v\n6gybXBaLf9OFIfZMOEgDt8RsTa4VH6e+MlyUinB+J0EeaOYtjDH9L4GMtlBtLFIK\nZhWlSaECgYB0pgrOYCjdEOglEhJ35DL8LWjySDZkkJVrtEccsGw/8HffcoDPw1G+\nGlqziKtEydJmeWX4yV1rXi1KExabxwO+r3t1Qt6wNKj5CdOdiL+wHsaIFwEOAAFJ\nxYx9bgQk5qiNCnJZEDB7lZBvY69t76KRDa/dzUfrGh1KlOjzF+tVBQKBgCYvbL81\nsWZb2kcLO73K34gZZ11EFGOsmOynIb6eClEO0ilPzSg0INmoLYjSSU01DuGVOMJ8\nJHJzwzDdyJ1R6ZVm02xZ98SXO9GJrlEqRYZkU/greuBhNDsTdCY1QnA/5q5tPEcV\nDWhp4VFtb5malFP9a+35pz8FeGFXRCRnbR1hAoGBAOT+jXx7c4y6FLpAJpcQiS44\no3nwtNAusJ34+GhCMls1UAsBOxjsFupmARNnoJ3RFp06T9m4DNKFXCRhb8UkDapP\nSUwuHoOgi9SYqJYA17zeWqBzI5He4gzGwJxaA4+unI/cWu7Ekm9j2zaU+ygnXIrC\nTMiTAEHbpxNj9OlpJXC3\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-6nibg@autifycloud-bba94.iam.gserviceaccount.com",
+    "client_id": "112073845903309538131",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6nibg%40autifycloud-bba94.iam.gserviceaccount.com"
+}

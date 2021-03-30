@@ -2,37 +2,88 @@ importScripts("https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js");
 importScripts(
     "https://www.gstatic.com/firebasejs/7.16.0/firebase-messaging.js"
 );
-const firebaseConfig = {
-    apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
-    authDomain: "autifycloud-bba94.firebaseapp.com",
-    databaseURL: "https://autifycloud-bba94.firebaseio.com",
-    projectId: "autifycloud-bba94",
-    storageBucket: "autifycloud-bba94.appspot.com",
-    messagingSenderId: "338960353893",
-    appId: "1:338960353893:web:e082eb524607ac7839d48c",
-    measurementId: "G-ECGLNDB5YY"
+// const firebaseConfig = {
+//     apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
+//     authDomain: "autifycloud-bba94.firebaseapp.com",
+//     databaseURL: "https://autifycloud-bba94.firebaseio.com",
+//     projectId: "autifycloud-bba94",
+//     storageBucket: "autifycloud-bba94.appspot.com",
+//     messagingSenderId: "338960353893",
+//     appId: "1:338960353893:web:e082eb524607ac7839d48c",
+//     measurementId: "G-ECGLNDB5YY"
+// };
+
+var firebaseConfig = {
+    apiKey: "AIzaSyBYtoMYgqcD0xJA67rfD2ZI4jV-DGhBx84",
+    authDomain: "chatonym-full.firebaseapp.com",
+    projectId: "chatonym-full",
+    storageBucket: "chatonym-full.appspot.com",
+    messagingSenderId: "738168635297",
+    appId: "1:738168635297:web:3e033097bd626e9d4bd5e0",
+    measurementId: "G-82GPCTJ8SG"
 };
 
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
-messaging.setBackgroundMessageHandler(function(payload) {
-    // storeMessage(payload);
-    // Customize notification here
-
-    const notificationTitle = payload.data.title;
-    const notificationOptions = {
-        title:payload.data.title,
-        body: payload.data.body,
-        icon: "/firebase-logo.png",
-        click_action: 'https://facebook.com'
-    };
-
-    return self.registration.showNotification(
-        notificationTitle,
-        notificationOptions
+self.addEventListener("push", function(event) {
+    console.log(event.data.json().data);
+    var title = event.data.json().data.title;
+    var body = event.data.json().data.body;
+    var icon = event.data.json().data.icon;;
+    var click_action = event.data.json().data.click_action;
+    event.waitUntil(
+        self.registration.showNotification(title, {
+            body: body,
+            icon: icon,
+            data: {
+                click_action
+            }
+        })
     );
 });
+
+self.addEventListener("notificationclick", function(event) {
+    var redirect_url = event.notification.data.click_action;
+    event.notification.close();
+    event.waitUntil(
+        clients
+            .matchAll({
+                type: "window"
+            })
+            .then(function(clientList) {
+                console.log(clientList);
+                for (var i = 0; i < clientList.length; i++) {
+                    var client = clientList[i];
+                    if (client.url === "/" && "focus" in client) {
+                        return client.focus();
+                    }
+                }
+                if (clients.openWindow) {
+                    return clients.openWindow(redirect_url);
+                }
+            })
+    );
+});
+
+// messaging.setBackgroundMessageHandler(function(payload) {
+//     console.log(payload);
+//     // storeMessage(payload);
+//     // Customize notification here
+
+//     const notificationTitle = payload.data.title;
+//     const notificationOptions = {
+//         title: payload.data.title,
+//         body: payload.data.body,
+//         icon: "/rainbow.svg",
+//         click_action: "https://facebook.com"
+//     };
+
+//     return self.registration.showNotification(
+//         notificationTitle,
+//         notificationOptions
+//     );
+// });
 
 // function storeMessage(payload) {
 //     var chats = [

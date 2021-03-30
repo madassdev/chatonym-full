@@ -25,6 +25,7 @@ class UserController extends Controller
 
     public function showChat(Message $message)
     {
+        abort_unless($message->user_id == auth()->user()->id || $message->replier_token == auth()->user()->token, 404, "We couldn't can");
         $message->load('chats');
         // return $message->chats;
         return view('user.chat', compact('message'));
@@ -46,7 +47,7 @@ class UserController extends Controller
             'notification' => [
                 "title" => $request->message,
                 "body" => $request->message,
-                'icon' => 'https://my-server/icon.png',
+                'icon' => 'https://chatonym.dv/house.png',
                 'click_action' => route('user.chat.show', ['message' => $message->id]),
             ],
             'fcm_options' => [

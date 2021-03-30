@@ -114,20 +114,30 @@
         var auth_status = "{{auth()->check() ? 1 : 0}}"
         var device_token = null;
         var app_url = "{{env('APP_URL')}}"
+        // var firebaseConfig = {
+        //     apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
+        //     authDomain: "autifycloud-bba94.firebaseapp.com",
+        //     databaseURL: "https://autifycloud-bba94.firebaseio.com",
+        //     projectId: "autifycloud-bba94",
+        //     storageBucket: "autifycloud-bba94.appspot.com",
+        //     messagingSenderId: "338960353893",
+        //     appId: "1:338960353893:web:e082eb524607ac7839d48c",
+        //     measurementId: "G-ECGLNDB5YY"
+        // };
         var firebaseConfig = {
-            apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
-            authDomain: "autifycloud-bba94.firebaseapp.com",
-            databaseURL: "https://autifycloud-bba94.firebaseio.com",
-            projectId: "autifycloud-bba94",
-            storageBucket: "autifycloud-bba94.appspot.com",
-            messagingSenderId: "338960353893",
-            appId: "1:338960353893:web:e082eb524607ac7839d48c",
-            measurementId: "G-ECGLNDB5YY"
+            apiKey: "AIzaSyBYtoMYgqcD0xJA67rfD2ZI4jV-DGhBx84",
+            authDomain: "chatonym-full.firebaseapp.com",
+            projectId: "chatonym-full",
+            storageBucket: "chatonym-full.appspot.com",
+            messagingSenderId: "738168635297",
+            appId: "1:738168635297:web:3e033097bd626e9d4bd5e0",
+            measurementId: "G-82GPCTJ8SG"
         };
 
         firebase.initializeApp(firebaseConfig);
         var messaging = firebase.messaging();
-        messaging.usePublicVapidKey('BPV4J_fRC_Evc8tCwwsiIXQgSgOMen3tDY94rtZL9IIobq9xWHvNk4DO22qDNSeF5WHhRRC8L7NqpHbmBXRVTiA');
+        // messaging.usePublicVapidKey('BPV4J_fRC_Evc8tCwwsiIXQgSgOMen3tDY94rtZL9IIobq9xWHvNk4DO22qDNSeF5WHhRRC8L7NqpHbmBXRVTiA');
+        messaging.usePublicVapidKey('BJNTgYZ3Xx6ZiT1P7wMQo9G1ylWcDhJAHzt7eHy_XMK94TtNZ02SqVbqTq6wfZGB0_pkVrXrsO9uRCf6w1Zun9g');
         messaging.requestPermission().then(function() {
             console.log("Notification permission granted.");
             return messaging.getToken();
