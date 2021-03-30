@@ -112,6 +112,7 @@ class HomeController extends Controller
                 'status' => $status
             ]
         );
+        $notif = null;
         // $pmessage = Message::find(16140);
         // return $request;
         $payload = [

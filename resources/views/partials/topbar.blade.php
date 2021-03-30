@@ -34,6 +34,9 @@
                     </ul>
                 </div>
             </div> -->
+            <div class="relative p-1 h-8 w-8 z-30 rounded-full flex items-center justify-center bg-cha-primary">
+                <i class="mdi mdi-email text-sm text-white text-center"></i>
+            </div>
 
             <div class="dp openNavBtn">
                 <img src="{{
