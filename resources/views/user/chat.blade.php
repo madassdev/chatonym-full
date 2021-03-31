@@ -17,9 +17,9 @@
             </div>
         </div>
         @else
-        <div class="flex justify-start w-full">
+        <div class="replier-chat flex justify-start w-full">
             <div class="max-w-3/4 bg-cha-secondary text-gray-600 p-3 rounded rounded-r-xl rounded-tl-xl">
-                <p class="text-sm">
+                <p class="text-sm chat-message">
                     {{$chat->message}}
                 </p>
                 <!-- <p class="text-xs-8 mt-3 text-right">
@@ -46,22 +46,14 @@
 @endsection
 @section('scripts')
 <script>
-    var scrollToBottom = (duration = 0) => {
-        $("html, body").animate({
-            scrollTop: $(document).height()
-        }, duration);
-    }
+    
     scrollToBottom();
 
     $('.chat-send').click(() => {
-        scrollToBottom();
 
-        var new_chat = $($('.sender-chat')[0]).clone();
         if ($('#reply-message').val() !== "") {
             var message = $('#reply-message').val()
-            new_chat.find('.chat-message').html(message.replace(/\n/g, '<br />'))
-            // new_chat.find('.chat-time').text(moment().format(Date.now()))
-            $('.chats-container').append(new_chat)
+            setNewChat(message, "sender")
             $('#reply-message').val('')
             //send to backend
             $.post('', {
@@ -69,6 +61,8 @@
                 // replier_token: "{{}}"
             }).done((res) => {
                 clog(res)
+            }).fail((res)=>{
+                
             })
         }
     })

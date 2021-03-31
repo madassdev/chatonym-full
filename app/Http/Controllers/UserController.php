@@ -28,7 +28,8 @@ class UserController extends Controller
         abort_unless($message->user_id == auth()->user()->id || $message->replier_token == auth()->user()->token, 404, "We couldn't can");
         $message->load('chats');
         // return $message->chats;
-        return view('user.chat', compact('message'));
+        $chat_page = true;
+        return view('user.chat', compact('message', 'chat_page'));
     }
 
     public function sendChat(Request $request, Message $message)

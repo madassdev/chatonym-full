@@ -115,12 +115,49 @@
         var auth_status = "{{auth()->check() ? 1 : 0}}"
         var device_token = null;
         var app_url = "{{env('APP_URL')}}"
+
         function setUserToken(token) {
             $.post(app_url + "/users/token", {
                 token: token
             }).done((res) => {
                 clog(res)
             })
+        }
+
+        // $('.mock-notif').click(() => {
+        //     setChatNotification()
+        // })
+
+        function setChatNotification(plod) {
+
+            const notif_count = $('.notif-count')
+            notif_count.removeClass('hidden')
+            notif_count.text(parseInt(notif_count.text()) + 1)
+            const no_new = $('.no-new');
+            const new_notif = no_new.clone().removeClass('no-new hidden')
+            new_notif.find('.notif-text').text("New message: " + '"' + plod.text.substring(0, 10) + '..."')
+            new_notif.find('.notif-link').attr('href', plod.link)
+            $('.notifications-list').prepend(new_notif)
+            no_new.addClass('hidden')
+            clog('lets begin')
+
+        }
+        var scrollToBottom = (duration = 0) => {
+            $("html, body").animate({
+                scrollTop: $(document).height()
+            }, duration);
+        }
+
+        function setNewChat(m, context = "sender") {
+            scrollToBottom();
+            if (context == "sender") {
+                var new_chat = $($('.sender-chat')[0]).clone();
+            } else {
+                var new_chat = $($('.replier-chat')[0]).clone();
+            }
+            new_chat.find('.chat-message').html(m.replace(/\n/g, '<br />'))
+            // new_chat.find('.chat-time').text(moment().format(Date.now()))
+            $('.chats-container').append(new_chat)
         }
         // var firebaseConfig = {
         //     apiKey: "AIzaSyCzzLQxYlhGrME1pB5Ukie2eZysQ014BpU",
@@ -151,7 +188,7 @@
             return messaging.getToken();
         }).then(function(token) {
             device_token = token
-            $('.stoken').html(token)
+            console.log(token)
             if (auth_status == 1) {
                 setUserToken(token)
             }
@@ -162,16 +199,21 @@
 
         messaging.onMessage(function(payload) {
             console.log('onMessage: ', payload);
-            showChatBox(payload)
+            const notif = {
+                text: payload.data.title,
+                link: payload.data.click_action
+            }
+            setChatNotification(notif)
+
+            @if(@$chat_page)
+            setNewChat(payload.data.body, "replier")
+            @endif
+
         });
 
         function clog(log) {
             console.log(log)
         }
-
-        function showChatBox(payload) {
-            $('#chat-box').removeClass('hidden')
-        };
         var CLOUDINARY_FOLDER_ID = "{{cloudinary_folder_id()}}"
         var CLOUDINARY_API_KEY = "{{cloudinary_api_key()}}"
         var CLOUDINARY_UPLOAD_PRESET = "{{cloudinary_upload_preset()}}"
@@ -207,6 +249,7 @@
         notif_icon.mouseup(function(e) {
             console.log(notif_dropdown);
             notif_dropdown.removeClass("hidden");
+            $('.notif-count').addClass("hidden")
         });
 
         $(document).mouseup(function(e) {
@@ -216,6 +259,7 @@
                 !notif_dropdown.hasClass("hidden")
             ) {
                 notif_dropdown.addClass("hidden");
+                $('.notif-count').text('0')
             }
         });
 
@@ -267,8 +311,6 @@
                 // setUserToken(sid)
             }
         });
-
-        
     </script>
     <!-- end webpushr code -->
 

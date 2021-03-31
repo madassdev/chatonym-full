@@ -15,6 +15,7 @@ class HomeController extends Controller
 {
     public function interface()
     {
+        // return auth()->user()->replies;
         return view('interface.feed');
     }
     public function vuefeeds()
@@ -48,10 +49,27 @@ class HomeController extends Controller
 
     public function saveToken(Request $request)
     {
+        $request->validate([
+            "token" => "required|string"
+        ]);
         $user = auth()->user();
+        if(!$user->token){
+            // return $request->token;
+            $user_replies = Message::whereReplierToken($request->token)->get();
+            // return $user_replies;
+            $user_replies->map(function($r) use ($user){
+                $r->replier_id = $user->id;
+                $r->save();
+            });
+        }
+
         $user->deviceToken()->updateOrCreate(['user_id' => $user->id], [
             "token" => $request->token,
+            "key" => md5($request->token)
         ]);
+
+        
+
 
         return response()->json([
             "success" => true,
@@ -143,7 +161,7 @@ class HomeController extends Controller
                 "image_url" => $pmessage->image_url,
                 "user_token" => $user->token,
                 "replier_token" => $request->replier_token,
-                "sent_by_anon" => auth()->user()->id != $pmessage->user_id
+                "sent_by_anon" => true
             ]);
         }
         if ($user->token) {

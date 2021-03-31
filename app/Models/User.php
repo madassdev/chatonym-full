@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Message::class)->latest();
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Message::class, 'replier_id', 'id')->latest();
+    }
+
     public function threads()
     {
         return $this->hasMany(Thread::class);

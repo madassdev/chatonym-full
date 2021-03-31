@@ -106,6 +106,8 @@
 
 @endsection @section('scripts')
 <script>
+    
+
     $('.ref-link').click(function() {
         var $temp = $("<input>");
         $("body").append($temp);

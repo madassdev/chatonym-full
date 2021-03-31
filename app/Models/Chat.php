@@ -22,11 +22,16 @@ class Chat extends Model
 
     public function getIsSenderAttribute()
     {
-        if($this->message_model->user_id == auth()->user()->id){
+        if(auth()->user()){
 
-            return !$this->sent_by_anon ? true : false;
+            if($this->message_model->user_id == auth()->user()->id){
+    
+                return !$this->sent_by_anon ? true : false;
+            }else{
+                return $this->sent_by_anon ? true : false;
+            }
         }else{
-            return $this->sent_by_anon ? true : false;
+            return false;
         }
     }
 }
