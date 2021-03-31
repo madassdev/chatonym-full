@@ -64,7 +64,7 @@ Route::post('/users/token', 'HomeController@saveToken')->name('users.tokens.crea
 
 Route::prefix('account')->middleware('auth')->group(function () {
     Route::get('/', 'UserController@showMessages')->name('user.profile.show');
-    Route::get('/settings', 'UserController@showSettings')->name('user.settings.show');
+    // Route::get('/settings', 'UserController@showSettings')->name('user.settings.show');
     Route::get('/messages', 'UserController@showMessages')->name('user.messages.show');
     Route::get('/replies', 'UserController@showReplies')->name('user.replies.show');
     Route::get('/messages/chat/{message}', 'UserController@showChat')->name('user.chat.show');
