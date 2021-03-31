@@ -77,7 +77,7 @@
                             Allow reply
                         </p>
                         <label class="switch">
-                            <input type="checkbox" id="repliable-check" />
+                            <input type="checkbox" id="repliable-check" checked/>
                             <span class="slider round"></span>
                         </label>
                     </div>
