@@ -50,7 +50,7 @@
 <div class="profile flex items-center justify-center my-5">
     <div class="dp text-center">
         <img src="{{asset('img/placeholders/anonymous.jpeg')}}" class="object-cover rounded-full w-24 h-24 my-2" alt="" />
-        <p class="text-xs">Sign in</p>
+        <a href="{{route('login')}}" class="text-xs">Sign in</a>
     </div>
 </div>
 
