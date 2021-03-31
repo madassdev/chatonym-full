@@ -51,6 +51,14 @@
             Chatonym.
         </div>
         <div class="w-full md:w-1/3 mb-24 md:mb-64 p-3 login-container z-10">
+            @if(\Str::contains(url()->previous(), "account/messages/chat"))
+            <div class="bg-white p-5 text-sm text-cha-primary">
+                You need to login or create an account to view chat reply.
+                <p class="text-xs my-3">
+                    Don't worry, you still remain Anonymous
+                </p>
+            </div>
+            @endif
             <form action="{{route('login')}}" method="post" class="form">
                 @if(session()->has('error'))
                 <div class="bg-red-300 text-red-800 rounded text-xs p-3 border-l-4 border-red-800">
