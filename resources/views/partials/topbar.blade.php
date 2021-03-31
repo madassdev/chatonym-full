@@ -1,5 +1,5 @@
-    <div class="flex items-center justify-between shadow-md p-2 px-3">
-        <div class="openNavBtn px-3 flex space-x-2 cursor-pointer">
+    <div class="flex items-center justify-between md:justify-end shadow-md p-2 px-3">
+        <div class="openNavBtn px-3 flex space-x-2 cursor-pointer md:hidden">
             <i class="mdi mdi-menu font-bold text-2xl {{$togglenav}} md:{{$togglenav}}"></i>
         </div>
         @if(@$thread)
