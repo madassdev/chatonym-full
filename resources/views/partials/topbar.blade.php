@@ -1,5 +1,5 @@
     <div class="flex items-center justify-between shadow-md p-2 px-3">
-        <div class="openNavBtn md:w-1/2 px-3 flex space-x-2">
+        <div class="openNavBtn md:w-1/2 px-3 flex space-x-2 cursor-pointer">
             <i class="mdi mdi-menu font-bold text-2xl {{$togglenav}} md:{{$togglenav}}"></i>
         </div>
         <div class="icons flex items-center space-x-4 md:w-1/2 justify-end">
