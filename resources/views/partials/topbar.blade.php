@@ -1,7 +1,17 @@
     <div class="flex items-center justify-between shadow-md p-2 px-3">
-        <div class="openNavBtn md:w-1/2 px-3 flex space-x-2 cursor-pointer">
+        <div class="openNavBtn px-3 flex space-x-2 cursor-pointer">
             <i class="mdi mdi-menu font-bold text-2xl {{$togglenav}} md:{{$togglenav}}"></i>
         </div>
+        @if(@$thread)
+        <div class="w-2/3">
+            <p class="text-white md:text-cha-primary font-bold">
+                {{ucfirst($thread->name)}}
+            </p>
+            <p class="text-white md:text-gray-500 text-xs-8">
+                {{$thread->description}}
+            </p>
+        </div>
+        @endif
         <div class="icons flex items-center space-x-4 md:w-1/2 justify-end">
             @auth
             <div id="notif-icon" class="relative cursor-pointer rounded-full text-center text-cha-primary h-8 w-8 flex items-center justify-center bg-purple-200 hover:bg-purple-300">

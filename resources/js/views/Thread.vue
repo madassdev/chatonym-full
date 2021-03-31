@@ -1,17 +1,17 @@
 <template>
   <div>
-    <section
+    <!-- <section
       class="fixed hiddesn top-12 shadow-lg thread-info p-4 px-8 duration-300 w-full bg-gray-50 z-10"
     >
       <p class="text-xl font-black text-cha-primary">{{ appThread.name }}</p>
       <p class="text-xs text-gray-500">{{ appThread.description }}</p>
-      <!-- <div class="icons text-cha-primary my-3">
+      <div class="icons text-cha-primary my-3">
         <i class="mdi mdi-message-text-outline"></i>
         <span class="text-xs">
           {{ appThread.messages_count }}
         </span>
-      </div> -->
-    </section>
+      </div>
+    </section> -->
     <div class="main-vh h-screen pb-20">
       <section class="overflow-y-scroll h-full pt-40" id="messagesViewport">
         <Spinner v-if="loadingThreadMessages" :text="'Loading messages..'" />
