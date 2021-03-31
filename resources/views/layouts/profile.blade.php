@@ -169,6 +169,27 @@
             $('.mobile-menu').toggleClass('-ml-64')
             $('.mobile-menu-overlay').toggleClass('hidden').css('opacity', '0')
         })
+
+        var notif_icon = $("#notif-icon");
+        var notif_dropdown = $("#notif-dropdown");
+
+        notif_icon.mouseup(function(e) {
+            console.log(notif_dropdown);
+            notif_dropdown.removeClass("hidden");
+            $('.notif-count').addClass("hidden")
+        });
+
+        $(document).mouseup(function(e) {
+            if (
+                !notif_icon.is(e.target) &&
+                notif_icon.has(e.target).length === 0 &&
+                !notif_dropdown.hasClass("hidden")
+            ) {
+                notif_dropdown.addClass("hidden");
+                $('.notif-count').text('0')
+            }
+        });
+
     </script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script> -->
 
