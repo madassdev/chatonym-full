@@ -76,7 +76,7 @@
                             <label for="" class="md:pr-8 md:w-1/3">Description</label>
                             <textarea name="" cols="30" rows="3" class="rounded-xl border-gray-400 border w-full" id="thread-desc"></textarea>
                         </div>
-                        <div class="p-3 bg-cha-secondary flex rounded items-center justify-between my-3">
+                        <!-- <div class="p-3 bg-cha-secondary flex rounded items-center justify-between my-3">
                             <div class="private w-5/6">
                                 <p class="text-sm text-cha-primary font-bold">
                                     Turn on privacy
@@ -91,7 +91,7 @@
                                 <input type="checkbox" id="private-check" />
                                 <span class="slider round"></span>
                             </label>
-                        </div>
+                        </div> -->
 
                         <div class="flex justify-end">
                             <x-primary-button id="create-thread-btn">Create</x-primary-button>

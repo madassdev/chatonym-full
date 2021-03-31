@@ -16,7 +16,7 @@
                 </a>
             </p>
             <span>
-                <i class="mdi mdi-lock text-cha-primary"></i>
+                <!-- <i class="mdi mdi-lock text-cha-primary"></i> -->
             </span>
         </div>
         <div class="desc my-2">
