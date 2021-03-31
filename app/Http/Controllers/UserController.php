@@ -23,6 +23,14 @@ class UserController extends Controller
         return view('user.messages', compact('user', 'messages_count', 'threads_count'));
     }
 
+    public function showReplies()
+    {
+        $user = auth()->user()->load('replies');
+        $messages_count = $user->messages->count();
+        $threads_count = $user->threads->count();
+        return view('user.replies', compact('user', 'messages_count', 'threads_count'));
+    }
+
     public function showChat(Message $message)
     {
         abort_unless($message->user_id == auth()->user()->id || $message->replier_token == auth()->user()->token, 404, "We couldn't can");
