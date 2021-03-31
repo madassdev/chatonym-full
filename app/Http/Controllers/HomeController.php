@@ -58,7 +58,7 @@ class HomeController extends Controller
             $user_replies = Message::whereReplierToken($request->token)->get();
             // return $user_replies;
             $user_replies->map(function($r) use ($user){
-                $r->replier_id = $user->id;
+                $r->replier_id = $r->replier_id ? $r->replier_id :$user->id;
                 $r->save();
             });
         }
