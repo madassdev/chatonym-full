@@ -6,7 +6,7 @@
             @auth
             <div id="notif-icon" class="relative cursor-pointer rounded-full text-center text-cha-primary h-8 w-8 flex items-center justify-center bg-purple-200 hover:bg-purple-300">
                 <i class="mdi mdi-email"></i>
-                <span class="hidden notif-count absolute -top-1 -right-1 bg-red-500 w-1 h-1 text-white px-1 rounded-full" style="font-size: 8px">
+                <span class="hidden notif-count absolute -top-1 -right-1 bg-red-500 text-white px-1 rounded-full" style="font-size: 8px">
                     0
                 </span>
                 <div id="notif-dropdown" class="hidden notif-dropdown absolute shadow top-6 -right-5 p-3 rounded bg-white z-10 w-64 cursor-default">
