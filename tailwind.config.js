@@ -16,8 +16,8 @@ module.exports = {
         extend: {
             colors: {
                 "cha-primary": "#6A50D3",
-                // "cha-secondary": "#F9F8FF",
-                "cha-secondary": "#dddbeb",
+                "cha-secondary": "#F9F8FF",
+                // "cha-secondary": "#dddbeb",
                 "cha-light": "#F9F8FF",
                 "cha-accent": "#A7D2F1",
             },
