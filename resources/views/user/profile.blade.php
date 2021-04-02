@@ -65,16 +65,16 @@
                     </h2>
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                 </header>
-                <main class="modal__content p-3" id="modal-1-content">
+                <main class="modal__content p-3 py-1" id="modal-1-content">
                     <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi rerum laboriosam voluptas optio exercitationem illo est aspernatur recusandae eum porro. Perferendis debitis corrupti consequuntur molestiae, doloribus labore tenetur accusantium aspernatur.</p> -->
                     <form action="" id="create-thread-form">
-                        <div class="form-group flex space-y-2 flex-col md:flex-row my-3 items-start md:items-center">
+                        <div class="form-group flex space-y-1 flex-col md:flex-row my-2 items-start md:items-center">
                             <label for="" class="md:pr-8 md:w-1/3">Name</label>
-                            <input type="text" class="rounded-xl border-gray-400 border w-full" id="thread-name" required />
+                            <input type="text" class="rounded-xl p-1 px-2 border-gray-400 border w-full" id="thread-name" required />
                         </div>
-                        <div class="form-group flex space-y-2 flex-col md:flex-row my-3 items-start md:items-center">
+                        <div class="form-group flex space-y-1 flex-col md:flex-row my-2 items-start md:items-center">
                             <label for="" class="md:pr-8 md:w-1/3">Description</label>
-                            <textarea name="" cols="30" rows="3" class="rounded-xl border-gray-400 border w-full" id="thread-desc"></textarea>
+                            <textarea name="" cols="30" rows="2" class="rounded-xl border-gray-400 border w-full" id="thread-desc"></textarea>
                         </div>
                         <!-- <div class="p-3 bg-cha-secondary flex rounded items-center justify-between my-3">
                             <div class="private w-5/6">
@@ -97,6 +97,22 @@
                             <x-primary-button id="create-thread-btn">Create</x-primary-button>
                         </div>
                     </form>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal micromodal-slide" id="share-modal" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <header class="modal__header text-cha-primary">
+                    <h2 class="modal__title" id="modal-1-title">
+                        Share
+                    </h2>
+                    <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                </header>
+                <main class="modal__content p-3 py-1" id="modal-1-content">
+                    
                 </main>
             </div>
         </div>

@@ -165,7 +165,7 @@
             $('.mobile-menu-overlay').toggleClass('hidden').css('opacity', '0.6')
         })
 
-        $('.closeNavBtn').click(function() {
+        $('.closeNavBtn,.mobile-menu-overlay').click(function() {
             $('.mobile-menu').toggleClass('-ml-64')
             $('.mobile-menu-overlay').toggleClass('hidden').css('opacity', '0')
         })
