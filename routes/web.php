@@ -94,6 +94,7 @@ Route::prefix('thread')->middleware('auth')->group(function () {
     Route::post('/{thread}', 'ThreadController@sendThreadMessage')->name('thread.show');
     Route::get('/{thread}/fetch', 'ThreadController@fetchMessages')->name('thread.fetch');
     Route::post('/', 'ThreadController@create')->name('thread.create');
+    Route::delete('/{thread}', 'ThreadController@destroy')->name('thread.destroy');
     // Route::get('/threads', 'UserController@showThreads')->name('user.threads.show');
 });
 

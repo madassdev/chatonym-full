@@ -38,10 +38,10 @@
                 <i class="mdi mdi-email text-sm text-white text-center"></i>
             </div> -->
 
-            <div class="dp openNavBtn">
+            <!-- <div class="dp openNavBtn">
                 <img src="{{
                                         asset('img/placeholders/anonymous.jpeg')
                                     }}" alt="" class="rounded-full w-6 h-6 object-cover cursor-pointer" />
-            </div>
+            </div> -->
         </div>
     </div>

@@ -140,3 +140,18 @@ function shareDmLink($link)
     return urlencode($template).$link;
 }
 
+function shareThreadLink($link)
+{
+    $template = "Say your mind on my anonymous thread,  Nobody knows nobody here 😁🤭💃🚀";
+    return urlencode($template).$link;
+}
+
+function shareFbLink($link)
+{
+    // return $link;
+    // "Write a *secret anonymous message* for me.. � I *won't know* who wrote it..";
+    $template = "Hey, there! Write a secret anonymous messageI won't know who wrote it";
+    // $thread_template = "Hey, there! Speak your mind on my completely anonymous discussion group 😄♻🗣️ ... *Nobody knows nobody here* 😁🤭💃🚀".$link;
+    return urlencode($template).$link;
+}
+

@@ -45,13 +45,10 @@
                 <i class="mdi mdi-content-copy"></i>
             </p>
         </div>
-        <div class="share my-2">
-
-            <span>
-                <a href="whatsapp://send?text={{shareDmLink(auth()->user()->ref_link)}}" data-action="share/whatsapp/share" target="_blank">
-
-                    <i class="mdi mdi-whatsapp"></i>
-                </a>
+        <div class="share-profile-btn my-2">
+            <span class="rounded-full px-6 py-1 text-xs cursor-pointer">
+                <i class="mdi mdi-share"></i>
+                Share
             </span>
         </div>
     </div>
@@ -102,17 +99,89 @@
         </div>
     </div>
 
-    <div class="modal micromodal-slide" id="share-modal" aria-hidden="true">
+    <div class="modal micromodal-slide" id="share-profile-modal" aria-hidden="true">
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                 <header class="modal__header text-cha-primary">
                     <h2 class="modal__title" id="modal-1-title">
-                        Share
+                        Share your profile
                     </h2>
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                 </header>
                 <main class="modal__content p-3 py-1" id="modal-1-content">
-                    
+                    <div class="my-8 flex space-x-4 items-center justify-center w-full md:w-3/4 mx-auto">
+                        <!-- Sharingbutton Facebook -->
+                        <a class="p-3 profile-share focus:outline-none text-2xl shadow-xl flex items-center justify-center rounded w-18 h-18 flex-col bg-blue-600 text-white" href="https://facebook.com/sharer/sharer.php?u={{(auth()->user()->ref_link)}}" target="_blank" rel="noopener" aria-label="Share on Facebook">
+                            <i class="mdi mdi-facebook"></i>
+                            <p class="text-white text-xs">Facebook</p>
+                        </a>
+                        <a class="p-3 profile-share focus:outline-none text-2xl shadow-xl flex items-center justify-center rounded w-18 h-18 flex-col bg-green-500 text-white" href="whatsapp://send?text={{shareDmLink(auth()->user()->ref_link)}}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                            <i class="mdi mdi-whatsapp"></i>
+                            <p class="text-white text-xs">Whatsapp</p>
+                        </a>
+                        <a class="p-3 profile-share focus:outline-none text-2xl shadow-xl flex items-center justify-center rounded w-18 h-18 flex-col bg-blue-900 text-white" href="https://twitter.com/intent/tweet/?text={{shareDmLink(auth()->user()->ref_link)}}" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                            <i class="mdi mdi-twitter"></i>
+                            <p class="text-white text-xs">Twitter</p>
+                        </a>
+
+                        <!-- Sharingbutton Twitter -->
+
+
+                        <!-- Sharingbutton WhatsApp -->
+                        <!-- <a class="whatsapp-share" href="whatsapp://send?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.%20http%3A%2F%2Fsharingbuttons.io" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                            
+                        </a> -->
+
+                        <!-- Sharingbutton Telegram -->
+                        <!-- <a class="telegram-share" href="https://telegram.me/share/url?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fsharingbuttons.io" target="_blank" rel="noopener" aria-label="Share on Telegram">
+                            
+                        </a> -->
+
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <div class="modal micromodal-slide" id="share-thread-modal" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container p-3 w-full mx-2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <header class="modal__header text-cha-primary">
+                    <h2 class="modal__title" id="modal-1-title">
+                        Share your thread
+                        <p class="text-xs thread-link-text"></p>
+                    </h2>
+                    <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                </header>
+                <main class="modal__content p-3 py-1" id="thread-share-content">
+                    <div class="thread-share-container my-8 flex space-x-4 items-center justify-center w-full md:w-3/4 mx-auto">
+                        <!-- Sharingbutton Facebook -->
+                        <a class="p-3 thread-share-fb focus:outline-none text-2xl shadow-xl flex items-center justify-center rounded w-18 h-18 flex-col bg-blue-600 text-white" href="https://facebook.com/sharer/sharer.php?u=***link***" target="_blank" rel="noopener" aria-label="Share on Facebook">
+                            <i class="mdi mdi-facebook"></i>
+                            <p class="text-white text-xs">Facebook</p>
+                        </a>
+                        <a class="p-3 thread-share-wa focus:outline-none text-2xl shadow-xl flex items-center justify-center rounded w-18 h-18 flex-col bg-green-500 text-white" href="whatsapp://send?text=***link***" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                            <i class="mdi mdi-whatsapp"></i>
+                            <p class="text-white text-xs">Whatsapp</p>
+                        </a>
+                        <a class="p-3 thread-share-tw focus:outline-none text-2xl shadow-xl flex items-center justify-center rounded w-18 h-18 flex-col bg-blue-900 text-white" href="https://twitter.com/intent/tweet/?text=***link***" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                            <i class="mdi mdi-twitter"></i>
+                            <p class="text-white text-xs">Twitter</p>
+                        </a>
+
+                        <!-- Sharingbutton Twitter -->
+
+
+                        <!-- Sharingbutton WhatsApp -->
+                        <!-- <a class="whatsapp-share" href="whatsapp://send?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.%20http%3A%2F%2Fsharingbuttons.io" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                            
+                        </a> -->
+
+                        <!-- Sharingbutton Telegram -->
+                        <!-- <a class="telegram-share" href="https://telegram.me/share/url?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fsharingbuttons.io" target="_blank" rel="noopener" aria-label="Share on Telegram">
+                            
+                        </a> -->
+
+                    </div>
                 </main>
             </div>
         </div>
@@ -122,8 +191,6 @@
 
 @endsection @section('scripts')
 <script>
-    
-
     $('.ref-link').click(function() {
         var $temp = $("<input>");
         $("body").append($temp);
@@ -136,9 +203,28 @@
             duration: 1500
         })
     })
+
+    var old_content = $('.thread-share-container').clone()
     // MicroModal.show("create-thread-modal");
     $(".create-thread").click(function() {
         MicroModal.show("create-thread-modal");
+    });
+    // MicroModal.show("share-profile-modal");
+    $(".share-profile-btn").click(function() {
+        MicroModal.show("share-profile-modal");
+    });
+    $(".share-thread-btn").click(function() {
+        $('.thread-link-text').text($(this).attr('data-thread-link'))
+        $('.thread-share-fb').attr('href', "https://facebook.com/sharer/sharer.php?u="+$(this).attr('data-thread-link'))
+        $('.thread-share-wa').attr('href',  "whatsapp://send?text="+$(this).attr('data-share-link'))
+        $('.thread-share-tw').attr('href',  "https://twitter.com/intent/tweet/?text="+$(this).attr('data-share-link'))
+        // clog(old_content)
+        MicroModal.show("share-thread-modal", {
+            onClose: function() {
+                // clog(old_content)
+                // $('#thread-share-content').html(old_content)
+            }
+        });
     });
 
     var create_thread_form = $("#create-thread-form");

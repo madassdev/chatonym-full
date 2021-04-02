@@ -15,8 +15,8 @@
                     <strong>#</strong> {{ucfirst($t->name)}}
                 </a>
             </p>
-            <span>
-                <!-- <i class="mdi mdi-lock text-cha-primary"></i> -->
+            <span class="share-thread-btn cursor-pointer text-xs text-cha-primary" data-thread-link="{{route('thread.show', $t)}}" data-share-link="{{shareThreadLink(route('thread.show', $t))}}">
+                <i class="mdi mdi-share"></i> Share
             </span>
         </div>
         <div class="desc my-2">
@@ -33,12 +33,18 @@
                 </a>
             </span>
             <div class="actions mt-6 flex items-center justify-end space-x-6 text-cha-primary text-xs">
-                <span>
-                    <i class="mdi mdi-share"></i> Share
-                </span>
-                <span>
-                    <i class="mdi mdi-delete"></i> Delete
-                </span>
+                <form action="{{route('thread.destroy', $t)}}" class="inline-flex" method="post" onsubmit="return confirm('Thread will be deleted, proceed?');">
+                    @csrf
+                    @method('delete')
+                    <div class="input-group mb-3">
+                        <input name="balance" type="hidden" value="{{$t->id}}">
+                        <div class="input-group-append">
+                            <button class="btn btn-danger text-xs" type="submit">
+                                <i class="mdi mdi-delete"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -46,5 +52,12 @@
 </div>
 
 @endsection @push('scripts')
-<script></script>
+@if(session()->has('success'))
+<script>
+    notyf.success({
+        message: "{{session()->get('success')}}",
+        duration: 1500
+    })
+</script>
+@endif()
 @endpush

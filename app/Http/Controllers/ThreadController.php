@@ -171,4 +171,10 @@ class ThreadController extends Controller
 
         return response()->json(['success' => true, 'data' => $tmessage->load('parent')]);
     }
+
+    public function destroy(Thread $thread)
+    {
+        $thread->delete();
+        return back()->withSuccess('Thread deleted successfully!');
+    }
 }
