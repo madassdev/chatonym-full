@@ -205,15 +205,15 @@
             }
             setChatNotification(notif)
 
-            @if(@$chat_page)
-            setNewChat(payload.data.body, "replier")
-            @endif
+            // @if(@$chat_page)
+            // setNewChat(payload.data.body, "replier")
+            // @endif
 
         });
 
-        // function clog(log) {
-        //     console.log(log)
-        // }
+        var clog = (log) => {
+            console.log(log)
+        }
         var CLOUDINARY_FOLDER_ID = "{{cloudinary_folder_id()}}"
         var CLOUDINARY_API_KEY = "{{cloudinary_api_key()}}"
         var CLOUDINARY_UPLOAD_PRESET = "{{cloudinary_upload_preset()}}"
