@@ -151,9 +151,11 @@
             }
             setChatNotification(notif)
 
-            @if(@$chat_page)
-            setNewChat(payload.data.body, "replier")
-            @endif
+            var is_chat_page = "{{@$chat_page}}"
+
+            if (is_chat_page) {
+                setNewChat(payload.data.body, "replier")
+            }
         });
 
         function clog(log) {

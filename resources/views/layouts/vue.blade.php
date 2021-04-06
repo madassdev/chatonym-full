@@ -120,7 +120,7 @@
             $.post(app_url + "/users/token", {
                 token: token
             }).done((res) => {
-                clog(res)
+                console.log(res)
             })
         }
 
@@ -139,7 +139,7 @@
             new_notif.find('.notif-link').attr('href', plod.link)
             $('.notifications-list').prepend(new_notif)
             no_new.addClass('hidden')
-            clog('lets begin')
+            // clog('lets begin')
 
         }
         var scrollToBottom = (duration = 0) => {
@@ -205,15 +205,18 @@
             }
             setChatNotification(notif)
 
-            @if(@$chat_page)
-            setNewChat(payload.data.body, "replier")
-            @endif
+            var is_chat_page = "{{@$chat_page}}"
+
+            if (is_chat_page) {
+                setNewChat(payload.data.body, "replier")
+            }
+
 
         });
 
-        var clog = (log) => {
-            console.log(log)
-        }
+        // var clog = (log) => {
+        //     console.log(log)
+        // }
         var CLOUDINARY_FOLDER_ID = "{{cloudinary_folder_id()}}"
         var CLOUDINARY_API_KEY = "{{cloudinary_api_key()}}"
         var CLOUDINARY_UPLOAD_PRESET = "{{cloudinary_upload_preset()}}"
