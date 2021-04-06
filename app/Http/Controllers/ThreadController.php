@@ -32,7 +32,7 @@ class ThreadController extends Controller
     public function fetchMessages(Thread $thread)
     {
         // abort(403);
-        $messages = ThreadMessage::whereThreadId($thread->id)->latest()->with('reactions')->with('parent')->withCount('reactions')->with('parent')->latest()
+        $messages = ThreadMessage::whereThreadId($thread->id)->latest()->with('reactions')->with('parent')->withCount('reactions')->with('parent')->orderBy('id', 'DESC')
             ->paginate(30);
 
         return response()->json(['success' => true, 'data' => ['messages' => FeedResource::collection($messages)]]);
