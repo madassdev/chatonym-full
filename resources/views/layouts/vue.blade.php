@@ -205,9 +205,9 @@
             }
             setChatNotification(notif)
 
-            // @if(@$chat_page)
-            // setNewChat(payload.data.body, "replier")
-            // @endif
+            @if(@$chat_page)
+            setNewChat(payload.data.body, "replier")
+            @endif
 
         });
 
