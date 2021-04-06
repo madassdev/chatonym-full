@@ -302,7 +302,7 @@
         //     'key': "{{config('webpushr.client_key')}}"
         // });
     </script><!-- end webpushr code -->
-    <script>
+    <!-- <script>
         //    Our JS snippet goes here
         webpushr('fetch_id', function(sid) {
             // device_token = sid
@@ -311,7 +311,7 @@
                 // setUserToken(sid)
             }
         });
-    </script>
+    </script> -->
     <!-- end webpushr code -->
 
 </body>
